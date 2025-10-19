@@ -45,7 +45,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAPITheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    WeatherScreen(modifier = Modifier.padding(innerPadding))
+//                    WeatherScreen(modifier = Modifier.padding(innerPadding))
+                    InstaGlowApp()
                 }
             }
         }
