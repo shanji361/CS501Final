@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeatherAPI</string>
+    // this has the google services authethentication id
+    <string name="default_web_client_id">1035151044793-1q5oj72a6p1moscapgqktab0e4llcdgc.apps.googleusercontent.com</string>
 </resources>
