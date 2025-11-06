@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Beauty App</string>
+    <string name="home">Home</string>
+    <string name="clean_products">Clean Products</string>
+    <string name="ai_scan">AI Scan</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
+    <string name="special_for_you">Special for you</string>
+    <string name="view_all_products">View all products</string>
+    <string name="products">Products</string>
+    <string name="my_favorites">My Favorites</string>
+    <string name="no_favorites_yet">No favorites yet</string>
+    <string name="your_cart_is_empty">Your cart is empty</string>
+    <string name="loading_products">Loading products...</string>
+    <string name="coming_soon">Coming soon...</string>
+    <string name="total">Total</string>
+    <string name="checkout">Checkout</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="like">Like</string>
+    <string name="back">Back</string>
+    <string name="profile_image">Profile</string>
+</resources>
