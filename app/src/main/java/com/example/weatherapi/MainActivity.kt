@@ -1,10 +1,8 @@
 package com.example.weatherapi
-
 import LoginScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -32,6 +30,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -42,51 +43,53 @@ data class WeatherData(
     val humidity: Int,
     val windSpeed: Double
 )
-//class MainActivity : ComponentActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
-//        setContent {
-//            WeatherAPITheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-////                    WeatherScreen(modifier = Modifier.padding(innerPadding))
-//                    InstaGlowApp()
-//                }
-//            }
-//        }
-//    }
-//}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
         setContent {
             WeatherAPITheme {
-                val navController = rememberNavController()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    // here we have navController, this is for the purpose of navigations between screens
+                    val navController = rememberNavController()
 
-                NavHost(navController = navController, startDestination = "login") {
-                    composable("login") {
-                        // Pass a callback to navigate to WeatherScreen after login
-                        LoginScreen(
-                            onLoginSuccess = {
-                                navController.navigate("weather") {
-                                    popUpTo("login") { inclusive = true }
+                    // navhost setup here
+                    NavHost(navController = navController, startDestination = "splash") {
+                        // this takes us to splash screen
+                        composable("splash") {
+                            SplashScreen(navController = navController)
+                        }
+                        //login screen route
+                        composable("login") {
+                            LoginScreen(
+                                //handles display name as an argument for home route
+                                onLoginSuccess = { userName ->                                    // Navigate to the main part of your app after login
+                                    // for example to a "home" screen, we pass in the username as an argument
+                                    navController.navigate("home/$userName") {                                        // Clear the back stack up to the login screen
+                                        popUpTo("login") {
+                                            inclusive = true
+                                        }
+                                    }
                                 }
-                            }
-                        )
-                    }
-                    composable("weather") {
-                        WeatherScreen() // Your existing weather UI
+                            )
+                        }
+                        composable("home/{userName}") { backStackEntry ->
+                            val userName=backStackEntry.arguments?.getString("userName")
+                             WeatherScreen(userName= userName ?: "Guest")
+                        }
+
                     }
                 }
             }
         }
     }
+}
 
     @Composable
-    fun WeatherScreen(modifier: Modifier = Modifier) {
+    fun WeatherScreen(modifier: Modifier = Modifier, userName: String) {
         var weatherData by remember { mutableStateOf<WeatherData?>(null) }
         var isLoading by remember { mutableStateOf(true) }
         var errorMessage by remember { mutableStateOf<String?>(null) }
@@ -119,8 +122,8 @@ class MainActivity : ComponentActivity() {
                     .padding(paddingValues)
                     .padding(horizontal = 20.dp, vertical = 16.dp)
             ) {
-                // Header Section
-                HeaderSection()
+                // header section, pass userNamer as an argument
+                HeaderSection(userName=userName)
 
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -198,7 +201,8 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun HeaderSection() {
+    //add userName as a param
+    fun HeaderSection(userName:String) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -212,7 +216,7 @@ class MainActivity : ComponentActivity() {
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "Nadia Bueno",
+                        text = userName, // here were using username passed in by user, not static, but dynamic
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -493,4 +497,4 @@ class MainActivity : ComponentActivity() {
     fun kmhToMph(kmh: Double): Double {
         return kmh * 0.621371
     }
-}
+

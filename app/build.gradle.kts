@@ -54,6 +54,10 @@ dependencies {
     //this dependency is for firebase authentication
     implementation("com.google.firebase:firebase-auth:23.0.0")
     implementation("com.google.android.gms:play-services-auth:21.2.0")
+    //this dependency is for facebook login
+    implementation("com.facebook.android:facebook-login:latest.release")
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation(libs.androidx.compose.animation.core.lint)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

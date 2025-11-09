@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.navigation.NavController
 
 
+
 @Composable
 fun InstaGlowApp(){
     val navController = rememberNavController()
