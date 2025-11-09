@@ -1,5 +1,6 @@
 package com.example.weatherapi
 import LoginScreen
+import SplashScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
