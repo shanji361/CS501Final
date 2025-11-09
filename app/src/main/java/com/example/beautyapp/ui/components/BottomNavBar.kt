@@ -1,6 +1,6 @@
 package com.example.beautyapp.ui.components
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -35,7 +35,7 @@ fun BottomNavBar(
         NavItem("cart", Icons.Default.ShoppingCart, "Cart"),
         NavItem("profile", Icons.Default.Person, "Profile")
     )
-    
+
     Surface(
         modifier = Modifier.fillMaxWidth(),
         color = Color.White,
@@ -53,7 +53,9 @@ fun BottomNavBar(
                     // Center AI Scan Button
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .clickable { onTabChange(item.id) }
                     ) {
                         FloatingActionButton(
                             onClick = { onTabChange(item.id) },
@@ -79,11 +81,12 @@ fun BottomNavBar(
                         )
                     }
                 } else {
-                    // Regular Nav Items
+                    // Regular Nav Items - ADD CLICKABLE HERE!
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
                             .weight(1f)
+                            .clickable { onTabChange(item.id) }  // THIS IS THE KEY FIX!
                             .padding(vertical = 8.dp)
                     ) {
                         Box {
@@ -93,7 +96,7 @@ fun BottomNavBar(
                                 tint = if (activeTab == item.id) Color(0xFFEC4899) else Color(0xFF9CA3AF),
                                 modifier = Modifier.size(20.dp)
                             )
-                            
+
                             // Cart Badge
                             if (item.id == "cart" && cartCount > 0) {
                                 Badge(
