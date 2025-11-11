@@ -1,205 +1,64 @@
 # Beauty App - Android (Kotlin + Jetpack Compose)
 
-This is the Kotlin/Android version of your React/TypeScript Beauty App, converted to use Jetpack Compose.
+This is a Kotlin/Android Beauty App built with Jetpack Compose. It integrates **Firebase Authentication**, a **live weather forecast** (from the OpenWeatherMap API), product browsing (from the Makeup API), and a local shopping cart.
 
 ## 🎨 Features
 
-- **Home Screen** with AR-style face overlay and featured products carousel
-- **Products Grid** with 2-column layout
-- **Like/Favorite** functionality with heart icons (top-left of product cards)
-- **Add to Cart** functionality with + buttons (top-right of product cards)
-- **Cart Screen** with quantity controls and total calculation
-- **Bottom Navigation** with elevated center AI Scan button
-- **API Integration** using Retrofit to fetch products from makeup-api.herokuapp.com
-- **State Management** using ViewModel and StateFlow
-- **Image Loading** with Coil library
+* **Firebase Authentication**: Full login and sign-up screen flow.
+* **Weather Home Screen**: The main "home" screen (`WeatherScreen.kt`) greets the logged-in user and displays a live weather card for their location.
+* **YouTube Video Carousel**: The home screen also features a horizontal scrolling list of embedded YouTube video thumbnails.
+* **Product Browsing**: A multi-column grid (`ProductsScreen.kt`) displaying makeup products fetched from the Makeup API.
+* **Product Filtering**: A filter sheet (`FilterBottomSheet.kt`) allows users to filter products.
+* **Product Details**: A dedicated screen (`ProductDetailScreen.kt`) shows more information for a selected item.
+* **Favorites (Likes)**: Users can "like" products, which are tracked in the `MainViewModel`.
+* **Shopping Cart**: A functional cart (`CartScreen.kt`) with quantity controls and total calculation.
+* **Profile Screen**: A dedicated screen (`ProfileScreen.kt`) for user information and liked items.
+* **Bottom Navigation**: A custom `BottomNavBar.kt` with an elevated, central "AI Scan" button.
+
+## 🎯 Core Technical Features
+
+This project demonstrates several key Android development concepts:
+
+* **Jetpack Navigation**: The app uses a `NavHost` in `MainActivity.kt` to manage navigation between multiple functional screens, including `LoginScreen`, `SignUpScreen`, and the main multi-screen `BeautyApp` composable.
+* **ViewModel & StateFlow**: State management is handled by two `ViewModel`s (`MainViewModel` and `WeatherViewModel`). Both use `StateFlow` to expose UI state (e.g., `productState` and `weatherState`), which is collected reactively in composables using `collectAsState()`.
+* **External API Calls**: The app successfully calls two different external APIs using Retrofit:
+    1.  The **Makeup API** to fetch product data in `MainViewModel`.
+    2.  The **OpenWeatherMap API** to fetch live weather data in `WeatherViewModel`.
 
 ## 📁 Project Structure
 
-```
-app/src/main/java/com/example/beautyapp/
-├── MainActivity.kt                      # Main entry point
-├── data/
-│   └── Product.kt                       # Product data model
-├── network/
-│   └── MakeupApiService.kt             # Retrofit API service
-├── viewmodel/
-│   └── MainViewModel.kt                # ViewModel for state management
-├── ui/
-│   ├── components/
-│   │   ├── ProductCard.kt              # Product card with heart + plus buttons
-│   │   └── BottomNavBar.kt             # Bottom navigation bar
-│   ├── screens/
-│   │   ├── HomeScreen.kt               # Home/Face scan screen
-│   │   ├── ProductsScreen.kt           # Products grid screen
-│   │   └── CartScreen.kt               # Shopping cart screen
-│   └── theme/
-│       ├── Theme.kt                     # App theme
-│       └── Typography.kt                # Typography definitions
-```
+app/src/main/java/com/example/beautyapp/ ├── MainActivity.kt # Main entry point, handles navigation ├── data/ │ ├── Product.kt # Product data model │ └── weather/ │ └── Weather.kt # Data models for weather ├── network/ │ ├── MakeupApiService.kt # Retrofit service for Makeup API │ ├── WeatherApi.kt # Retrofit service for Weather API │ └── WeatherApiService.kt ├── viewmodel/ │ ├── MainViewModel.kt # ViewModel for products, cart, likes │ └── WeatherViewModel.kt # ViewModel for fetching weather ├── ui/ │ ├── components/ │ │ ├── BottomNavBar.kt # Custom bottom navigation bar │ │ ├── FilterBottomSheet.kt # Composable for filtering products │ │ └── ProductCard.kt # Card for displaying a single product │ ├── screens/ │ │ ├── CartScreen.kt # Shopping cart screen │ │ ├── LoginScreen.kt # User login screen │ │ ├── ProductDetailScreen.kt # Product detail view │ │ ├── ProductsScreen.kt # Product grid screen │ │ ├── ProfileScreen.kt # User profile and favorites │ │ ├── SignUpScreen.kt # User registration screen │ │ └── WeatherScreen.kt # Main "Home" screen with weather │ └── theme/ │ ├── Theme.kt │ └── Typography.kt
+
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Android Studio (Hedgehog or later)
-- JDK 8 or higher
-- Android SDK (API 24+)
+* Android Studio (Iguana or later)
+* JDK 17 or higher
+* Android SDK (API 24+)
+* **Firebase Project**: You must create a Firebase project, enable Authentication, and add your `google-services.json` file to the `app/` directory.
+* **API Keys**: You need to add API keys for [OpenWeatherMap](https://openweathermap.org/api) to fetch weather.
 
 ### Setup Instructions
 
-1. **Open the project in Android Studio**
-   - File → Open → Select the `android-beauty-app` folder
+1.  **Clone/Open Project**: Open the project in Android Studio.
+2.  **Add `google-services.json`**: Download this file from your Firebase project settings and place it in the `app/` folder.
+3.  **Add API Keys**: Add your OpenWeatherMap API key where required (e.g., in `WeatherViewModel.kt` or `local.properties`).
+4.  **Sync Gradle**: Click "Sync Project with Gradle Files".
+5.  **Run the app**: Connect an Android device or start an emulator and click "Run".
 
-2. **Sync Gradle**
-   - Android Studio should automatically sync
-   - If not, click "Sync Project with Gradle Files"
+## 📦 Key Dependencies
 
-3. **Run the app**
-   - Connect an Android device or start an emulator
-   - Click the "Run" button or press Shift+F10
+* **Jetpack Compose**: Modern UI toolkit
+* **Material3**: Material Design 3 components
+* **Firebase Authentication**: For user login and registration
+* **Retrofit & Gson**: HTTP client for API calls and JSON parsing
+* **Coil**: Image loading library
+* **Coroutines & ViewModel**: For asynchronous operations and state management
+* **Android YouTube Player**: For embedding YouTube videos
 
-## 🔑 Key Components
+## 📱 APIs Used
 
-### Data Model
-```kotlin
-data class Product(
-    val id: Int,
-    val brand: String?,
-    val name: String?,
-    val price: String?,
-    val imageLink: String?,
-    val productType: String?,
-    val description: String?
-)
-```
-
-### ViewModel State
-```kotlin
-data class AppState(
-    val products: List<Product> = emptyList(),
-    val likedProducts: Set<Int> = emptySet(),
-    val cartItems: Map<Int, Int> = emptyMap(),
-    val loading: Boolean = false,
-    val activeTab: String = "home"
-)
-```
-
-### Product Card Features
-- **Heart Icon (Top-Left)**: Toggle like/favorite
-- **Plus Icon (Top-Right)**: Add to cart
-- Both icons turn into checkmarks briefly when clicked
-- Colored backgrounds (alternating: amber, emerald, slate, rose, blue, purple)
-
-### Bottom Navigation
-- Home
-- Clean Products
-- **AI Face Scan** (center, elevated pink circle)
-- Cart (with badge showing item count)
-- Profile
-
-## 📦 Dependencies
-
-- **Jetpack Compose** - Modern UI toolkit
-- **Material3** - Material Design 3 components
-- **Retrofit** - HTTP client for API calls
-- **Gson** - JSON serialization
-- **Coil** - Image loading library
-- **Coroutines** - Asynchronous programming
-- **ViewModel** - State management
-
-## 🎯 Screens
-
-### 1. Home Screen
-- Full-screen face image with AR overlay
-- "Special for you" text
-- Horizontal carousel of 3 featured products
-- "View all products" CTA button
-
-### 2. Products Screen
-- Header with back button, title, and profile image
-- 2-column grid layout
-- Each product card has:
-  - Colored background
-  - Product image
-  - Heart icon (top-left) for favorites
-  - Plus icon (top-right) to add to cart
-  - Product name below card
-
-### 3. Cart Screen
-- List of items with quantity controls
-- Each item shows: image, name, brand, price
-- +/- buttons to adjust quantity
-- Total price calculation
-- Checkout button
-
-### 4. Favorites Screen
-- Same as Products Screen but filtered to show only liked items
-
-## 🔄 State Management
-
-The app uses `MainViewModel` with `StateFlow` for reactive state management:
-
-- `fetchProducts()` - Load products from API
-- `toggleLike(productId)` - Add/remove from favorites
-- `addToCart(productId)` - Increment cart quantity
-- `removeFromCart(productId)` - Decrement cart quantity
-- `setActiveTab(tab)` - Change active screen
-
-## 🎨 Styling
-
-### Colors
-- **Primary Pink**: `#F472B6` (Pink-400)
-- **Secondary Pink**: `#EC4899` (Pink-500)
-- **Green (Success)**: `#10B981` (Emerald-500)
-- **Red (Like)**: `#EF4444` (Red-500)
-
-### Card Background Colors
-- Amber-50, Emerald-50, Slate-100, Rose-50, Blue-50, Purple-50
-
-## 📱 API
-
-The app fetches products from:
-```
-https://makeup-api.herokuapp.com/api/v1/products.json
-```
-
-## Android YouTube Player 
-```
-https://github.com/PierfrancescoSoffritti/android-youtube-player
-```
-
-## 🐛 Troubleshooting
-
-### API Not Loading
-- Check internet connection
-- Verify `INTERNET` permission in AndroidManifest.xml
-- Check if API endpoint is accessible
-
-### Images Not Loading
-- Ensure Coil dependency is properly added
-- Check image URLs are valid
-- Verify internet permission
-
-### Build Errors
-- Clean project: Build → Clean Project
-- Rebuild: Build → Rebuild Project
-- Invalidate caches: File → Invalidate Caches → Restart
-
-## 🔮 Future Enhancements
-
-- Search functionality
-- Product filtering
-- User authentication
-- Persistent storage (Room database)
-- Animations and transitions
-- AI face scanning feature
-- Payment integration
-
-## 📄 License
-
-This project is a conversion from React/TypeScript to Kotlin/Jetpack Compose for educational purposes.
-
----
-
-**Happy Coding! 🚀**
+* **Makeup API**: `https://makeup-api.herokuapp.com/api/v1/products.json`
+* **OpenWeatherMap API**: For fetching live weather data.
