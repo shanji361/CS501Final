@@ -184,8 +184,8 @@ fun BeautyApp(
                     0 -> WeatherScreen(
                         modifier = Modifier.fillMaxSize(),
                         context = context,
-                        userName = userName,
-                        viewModel = weatherViewModel
+                        viewModel = weatherViewModel,
+                        userName = userName
                     )
                     1 -> ProductsScreen(
                         products = productViewModel.getDisplayProducts(),

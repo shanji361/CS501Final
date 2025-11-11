@@ -436,7 +436,7 @@ fun WeatherDisplayCard(
                         modifier = Modifier.clickable(
                             indication = rememberRipple(bounded = false),
                             interactionSource = remember { MutableInteractionSource() }
-                        ) { onUnitToggle(true) }
+                        ) { onUnitToggle(false) }
                     )
                 }
 
