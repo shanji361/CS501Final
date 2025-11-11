@@ -80,6 +80,7 @@ MERGED from [androidx.core:core:1.12.0] /Users/auroraa/.gradle/caches/transforms
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /Users/auroraa/.gradle/caches/transforms-3/23e1e08f483c630673997d6e66c98014/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-compose:2.7.0] /Users/auroraa/.gradle/caches/transforms-3/97869867c238a1704b4aca169068b323/transformed/lifecycle-runtime-compose-2.7.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0] /Users/auroraa/.gradle/caches/transforms-3/ab9e8cfaca665c0afd6966c1dc9cb45c/transformed/lifecycle-viewmodel-compose-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] /Users/auroraa/.gradle/caches/transforms-3/542e8fd47eaf024596aef01ed9c75865/transformed/core-12.1.0/AndroidManifest.xml:2:1-10:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /Users/auroraa/.gradle/caches/transforms-3/580f68dc57383b9bed28e94c74509349/transformed/lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.libraries.identity.googleid:googleid:1.1.0] /Users/auroraa/.gradle/caches/transforms-3/241bbde63a20a96d9c0d3f0009184475/transformed/googleid-1.1.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/auroraa/.gradle/caches/transforms-3/6ba6607128b23368b0f6b0707a4613fa/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
@@ -109,6 +110,8 @@ MERGED from [com.google.firebase:firebase-auth:23.1.0] /Users/auroraa/.gradle/ca
 MERGED from [com.google.firebase:firebase-auth:23.1.0] /Users/auroraa/.gradle/caches/transforms-3/ba72cb824d2d4a0641ad91afaf62c8b1/transformed/firebase-auth-23.1.0/AndroidManifest.xml:25:5-67
 MERGED from [com.google.android.recaptcha:recaptcha:18.5.1] /Users/auroraa/.gradle/caches/transforms-3/68761a8b9f48e11f3d092f75e1ffd849/transformed/recaptcha-18.5.1/AndroidManifest.xml:7:5-67
 MERGED from [com.google.android.recaptcha:recaptcha:18.5.1] /Users/auroraa/.gradle/caches/transforms-3/68761a8b9f48e11f3d092f75e1ffd849/transformed/recaptcha-18.5.1/AndroidManifest.xml:7:5-67
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] /Users/auroraa/.gradle/caches/transforms-3/542e8fd47eaf024596aef01ed9c75865/transformed/core-12.1.0/AndroidManifest.xml:7:5-67
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] /Users/auroraa/.gradle/caches/transforms-3/542e8fd47eaf024596aef01ed9c75865/transformed/core-12.1.0/AndroidManifest.xml:7:5-67
 	android:name
 		ADDED from /Users/auroraa/Downloads/android-beauty-app 2/app/src/main/AndroidManifest.xml:6:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
@@ -117,6 +120,8 @@ MERGED from [com.google.firebase:firebase-auth:23.1.0] /Users/auroraa/.gradle/ca
 MERGED from [com.google.firebase:firebase-auth:23.1.0] /Users/auroraa/.gradle/caches/transforms-3/ba72cb824d2d4a0641ad91afaf62c8b1/transformed/firebase-auth-23.1.0/AndroidManifest.xml:26:5-79
 MERGED from [com.google.android.recaptcha:recaptcha:18.5.1] /Users/auroraa/.gradle/caches/transforms-3/68761a8b9f48e11f3d092f75e1ffd849/transformed/recaptcha-18.5.1/AndroidManifest.xml:8:5-79
 MERGED from [com.google.android.recaptcha:recaptcha:18.5.1] /Users/auroraa/.gradle/caches/transforms-3/68761a8b9f48e11f3d092f75e1ffd849/transformed/recaptcha-18.5.1/AndroidManifest.xml:8:5-79
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] /Users/auroraa/.gradle/caches/transforms-3/542e8fd47eaf024596aef01ed9c75865/transformed/core-12.1.0/AndroidManifest.xml:8:5-79
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] /Users/auroraa/.gradle/caches/transforms-3/542e8fd47eaf024596aef01ed9c75865/transformed/core-12.1.0/AndroidManifest.xml:8:5-79
 	android:name
 		ADDED from /Users/auroraa/Downloads/android-beauty-app 2/app/src/main/AndroidManifest.xml:7:22-76
 application
@@ -364,6 +369,8 @@ MERGED from [androidx.lifecycle:lifecycle-runtime-compose:2.7.0] /Users/auroraa/
 MERGED from [androidx.lifecycle:lifecycle-runtime-compose:2.7.0] /Users/auroraa/.gradle/caches/transforms-3/97869867c238a1704b4aca169068b323/transformed/lifecycle-runtime-compose-2.7.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0] /Users/auroraa/.gradle/caches/transforms-3/ab9e8cfaca665c0afd6966c1dc9cb45c/transformed/lifecycle-viewmodel-compose-2.7.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0] /Users/auroraa/.gradle/caches/transforms-3/ab9e8cfaca665c0afd6966c1dc9cb45c/transformed/lifecycle-viewmodel-compose-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] /Users/auroraa/.gradle/caches/transforms-3/542e8fd47eaf024596aef01ed9c75865/transformed/core-12.1.0/AndroidManifest.xml:5:5-44
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] /Users/auroraa/.gradle/caches/transforms-3/542e8fd47eaf024596aef01ed9c75865/transformed/core-12.1.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /Users/auroraa/.gradle/caches/transforms-3/580f68dc57383b9bed28e94c74509349/transformed/lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /Users/auroraa/.gradle/caches/transforms-3/580f68dc57383b9bed28e94c74509349/transformed/lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.libraries.identity.googleid:googleid:1.1.0] /Users/auroraa/.gradle/caches/transforms-3/241bbde63a20a96d9c0d3f0009184475/transformed/googleid-1.1.0/AndroidManifest.xml:5:5-44

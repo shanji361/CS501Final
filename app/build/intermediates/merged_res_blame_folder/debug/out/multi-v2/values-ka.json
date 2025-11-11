@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.beautyapp-mergeDebugResources-63:/values-ka/values-ka.xml",
+            "outputFile": "com.example.beautyapp-mergeDebugResources-64:/values-ka/values-ka.xml",
             "map": [
                 {
                     "source": "/Users/auroraa/.gradle/caches/transforms-3/fcd23989b1a5a350529005b9674303cc/transformed/ui-release/res/values-ka/values-ka.xml",

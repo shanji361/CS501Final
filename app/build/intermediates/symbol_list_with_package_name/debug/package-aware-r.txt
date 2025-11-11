@@ -2,12 +2,14 @@ com.example.beautyapp
 attr action
 attr alpha
 attr argType
+attr autoPlay
 attr buttonSize
 attr circleCrop
 attr colorScheme
 attr data
 attr dataPattern
 attr destination
+attr enableAutomaticInitialization
 attr enterAnim
 attr exitAnim
 attr font
@@ -22,6 +24,7 @@ attr fontStyle
 attr fontVariationSettings
 attr fontWeight
 attr graph
+attr handleNetworkEvents
 attr imageAspectRatio
 attr imageAspectRatioAdjust
 attr lStar
@@ -44,6 +47,7 @@ attr startDestination
 attr targetPackage
 attr ttcIndex
 attr uri
+attr videoId
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
 color black
@@ -263,6 +267,7 @@ layout notification_template_part_time
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
+raw ayp_youtube_player
 raw firebase_common_keep
 string add_to_cart
 string ai_scan
@@ -433,6 +438,7 @@ styleable Navigator android_label android_id route
 styleable SignInButton buttonSize colorScheme scopeUris
 styleable StateListDrawable android_dither android_visible android_variablePadding android_constantSize android_enterFadeDuration android_exitFadeDuration
 styleable StateListDrawableItem android_drawable
+styleable YouTubePlayerView autoPlay enableAutomaticInitialization handleNetworkEvents videoId
 xml backup_rules
 xml data_extraction_rules
 xml image_share_filepaths

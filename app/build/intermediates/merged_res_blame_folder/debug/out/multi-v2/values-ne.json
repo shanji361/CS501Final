@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.beautyapp-mergeDebugResources-63:/values-ne/values-ne.xml",
+            "outputFile": "com.example.beautyapp-mergeDebugResources-64:/values-ne/values-ne.xml",
             "map": [
                 {
                     "source": "/Users/auroraa/.gradle/caches/transforms-3/f6adb375358a5977a379a69810a0d8f4/transformed/browser-1.4.0/res/values-ne/values-ne.xml",

@@ -22,8 +22,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.example.beautyapp.viewmodel.WeatherViewModel
 import com.example.beautyapp.data.weather.*
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 @Composable
 fun WeatherScreen(
@@ -39,6 +43,7 @@ fun WeatherScreen(
     var searchInput by remember { mutableStateOf("") }
     var searchError by remember { mutableStateOf("") }
     var isSearching by remember { mutableStateOf(false) }
+    var selectedVideoId by remember { mutableStateOf<String?>(null) }
 
     // Store the last successful weather state
     var lastSuccessfulState by remember {
@@ -272,8 +277,19 @@ fun WeatherScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Video Section
-        VideoCardPlaceHolder(context)
+        // Video Section with Embedded Player
+        if (selectedVideoId != null) {
+            EmbeddedYouTubePlayer(
+                videoId = selectedVideoId!!,
+                lifecycleOwner = context,
+                onClose = { selectedVideoId = null }
+            )
+        } else {
+            VideoCardPlaceHolder(
+                context = context,
+                onVideoClick = { videoId -> selectedVideoId = videoId }
+            )
+        }
     }
 }
 
@@ -450,28 +466,74 @@ fun WeatherDisplayCard(
 }
 
 @Composable
-fun VideoCardPlaceHolder(context: ComponentActivity) {
-    val weatherVideos = listOf(
-        Triple("Foundation", "1 min", "https://www.youtube.com/shorts/VWQWI333vqI"),
-        Triple("Blush Application", "1 min", "https://www.youtube.com/shorts/EuvGTZ1UwBA"),
-        Triple("Contour Tips", "1 min", "https://www.youtube.com/shorts/nNcEqP1nHiw"),
-        Triple("Eye Makeup", "1 min", "https://www.youtube.com/shorts/8SrXsfQMlyQ"),
-        Triple("Lipstick Guide", "1 min", "https://www.youtube.com/shorts/mIzYqIKwTJE")
+fun EmbeddedYouTubePlayer(
+    videoId: String,
+    lifecycleOwner: ComponentActivity,
+    onClose: () -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        // Close button
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            IconButton(onClick = onClose) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Close",
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+
+        // YouTube Player
+        AndroidView(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp)
+                .clip(RoundedCornerShape(16.dp)),
+            factory = { context ->
+                YouTubePlayerView(context).apply {
+                    lifecycleOwner.lifecycle.addObserver(this)
+
+                    addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                        override fun onReady(youTubePlayer: YouTubePlayer) {
+                            youTubePlayer.loadVideo(videoId, 0f)
+                        }
+                    })
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun VideoCardPlaceHolder(
+    context: ComponentActivity,
+    onVideoClick: (String) -> Unit
+) {
+    val beautyVideos = listOf(
+        Triple("Foundation", "1 min", "VWQWI333vqI"),
+        Triple("Blush Application", "1 min", "EuvGTZ1UwBA"),
+        Triple("Contour Tips", "1 min", "nNcEqP1nHiw"),
+        Triple("Eye Makeup", "1 min", "8SrXsfQMlyQ"),
+        Triple("Lipstick Guide", "1 min", "mIzYqIKwTJE")
     )
 
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(weatherVideos.size) { index ->
-            val (topic, duration, videoUrl) = weatherVideos[index]
+        items(beautyVideos.size) { index ->
+            val (topic, duration, videoId) = beautyVideos[index]
             Card(
                 modifier = Modifier
                     .width(300.dp)
                     .height(400.dp)
-                    .clickable {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
-                        context.startActivity(intent)
-                    },
+                    .clickable { onVideoClick(videoId) },
                 shape = RoundedCornerShape(24.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
             ) {
