@@ -8,6 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -21,6 +23,7 @@ import com.example.beautyapp.ui.theme.BeautyAppTheme
 import com.example.beautyapp.viewmodel.MainViewModel
 import com.example.beautyapp.viewmodel.WeatherViewModel
 import com.google.firebase.auth.FirebaseAuth
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -181,6 +184,7 @@ fun BeautyApp(
                     0 -> WeatherScreen(
                         modifier = Modifier.fillMaxSize(),
                         context = context,
+                        userName = userName,
                         viewModel = weatherViewModel
                     )
                     1 -> ProductsScreen(
@@ -211,7 +215,9 @@ fun BeautyApp(
                         onAddToCart = { productViewModel.addToCart(it) },
                         onRemoveFromCart = { productViewModel.removeFromCart(it) }
                     )
+
                     4 -> ProfileScreen(
+                        // FIX: Pass the userName to the ProfileScreen
                         userName = userName,
                         likedProducts = productState.products.filter {
                             productState.likedProducts.contains(it.id)

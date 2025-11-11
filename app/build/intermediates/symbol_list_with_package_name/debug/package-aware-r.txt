@@ -70,6 +70,7 @@ color common_google_signin_btn_text_light_pressed
 color common_google_signin_btn_tint
 color gray_400
 color gray_900
+color ic_launcher_background
 color notification_action_color_filter
 color notification_icon_bg_color
 color pink_400
@@ -132,6 +133,7 @@ drawable ic_call_answer_video
 drawable ic_call_answer_video_low
 drawable ic_call_decline
 drawable ic_call_decline_low
+drawable ic_launcher_background
 drawable ic_other_sign_in
 drawable ic_passkey
 drawable ic_password
@@ -251,6 +253,7 @@ id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id wide
 id wrapped_composition_tag
+id youtube_player_view
 integer google_play_services_version
 integer status_bar_notification_info_maxnum
 layout browser_actions_context_menu_page
@@ -258,6 +261,7 @@ layout browser_actions_context_menu_row
 layout custom_dialog
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout mainlayout
 layout notification_action
 layout notification_action_tombstone
 layout notification_template_custom_big

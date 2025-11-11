@@ -138,7 +138,7 @@ fun LoginScreen(
             )
 
             Text(
-                text = "BeautyHub",
+                text = "InstaGlow",
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFF472B6),

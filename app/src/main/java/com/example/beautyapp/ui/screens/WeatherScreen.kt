@@ -28,12 +28,14 @@ import com.example.beautyapp.data.weather.*
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material.ripple.rememberRipple
 @Composable
 fun WeatherScreen(
     modifier: Modifier = Modifier,
     context: ComponentActivity,
-    viewModel: WeatherViewModel
+    viewModel: WeatherViewModel,
+    userName:String
 ) {
     var cityName by remember { mutableStateOf("Boston") }
     val weatherState by viewModel.weatherState.collectAsState()
@@ -61,7 +63,7 @@ fun WeatherScreen(
             .padding(horizontal = 20.dp, vertical = 16.dp)
     ) {
         // Header Section
-        HeaderSection()
+        HeaderSection(userName=userName)
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -294,7 +296,7 @@ fun WeatherScreen(
 }
 
 @Composable
-fun HeaderSection() {
+fun HeaderSection(userName:String) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -309,7 +311,7 @@ fun HeaderSection() {
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "User",
+                    text = userName,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
@@ -416,7 +418,10 @@ fun WeatherDisplayCard(
                         fontSize = 16.sp,
                         fontWeight = if (isFahrenheit) FontWeight.Bold else FontWeight.Medium,
                         color = if (isFahrenheit) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.clickable { onUnitToggle(true) }
+                        modifier = Modifier.clickable(
+                            indication = rememberRipple(bounded = false),
+                            interactionSource = remember { MutableInteractionSource() }
+                        ) { onUnitToggle(true) }
                     )
                     Text(
                         text = "|",
@@ -428,7 +433,10 @@ fun WeatherDisplayCard(
                         fontSize = 16.sp,
                         fontWeight = if (!isFahrenheit) FontWeight.Bold else FontWeight.Medium,
                         color = if (!isFahrenheit) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.clickable { onUnitToggle(false) }
+                        modifier = Modifier.clickable(
+                            indication = rememberRipple(bounded = false),
+                            interactionSource = remember { MutableInteractionSource() }
+                        ) { onUnitToggle(true) }
                     )
                 }
 
@@ -517,12 +525,13 @@ fun VideoCardPlaceHolder(
     onVideoClick: (String) -> Unit
 ) {
     val beautyVideos = listOf(
-        Triple("Foundation", "1 min", "VWQWI333vqI"),
-        Triple("Blush Application", "1 min", "EuvGTZ1UwBA"),
-        Triple("Contour Tips", "1 min", "nNcEqP1nHiw"),
-        Triple("Eye Makeup", "1 min", "8SrXsfQMlyQ"),
-        Triple("Lipstick Guide", "1 min", "mIzYqIKwTJE")
+        Triple("Foundation Tips", "2 min", "hkQhA6lmDME"),
+    Triple("Blush Tutorial", "3 min", "5wx1U64ez14"),
+    Triple("Contour Guide", "4 min", "QKz_2ScpV9s"),
+    Triple("Eye Makeup", "5 min", "tTV6vZCKEWM"),
+    Triple("Lipstick", "2 min", "ay1EH7uQjG0")
     )
+
 
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -533,7 +542,12 @@ fun VideoCardPlaceHolder(
                 modifier = Modifier
                     .width(300.dp)
                     .height(400.dp)
-                    .clickable { onVideoClick(videoId) },
+                    .clickable(
+                        indication = rememberRipple(),
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
+                        onVideoClick(videoId)
+                    },
                 shape = RoundedCornerShape(24.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
             ) {

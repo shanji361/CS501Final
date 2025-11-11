@@ -3,12 +3,16 @@ local
 color black
 color gray_400
 color gray_900
+color ic_launcher_background
 color pink_400
 color pink_50
 color pink_500
 color white
 drawable facebook_logo
 drawable google_logo
+drawable ic_launcher_background
+id youtube_player_view
+layout mainlayout
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
