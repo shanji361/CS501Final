@@ -23,7 +23,7 @@
     <string name="profile_image">Profile</string>
     <!-- Firebase & Authentication -->
 
-    <string name="default_web_client_id">1035151044793-1q5oj72a6p1moscapgqktab0e4llcdgc.apps.googleusercontent.com</string>
+    <string name="default_web_client_id">657735404993-jbe21it8us5fhframgtb6a49bjvp029c.apps.googleusercontent.com</string>
       <!-- this is facebook authethentication id
       //  <string name="facebook_app_id">829972963128341</string>
    // <string name="fb_login_protocol_scheme">fb829972963128341</string>

@@ -75,6 +75,7 @@ fun SignUpScreen(
         }
     }
 
+
     Box(
         modifier = Modifier
             .fillMaxSize()
