@@ -4,7 +4,7 @@
             "outputFile": "com.example.beautyapp-mergeDebugResources-64:/values-it/values-it.xml",
             "map": [
                 {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/cac1ae7d9d6122f6a72cf5a8f33c3cfc/transformed/play-services-base-18.0.1/res/values-it/values.xml",
+                    "source": "/Users/javeria2/.gradle/caches/transforms-3/cac1ae7d9d6122f6a72cf5a8f33c3cfc/transformed/play-services-base-18.0.1/res/values-it/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,58 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/1b724306c5ea7045e46589404cfa912a/transformed/play-services-basement-18.4.0/res/values-it/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "131",
-                        "endOffsets": "326"
-                    },
-                    "to": {
-                        "startLines": "21",
-                        "startColumns": "4",
-                        "startOffsets": "2264",
-                        "endColumns": "135",
-                        "endOffsets": "2395"
-                    }
-                },
-                {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/f6adb375358a5977a379a69810a0d8f4/transformed/browser-1.4.0/res/values-it/values-it.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,155,253,363",
-                        "endColumns": "99,97,109,102",
-                        "endOffsets": "150,248,358,461"
-                    },
-                    "to": {
-                        "startLines": "31,35,36,37",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "3487,3872,3970,4080",
-                        "endColumns": "99,97,109,102",
-                        "endOffsets": "3582,3965,4075,4178"
-                    }
-                },
-                {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/1644efdc072196273c66d26d7aafbc79/transformed/foundation-release/res/values-it/values-it.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,153",
-                        "endColumns": "97,98",
-                        "endOffsets": "148,247"
-                    },
-                    "to": {
-                        "startLines": "107,108",
-                        "startColumns": "4,4",
-                        "startOffsets": "11618,11716",
-                        "endColumns": "97,98",
-                        "endOffsets": "11711,11810"
-                    }
-                },
-                {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/fcd23989b1a5a350529005b9674303cc/transformed/ui-release/res/values-it/values-it.xml",
+                    "source": "/Users/javeria2/.gradle/caches/transforms-3/fcd23989b1a5a350529005b9674303cc/transformed/ui-release/res/values-it/values-it.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -89,24 +38,41 @@
                     }
                 },
                 {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/6cdf2df32567ef9e686b26118d1b82c3/transformed/credentials-1.2.0-rc01/res/values-it/values-it.xml",
+                    "source": "/Users/javeria2/.gradle/caches/transforms-3/1b724306c5ea7045e46589404cfa912a/transformed/play-services-basement-18.4.0/res/values-it/values.xml",
                     "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,167",
-                        "endColumns": "111,113",
-                        "endOffsets": "162,276"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "131",
+                        "endOffsets": "326"
                     },
                     "to": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "105,217",
-                        "endColumns": "111,113",
-                        "endOffsets": "212,326"
+                        "startLines": "21",
+                        "startColumns": "4",
+                        "startOffsets": "2264",
+                        "endColumns": "135",
+                        "endOffsets": "2395"
                     }
                 },
                 {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/5b42b78a4f36c6491e3670ad0943d473/transformed/core-1.12.0/res/values-it/values-it.xml",
+                    "source": "/Users/javeria2/.gradle/caches/transforms-3/1644efdc072196273c66d26d7aafbc79/transformed/foundation-release/res/values-it/values-it.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,153",
+                        "endColumns": "97,98",
+                        "endOffsets": "148,247"
+                    },
+                    "to": {
+                        "startLines": "107,108",
+                        "startColumns": "4,4",
+                        "startOffsets": "11618,11716",
+                        "endColumns": "97,98",
+                        "endOffsets": "11711,11810"
+                    }
+                },
+                {
+                    "source": "/Users/javeria2/.gradle/caches/transforms-3/5b42b78a4f36c6491e3670ad0943d473/transformed/core-1.12.0/res/values-it/values-it.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -123,7 +89,41 @@
                     }
                 },
                 {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/f0a6e8553b95949f197b90b5f0edbdee/transformed/material3-release/res/values-it/values-it.xml",
+                    "source": "/Users/javeria2/.gradle/caches/transforms-3/f6adb375358a5977a379a69810a0d8f4/transformed/browser-1.4.0/res/values-it/values-it.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,155,253,363",
+                        "endColumns": "99,97,109,102",
+                        "endOffsets": "150,248,358,461"
+                    },
+                    "to": {
+                        "startLines": "31,35,36,37",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "3487,3872,3970,4080",
+                        "endColumns": "99,97,109,102",
+                        "endOffsets": "3582,3965,4075,4178"
+                    }
+                },
+                {
+                    "source": "/Users/javeria2/.gradle/caches/transforms-3/6cdf2df32567ef9e686b26118d1b82c3/transformed/credentials-1.2.0-rc01/res/values-it/values-it.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,167",
+                        "endColumns": "111,113",
+                        "endOffsets": "162,276"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "105,217",
+                        "endColumns": "111,113",
+                        "endOffsets": "212,326"
+                    }
+                },
+                {
+                    "source": "/Users/javeria2/.gradle/caches/transforms-3/f0a6e8553b95949f197b90b5f0edbdee/transformed/material3-release/res/values-it/values-it.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
