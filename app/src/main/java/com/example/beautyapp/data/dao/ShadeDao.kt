@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.example.beautyapp.data.entities.Shade
 
-// this dao file, writes the QUERY and interacts with SQLite db, to get data from our shades table
+// this file: ShadeDao.kt writes the QUERY and interacts with SQLite db, to get data from our shades table
 // gets one shade
 @Dao
 interface ShadeDao{
