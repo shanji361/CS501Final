@@ -98,6 +98,7 @@ dependencies {
     // YouTube Player
     implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
     implementation("androidx.room:room-common-jvm:2.8.4")
+    implementation("androidx.room:room-runtime-android:2.8.4")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
