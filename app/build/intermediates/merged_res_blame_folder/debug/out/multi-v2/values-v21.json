@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.beautyapp-mergeDebugResources-64:/values-v21/values-v21.xml",
+            "outputFile": "com.example.beautyapp-mergeDebugResources-55:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "/Users/javeria2/.gradle/caches/transforms-3/5b42b78a4f36c6491e3670ad0943d473/transformed/core-1.12.0/res/values-v21/values-v21.xml",
+                    "source": "/Users/javeria2/.gradle/caches/transforms-3/352b2ac8a32a2aaa7d1ec7e7bb7b9525/transformed/core-1.15.0/res/values-v21/values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

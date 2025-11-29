@@ -28,10 +28,10 @@ import com.example.beautyapp.data.weather.*
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material.ripple.rememberRipple
 // Added imports:
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.graphics.Brush
@@ -433,25 +433,29 @@ fun WeatherDisplayCard(
                         fontWeight = if (isFahrenheit) FontWeight.Bold else FontWeight.Medium,
                         color = if (isFahrenheit) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.clickable(
-                            indication = rememberRipple(bounded = false),
-                            interactionSource = remember { MutableInteractionSource() }
-                        ) { onUnitToggle(true) }
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = LocalIndication.current,
+                            onClick = { onUnitToggle(true) }
+                        )
                     )
                     Text(
                         text = "|",
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                    // NEW and CORRECT code
                     Text(
                         text = "°C",
                         fontSize = 16.sp,
                         fontWeight = if (!isFahrenheit) FontWeight.Bold else FontWeight.Medium,
                         color = if (!isFahrenheit) MaterialTheme.colorScheme.onSecondaryContainer else MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.clickable(
-                            indication = rememberRipple(bounded = false),
-                            interactionSource = remember { MutableInteractionSource() }
-                        ) { onUnitToggle(false) }
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = LocalIndication.current,
+                            onClick = { onUnitToggle(false) }
+                        )
                     )
+
                 }
 
                 Spacer(modifier = Modifier.width(8.dp))
@@ -562,13 +566,11 @@ fun VideoCardPlaceHolder(
                     .width(220.dp)
                     .height(300.dp)
                     .clickable(
-                        indication = rememberRipple(),
-                        interactionSource = remember { MutableInteractionSource() }
-                    ) {
-                        onVideoClick(videoId)
-                    },
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = LocalIndication.current,
+                        onClick = { onVideoClick(videoId) }
+                    ),
+                shape = RoundedCornerShape(24.dp),    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
             ) {
                 Box(
                     modifier = Modifier.fillMaxSize()

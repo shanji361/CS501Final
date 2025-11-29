@@ -1,0 +1,371 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.beautyapp"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="35" />
+10
+11    <!-- Internet Permission for API calls -->
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:6:5-67
+12-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:7:5-79
+13-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:7:22-76
+14    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+14-->[com.google.android.recaptcha:recaptcha:18.5.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/f3ead0a505520a830ac9f35724281d0b/transformed/recaptcha-18.5.1/AndroidManifest.xml:9:5-98
+14-->[com.google.android.recaptcha:recaptcha:18.5.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/f3ead0a505520a830ac9f35724281d0b/transformed/recaptcha-18.5.1/AndroidManifest.xml:9:22-95
+15
+16    <permission
+16-->[androidx.core:core:1.15.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/8dc0e9441b9143f8ff768dd2125c88c9/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+17        android:name="com.example.beautyapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+17-->[androidx.core:core:1.15.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/8dc0e9441b9143f8ff768dd2125c88c9/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+18        android:protectionLevel="signature" />
+18-->[androidx.core:core:1.15.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/8dc0e9441b9143f8ff768dd2125c88c9/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+19
+20    <uses-permission android:name="com.example.beautyapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+20-->[androidx.core:core:1.15.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/8dc0e9441b9143f8ff768dd2125c88c9/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+20-->[androidx.core:core:1.15.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/8dc0e9441b9143f8ff768dd2125c88c9/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+21
+22    <application
+22-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:9:5-32:19
+23        android:allowBackup="true"
+23-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:10:9-35
+24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+24-->[androidx.core:core:1.15.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/8dc0e9441b9143f8ff768dd2125c88c9/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+25        android:dataExtractionRules="@xml/data_extraction_rules"
+25-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:11:9-65
+26        android:debuggable="true"
+27        android:extractNativeLibs="false"
+28        android:fullBackupContent="@xml/backup_rules"
+28-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:12:9-54
+29        android:icon="@mipmap/ic_launcher"
+29-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:13:9-43
+30        android:label="@string/app_name"
+30-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:14:9-41
+31        android:roundIcon="@mipmap/ic_launcher_round"
+31-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:15:9-54
+32        android:supportsRtl="true"
+32-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:16:9-35
+33        android:testOnly="true"
+34        android:theme="@style/Theme.BeautyApp"
+34-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:17:9-47
+35        android:usesCleartextTraffic="true" >
+35-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:18:9-44
+36
+37        <!-- Main Activity -->
+38        <activity
+38-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:22:9-30:20
+39            android:name="com.example.beautyapp.MainActivity"
+39-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:23:13-41
+40            android:exported="true"
+40-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:24:13-36
+41            android:theme="@style/Theme.BeautyApp" >
+41-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:25:13-51
+42            <intent-filter>
+42-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:26:13-29:29
+43                <action android:name="android.intent.action.MAIN" />
+43-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:27:17-69
+43-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:27:25-66
+44
+45                <category android:name="android.intent.category.LAUNCHER" />
+45-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:28:17-77
+45-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:28:27-74
+46            </intent-filter>
+47        </activity>
+48
+49        <service
+49-->[com.google.firebase:firebase-auth-ktx:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/0a68d523d2d7860a86e35edf48cd968b/transformed/firebase-auth-ktx-23.1.0/AndroidManifest.xml:8:9-14:19
+50            android:name="com.google.firebase.components.ComponentDiscoveryService"
+50-->[com.google.firebase:firebase-auth-ktx:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/0a68d523d2d7860a86e35edf48cd968b/transformed/firebase-auth-ktx-23.1.0/AndroidManifest.xml:9:13-84
+51            android:directBootAware="true"
+51-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:32:13-43
+52            android:exported="false" >
+52-->[com.google.firebase:firebase-auth-ktx:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/0a68d523d2d7860a86e35edf48cd968b/transformed/firebase-auth-ktx-23.1.0/AndroidManifest.xml:10:13-37
+53            <meta-data
+53-->[com.google.firebase:firebase-auth-ktx:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/0a68d523d2d7860a86e35edf48cd968b/transformed/firebase-auth-ktx-23.1.0/AndroidManifest.xml:11:13-13:85
+54                android:name="com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthLegacyRegistrar"
+54-->[com.google.firebase:firebase-auth-ktx:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/0a68d523d2d7860a86e35edf48cd968b/transformed/firebase-auth-ktx-23.1.0/AndroidManifest.xml:12:17-119
+55                android:value="com.google.firebase.components.ComponentRegistrar" />
+55-->[com.google.firebase:firebase-auth-ktx:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/0a68d523d2d7860a86e35edf48cd968b/transformed/firebase-auth-ktx-23.1.0/AndroidManifest.xml:13:17-82
+56            <meta-data
+56-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:69:13-71:85
+57                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+57-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:70:17-109
+58                android:value="com.google.firebase.components.ComponentRegistrar" />
+58-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:71:17-82
+59            <meta-data
+59-->[com.google.firebase:firebase-common-ktx:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/c74952df1f5f5b99e1c8225c0c1ec23e/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:12:13-14:85
+60                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+60-->[com.google.firebase:firebase-common-ktx:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/c74952df1f5f5b99e1c8225c0c1ec23e/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:13:17-116
+61                android:value="com.google.firebase.components.ComponentRegistrar" />
+61-->[com.google.firebase:firebase-common-ktx:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/c74952df1f5f5b99e1c8225c0c1ec23e/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:14:17-82
+62            <meta-data
+62-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:35:13-37:85
+63                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+63-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:36:17-109
+64                android:value="com.google.firebase.components.ComponentRegistrar" />
+64-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:37:17-82
+65        </service>
+66
+67        <activity
+67-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:29:9-46:20
+68            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+68-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:30:13-80
+69            android:excludeFromRecents="true"
+69-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:31:13-46
+70            android:exported="true"
+70-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:32:13-36
+71            android:launchMode="singleTask"
+71-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:33:13-44
+72            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+72-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:34:13-72
+73            <intent-filter>
+73-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:35:13-45:29
+74                <action android:name="android.intent.action.VIEW" />
+74-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:36:17-69
+74-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:36:25-66
+75
+76                <category android:name="android.intent.category.DEFAULT" />
+76-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:38:17-76
+76-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:38:27-73
+77                <category android:name="android.intent.category.BROWSABLE" />
+77-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:39:17-78
+77-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:39:27-75
+78
+79                <data
+79-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:41:17-44:51
+80                    android:host="firebase.auth"
+80-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:42:21-49
+81                    android:path="/"
+81-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:43:21-37
+82                    android:scheme="genericidp" />
+82-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:44:21-48
+83            </intent-filter>
+84        </activity>
+85        <activity
+85-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:47:9-64:20
+86            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+86-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:48:13-79
+87            android:excludeFromRecents="true"
+87-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:49:13-46
+88            android:exported="true"
+88-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:50:13-36
+89            android:launchMode="singleTask"
+89-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:51:13-44
+90            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+90-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:52:13-72
+91            <intent-filter>
+91-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:53:13-63:29
+92                <action android:name="android.intent.action.VIEW" />
+92-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:36:17-69
+92-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:36:25-66
+93
+94                <category android:name="android.intent.category.DEFAULT" />
+94-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:38:17-76
+94-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:38:27-73
+95                <category android:name="android.intent.category.BROWSABLE" />
+95-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:39:17-78
+95-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:39:27-75
+96
+97                <data
+97-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:41:17-44:51
+98                    android:host="firebase.auth"
+98-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:42:21-49
+99                    android:path="/"
+99-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:43:21-37
+100                    android:scheme="recaptcha" />
+100-->[com.google.firebase:firebase-auth:23.1.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/237d0b112fe33d4f2170da352a008e7a/transformed/firebase-auth-23.1.0/AndroidManifest.xml:44:21-48
+101            </intent-filter>
+102        </activity>
+103
+104        <service
+104-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:24:9-32:19
+105            android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder"
+105-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:25:13-94
+106            android:enabled="true"
+106-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:26:13-35
+107            android:exported="false" >
+107-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:27:13-37
+108            <meta-data
+108-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:29:13-31:104
+109                android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY"
+109-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:30:17-76
+110                android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl" />
+110-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:31:17-101
+111        </service>
+112
+113        <activity
+113-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:34:9-41:20
+114            android:name="androidx.credentials.playservices.HiddenActivity"
+114-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:35:13-76
+115            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+115-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:36:13-87
+116            android:enabled="true"
+116-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:37:13-35
+117            android:exported="false"
+117-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:38:13-37
+118            android:fitsSystemWindows="true"
+118-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:39:13-45
+119            android:theme="@style/Theme.Hidden" >
+119-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/61269c823f4ba0642238ad03c50a3ee2/transformed/credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:40:13-48
+120        </activity>
+121        <activity
+121-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
+122            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+122-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
+123            android:excludeFromRecents="true"
+123-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
+124            android:exported="false"
+124-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
+125            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+125-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
+126        <!--
+127            Service handling Google Sign-In user revocation. For apps that do not integrate with
+128            Google Sign-In, this service will never be started.
+129        -->
+130        <service
+130-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
+131            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+131-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
+132            android:exported="true"
+132-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
+133            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+133-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
+134            android:visibleToInstantApps="true" />
+134-->[com.google.android.gms:play-services-auth:20.7.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/081e19b227dae2b8bc9bba8a4e9f8dcb/transformed/play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
+135
+136        <activity
+136-->[com.google.android.gms:play-services-base:18.0.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/2884a481067b2ad104c15aaabb26167d/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+137            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+137-->[com.google.android.gms:play-services-base:18.0.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/2884a481067b2ad104c15aaabb26167d/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+138            android:exported="false"
+138-->[com.google.android.gms:play-services-base:18.0.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/2884a481067b2ad104c15aaabb26167d/transformed/play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+139            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+139-->[com.google.android.gms:play-services-base:18.0.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/2884a481067b2ad104c15aaabb26167d/transformed/play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+140
+141        <provider
+141-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:23:9-28:39
+142            android:name="com.google.firebase.provider.FirebaseInitProvider"
+142-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:24:13-77
+143            android:authorities="com.example.beautyapp.firebaseinitprovider"
+143-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:25:13-72
+144            android:directBootAware="true"
+144-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:26:13-43
+145            android:exported="false"
+145-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:27:13-37
+146            android:initOrder="100" />
+146-->[com.google.firebase:firebase-common:21.0.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d3092bbebef7be0a52686ab834a68ed/transformed/firebase-common-21.0.0/AndroidManifest.xml:28:13-36
+147
+148        <service
+148-->[androidx.room:room-runtime:2.6.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/54fac9b82d403b99f0fe9a09d7dea70d/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+149            android:name="androidx.room.MultiInstanceInvalidationService"
+149-->[androidx.room:room-runtime:2.6.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/54fac9b82d403b99f0fe9a09d7dea70d/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+150            android:directBootAware="true"
+150-->[androidx.room:room-runtime:2.6.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/54fac9b82d403b99f0fe9a09d7dea70d/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+151            android:exported="false" />
+151-->[androidx.room:room-runtime:2.6.1] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/54fac9b82d403b99f0fe9a09d7dea70d/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+152
+153        <activity
+153-->[androidx.compose.ui:ui-test-manifest:1.9.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/05107980a5f2e03fefe7cd4f47c3633f/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:23:9-26:79
+154            android:name="androidx.activity.ComponentActivity"
+154-->[androidx.compose.ui:ui-test-manifest:1.9.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/05107980a5f2e03fefe7cd4f47c3633f/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:24:13-63
+155            android:exported="true"
+155-->[androidx.compose.ui:ui-test-manifest:1.9.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/05107980a5f2e03fefe7cd4f47c3633f/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:25:13-36
+156            android:theme="@android:style/Theme.Material.Light.NoActionBar" />
+156-->[androidx.compose.ui:ui-test-manifest:1.9.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/05107980a5f2e03fefe7cd4f47c3633f/transformed/ui-test-manifest-1.9.0/AndroidManifest.xml:26:13-76
+157        <activity
+157-->[androidx.compose.ui:ui-tooling-android:1.9.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/7a442924232dfd4fc54f5c1274a4abfc/transformed/ui-tooling/AndroidManifest.xml:23:9-25:39
+158            android:name="androidx.compose.ui.tooling.PreviewActivity"
+158-->[androidx.compose.ui:ui-tooling-android:1.9.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/7a442924232dfd4fc54f5c1274a4abfc/transformed/ui-tooling/AndroidManifest.xml:24:13-71
+159            android:exported="true" />
+159-->[androidx.compose.ui:ui-tooling-android:1.9.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/7a442924232dfd4fc54f5c1274a4abfc/transformed/ui-tooling/AndroidManifest.xml:25:13-36
+160
+161        <provider
+161-->[androidx.emoji2:emoji2:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/159aad0f321bf1e54ad17ccd1432727f/transformed/emoji2-1.4.0/AndroidManifest.xml:24:9-32:20
+162            android:name="androidx.startup.InitializationProvider"
+162-->[androidx.emoji2:emoji2:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/159aad0f321bf1e54ad17ccd1432727f/transformed/emoji2-1.4.0/AndroidManifest.xml:25:13-67
+163            android:authorities="com.example.beautyapp.androidx-startup"
+163-->[androidx.emoji2:emoji2:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/159aad0f321bf1e54ad17ccd1432727f/transformed/emoji2-1.4.0/AndroidManifest.xml:26:13-68
+164            android:exported="false" >
+164-->[androidx.emoji2:emoji2:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/159aad0f321bf1e54ad17ccd1432727f/transformed/emoji2-1.4.0/AndroidManifest.xml:27:13-37
+165            <meta-data
+165-->[androidx.emoji2:emoji2:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/159aad0f321bf1e54ad17ccd1432727f/transformed/emoji2-1.4.0/AndroidManifest.xml:29:13-31:52
+166                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+166-->[androidx.emoji2:emoji2:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/159aad0f321bf1e54ad17ccd1432727f/transformed/emoji2-1.4.0/AndroidManifest.xml:30:17-75
+167                android:value="androidx.startup" />
+167-->[androidx.emoji2:emoji2:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/159aad0f321bf1e54ad17ccd1432727f/transformed/emoji2-1.4.0/AndroidManifest.xml:31:17-49
+168            <meta-data
+168-->[androidx.lifecycle:lifecycle-process:2.9.4] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/6463ff1694e81200c85642d4cc310f61/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:29:13-31:52
+169                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+169-->[androidx.lifecycle:lifecycle-process:2.9.4] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/6463ff1694e81200c85642d4cc310f61/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:30:17-78
+170                android:value="androidx.startup" />
+170-->[androidx.lifecycle:lifecycle-process:2.9.4] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/6463ff1694e81200c85642d4cc310f61/transformed/lifecycle-process-2.9.4/AndroidManifest.xml:31:17-49
+171            <meta-data
+171-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+172                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+172-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+173                android:value="androidx.startup" />
+173-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+174        </provider>
+175
+176        <meta-data
+176-->[com.google.android.gms:play-services-basement:18.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d0ae46ee7c20f79375d416c2adc5a85/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+177            android:name="com.google.android.gms.version"
+177-->[com.google.android.gms:play-services-basement:18.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d0ae46ee7c20f79375d416c2adc5a85/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+178            android:value="@integer/google_play_services_version" />
+178-->[com.google.android.gms:play-services-basement:18.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/3d0ae46ee7c20f79375d416c2adc5a85/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+179
+180        <receiver
+180-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+181            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+181-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+182            android:directBootAware="false"
+182-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+183            android:enabled="true"
+183-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+184            android:exported="true"
+184-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+185            android:permission="android.permission.DUMP" >
+185-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
+186            <intent-filter>
+186-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+187                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+187-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+187-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
+188            </intent-filter>
+189            <intent-filter>
+189-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+190                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+190-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+190-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+191            </intent-filter>
+192            <intent-filter>
+192-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+193                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+193-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+193-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+194            </intent-filter>
+195            <intent-filter>
+195-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+196                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+196-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+196-->[androidx.profileinstaller:profileinstaller:1.4.0] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/dc9636977001b5909d2c62b906f1d78d/transformed/profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+197            </intent-filter>
+198        </receiver> <!-- The activities will be merged into the manifest of the hosting app. -->
+199        <activity
+199-->[com.google.android.play:core-common:2.0.3] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/38d2b4cf68e4eff351df89935154ba2f/transformed/core-common-2.0.3/AndroidManifest.xml:14:9-18:65
+200            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+200-->[com.google.android.play:core-common:2.0.3] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/38d2b4cf68e4eff351df89935154ba2f/transformed/core-common-2.0.3/AndroidManifest.xml:15:13-93
+201            android:exported="false"
+201-->[com.google.android.play:core-common:2.0.3] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/38d2b4cf68e4eff351df89935154ba2f/transformed/core-common-2.0.3/AndroidManifest.xml:16:13-37
+202            android:stateNotNeeded="true"
+202-->[com.google.android.play:core-common:2.0.3] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/38d2b4cf68e4eff351df89935154ba2f/transformed/core-common-2.0.3/AndroidManifest.xml:17:13-42
+203            android:theme="@style/Theme.PlayCore.Transparent" />
+203-->[com.google.android.play:core-common:2.0.3] /opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/9.0-milestone-1/transforms/38d2b4cf68e4eff351df89935154ba2f/transformed/core-common-2.0.3/AndroidManifest.xml:18:13-62
+204    </application>
+205
+206</manifest>

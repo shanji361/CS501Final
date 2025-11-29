@@ -1,12 +1,23 @@
 package com.example.beautyapp.data.entities
+
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-//this file creates the shade table
+// NEW AND CORRECT
 @Entity(tableName = "shades")
 data class Shade(
-    @PrimaryKey val shade_id: Int,
-    val hex_code: String,
-    val undertone: String,
-    val description: String
+    @PrimaryKey
+    @ColumnInfo(name = "shade_id")
+    val shadeId: Int,
+
+    @ColumnInfo(name = "hex_code")
+    val hexCode: String,
+
+    @ColumnInfo(name = "undertone")
+    val undertone: String?, // <-- FIX HERE
+
+    @ColumnInfo(name = "description")
+    val description: String? // <-- FIX HERE
 )
+

@@ -1,8 +1,10 @@
 package com.example.beautyapp.ui.screens
 
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -269,7 +271,12 @@ fun ShadeButton(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.clickable { onClick() }
+        modifier = Modifier
+            .clickable(
+            interactionSource = remember { MutableInteractionSource() },
+            indication = LocalIndication.current,
+            onClick = { onClick() }
+        )
     ) {
         Box(
             modifier = Modifier

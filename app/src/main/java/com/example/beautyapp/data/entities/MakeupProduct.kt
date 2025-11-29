@@ -5,17 +5,19 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
+// NEW AND CORRECT
 @Entity(
     tableName = "products",
     foreignKeys = [
         ForeignKey(
             entity = Shade::class,
-            parentColumns = ["shade_id"], // corresponds to the column name in the 'shades' table
-            childColumns = ["shade_id"],  // corresponds to the column name in this 'products' table
-            onDelete = ForeignKey.CASCADE
+            parentColumns = ["shade_id"],
+            childColumns = ["shade_id"],
+            onDelete = ForeignKey.NO_ACTION // <-- THIS IS THE FIX
         )
     ]
 )
+
 data class MakeupProduct(
     //in sqlite db, i name all the columns with underscore, kotlin doesn't allow underscore naming
     //convention, so I passing the column name as in the db, to ColumnInfo name.
@@ -30,9 +32,10 @@ data class MakeupProduct(
     val brand: String,
     val name: String,
 
-    @ColumnInfo(name = "image_url")
-    val imageUrl: String,
 
+    @ColumnInfo(name = "image_url")
+    val imageUrl: String?,
     val price: Double,
-    val description: String
+    val description: String?
 )
+

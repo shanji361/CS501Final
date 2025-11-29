@@ -1,4 +1,5 @@
 package com.example.beautyapp
+
 import androidx.compose.ui.platform.LocalContext
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,7 @@ import com.example.beautyapp.ui.screens.*
 import com.example.beautyapp.ui.components.BottomNavBar
 import com.example.beautyapp.ui.theme.BeautyAppTheme
 import com.example.beautyapp.viewmodel.MainViewModel
+import com.example.beautyapp.viewmodel.ShadeProductViewModel
 import com.example.beautyapp.viewmodel.WeatherViewModel
 import com.google.firebase.auth.FirebaseAuth
 
@@ -32,27 +34,35 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             BeautyAppTheme {
-                // Simple state check without LaunchedEffect
-                val auth = FirebaseAuth.getInstance()
-                val currentUser = auth.currentUser
-                val isLoggedIn = currentUser != null
+                // The faulty CompositionLocalProvider has been removed.
+                // We are now using your original, correct navigation flow.
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    val auth = FirebaseAuth.getInstance()
+                    val currentUser = auth.currentUser
+                    val isLoggedIn = currentUser != null
 
-                Log.d("MainActivity", "onCreate - isLoggedIn: $isLoggedIn, user: ${currentUser?.displayName}")
+                    val mainViewModel: MainViewModel = viewModel()
+                    val weatherViewModel: WeatherViewModel = viewModel()
+                    val shadeProductViewModel: ShadeProductViewModel = viewModel()
 
-                if (isLoggedIn) {
-                    // User is logged in, go straight to main screen
-                    BeautyApp(
-                        context = this@MainActivity,
-                        userName = currentUser?.displayName ?: "User",
-                        onLogout = {
-                            FirebaseAuth.getInstance().signOut()
-                            // Restart activity to go back to login
-                            recreate()
-                        }
-                    )
-                } else {
-                    // Not logged in, show login/navigation
-                    AppNavigation()
+                    if (isLoggedIn) {
+                        BeautyApp(
+                            context = this@MainActivity,
+                            userName = currentUser?.displayName ?: "User",
+                            onLogout = {
+                                FirebaseAuth.getInstance().signOut()
+                                recreate()
+                            },  productViewModel = mainViewModel,
+                            weatherViewModel = weatherViewModel,
+                            shadeProductViewModel = shadeProductViewModel
+                        )
+                    } else {
+                        AppNavigation(
+                            mainViewModel = mainViewModel,
+                            weatherViewModel = weatherViewModel,
+                            shadeProductViewModel = shadeProductViewModel
+                        )
+                    }
                 }
             }
         }
@@ -60,7 +70,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation( mainViewModel: MainViewModel,
+                   weatherViewModel: WeatherViewModel,
+                   shadeProductViewModel: ShadeProductViewModel) {
     val navController = rememberNavController()
 
     NavHost(
@@ -105,7 +117,10 @@ fun AppNavigation() {
                     navController.navigate("login") {
                         popUpTo(0) { inclusive = true }
                     }
-                }
+                },
+                productViewModel = mainViewModel,
+                weatherViewModel = weatherViewModel,
+                shadeProductViewModel = shadeProductViewModel
             )
         }
     }
@@ -117,7 +132,8 @@ fun BeautyApp(
     userName: String,
     onLogout: () -> Unit,
     productViewModel: MainViewModel = viewModel(),
-    weatherViewModel: WeatherViewModel = viewModel()
+    weatherViewModel: WeatherViewModel = viewModel(),
+    shadeProductViewModel: ShadeProductViewModel = viewModel()
 ) {
     val productState by productViewModel.state.collectAsState()
     var selectedProduct by remember { mutableStateOf<Product?>(null) }
@@ -157,7 +173,7 @@ fun BeautyApp(
         Scaffold(
             bottomBar = {
                 BottomNavBar(
-                    activeTab = when(selectedTab) {
+                    activeTab = when (selectedTab) {
                         0 -> "home"
                         1 -> "search"
                         2 -> "scan"
@@ -166,7 +182,7 @@ fun BeautyApp(
                         else -> "home"
                     },
                     onTabChange = { tab ->
-                        selectedTab = when(tab) {
+                        selectedTab = when (tab) {
                             "home" -> 0
                             "search" -> 1
                             "scan" -> 2
@@ -187,6 +203,7 @@ fun BeautyApp(
                         viewModel = weatherViewModel,
                         userName = userName
                     )
+
                     1 -> ProductsScreen(
                         products = productViewModel.getDisplayProducts(),
                         likedProducts = productState.likedProducts,
@@ -203,12 +220,14 @@ fun BeautyApp(
                         hasActiveFilters = productViewModel.hasActiveFilters(),
                         onProductClick = { product -> selectedProduct = product }
                     )
+
                     2 -> Box(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(text = "AI Face Scan - Coming soon...")
+                        ShadeProductScreen(viewModel = shadeProductViewModel)
                     }
+
                     3 -> CartScreen(
                         cartItems = productState.cartItems,
                         products = productState.products,
@@ -217,7 +236,6 @@ fun BeautyApp(
                     )
 
                     4 -> ProfileScreen(
-                        // FIX: Pass the userName to the ProfileScreen
                         userName = userName,
                         likedProducts = productState.products.filter {
                             productState.likedProducts.contains(it.id)

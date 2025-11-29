@@ -44,7 +44,7 @@ class ShadeProductViewModel(application: Application) : AndroidViewModel(applica
         _selectedShade.value = shade
         //coroutine, thread runs in the background
         viewModelScope.launch(Dispatchers.IO) {
-            val result = productDao.getProductsForShade(shade.shade_id)
+            val result = productDao.getProductsForShade(shade.shadeId)
             _products.postValue(result)
         }
     }
