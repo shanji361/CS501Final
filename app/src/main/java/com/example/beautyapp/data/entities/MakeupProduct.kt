@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-// NEW AND CORRECT
 @Entity(
     tableName = "products",
     foreignKeys = [
@@ -13,13 +12,13 @@ import androidx.room.PrimaryKey
             entity = Shade::class,
             parentColumns = ["shade_id"],
             childColumns = ["shade_id"],
-            onDelete = ForeignKey.NO_ACTION // <-- THIS IS THE FIX
+            onDelete = ForeignKey.NO_ACTION
         )
     ]
 )
 
 data class MakeupProduct(
-    //in sqlite db, i name all the columns with underscore, kotlin doesn't allow underscore naming
+    //in sqlite db, i named all the columns with underscore, kotlin doesn't allow underscore naming
     //convention, so I passing the column name as in the db, to ColumnInfo name.
     @PrimaryKey
     @ColumnInfo(name = "product_id")

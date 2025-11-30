@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.beautyapp.data.entities.Shade
-
+//this is UI for ShadeSelectionSection shown in MainActivity/ replaces AR screen
 @Composable
 fun ShadeSelectionSection(
     shades: List<Shade>,

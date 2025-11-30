@@ -15,9 +15,7 @@ import coil.compose.AsyncImage
 import com.example.beautyapp.data.entities.MakeupProduct
 
 @Composable
-// FIX 2: Rename the composable to be specific, which you already did. Perfect.
 fun ShadeProductCard(
-    // FIX 3: Change the parameter from 'Product' to 'MakeupProduct'.
     product: MakeupProduct
 ) {
     Card(
@@ -31,7 +29,6 @@ fun ShadeProductCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
-            // FIX 4: Use the correct property name `imageUrl`. Your entity uses camelCase.
             AsyncImage(
                 model = product.imageUrl,
                 contentDescription = product.name,

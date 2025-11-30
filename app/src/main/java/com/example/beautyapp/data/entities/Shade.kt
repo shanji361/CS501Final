@@ -3,8 +3,7 @@ package com.example.beautyapp.data.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
-// NEW AND CORRECT
+//this is all data in relation to skin shade
 @Entity(tableName = "shades")
 data class Shade(
     @PrimaryKey
@@ -15,9 +14,9 @@ data class Shade(
     val hexCode: String,
 
     @ColumnInfo(name = "undertone")
-    val undertone: String?, // <-- FIX HERE
+    val undertone: String?,
 
     @ColumnInfo(name = "description")
-    val description: String? // <-- FIX HERE
+    val description: String?
 )
 
