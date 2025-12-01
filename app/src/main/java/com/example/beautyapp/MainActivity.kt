@@ -32,7 +32,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             BeautyAppTheme {
-                // Simple state check without LaunchedEffect
                 val auth = FirebaseAuth.getInstance()
                 val currentUser = auth.currentUser
                 val isLoggedIn = currentUser != null
@@ -40,18 +39,15 @@ class MainActivity : ComponentActivity() {
                 Log.d("MainActivity", "onCreate - isLoggedIn: $isLoggedIn, user: ${currentUser?.displayName}")
 
                 if (isLoggedIn) {
-                    // User is logged in, go straight to main screen
                     BeautyApp(
                         context = this@MainActivity,
                         userName = currentUser?.displayName ?: "User",
                         onLogout = {
                             FirebaseAuth.getInstance().signOut()
-                            // Restart activity to go back to login
                             recreate()
                         }
                     )
                 } else {
-                    // Not logged in, show login/navigation
                     AppNavigation()
                 }
             }
@@ -217,7 +213,6 @@ fun BeautyApp(
                     )
 
                     4 -> ProfileScreen(
-                        // FIX: Pass the userName to the ProfileScreen
                         userName = userName,
                         likedProducts = productState.products.filter {
                             productState.likedProducts.contains(it.id)
@@ -226,7 +221,8 @@ fun BeautyApp(
                         onToggleLike = { productViewModel.toggleLike(it) },
                         onAddToCart = { productViewModel.addToCart(it) },
                         onProductClick = { product -> selectedProduct = product },
-                        onLogout = { showLogoutDialog = true }
+                        onLogout = { showLogoutDialog = true },
+                        viewModel = productViewModel  //new - pass ViewModel to ProfileScreen for note operations
                     )
                 }
             }

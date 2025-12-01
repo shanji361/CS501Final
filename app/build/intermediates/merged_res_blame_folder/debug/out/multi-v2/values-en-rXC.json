@@ -1,8 +1,59 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.beautyapp-mergeDebugResources-68:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.example.beautyapp-mergeDebugResources-59:/values-en-rXC/values-en-rXC.xml",
             "map": [
+                {
+                    "source": "/Users/auroraa/.gradle/caches/transforms-3/b47107cb9d52f271785a01aea8c1c46b/transformed/ui-release/res/values-en-rXC/values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,296,481,678,880,1067,1252,1445,1633,1820,2001,2186,2352,2538,2716,2891,3062,3241,3408",
+                        "endColumns": "190,184,196,201,186,184,192,187,186,180,184,165,185,177,174,170,178,166,237",
+                        "endOffsets": "291,476,673,875,1062,1247,1440,1628,1815,1996,2181,2347,2533,2711,2886,3057,3236,3403,3641"
+                    },
+                    "to": {
+                        "startLines": "11,12,14,15,16,20,21,78,79,80,81,82,83,84,85,86,88,89,90",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1963,2154,2539,2736,2938,3737,3922,15833,16021,16208,16389,16574,16740,16926,17104,17279,17654,17833,18000",
+                        "endColumns": "190,184,196,201,186,184,192,187,186,180,184,165,185,177,174,170,178,166,237",
+                        "endOffsets": "2149,2334,2731,2933,3120,3917,4110,16016,16203,16384,16569,16735,16921,17099,17274,17445,17828,17995,18233"
+                    }
+                },
+                {
+                    "source": "/Users/auroraa/.gradle/caches/transforms-3/dbc37af59ec4a421df70771c3448ddd2/transformed/core-1.15.0/res/values-en-rXC/values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,251,456,657,858,1065,1270,1482",
+                        "endColumns": "195,204,200,200,206,204,211,203",
+                        "endOffsets": "246,451,652,853,1060,1265,1477,1681"
+                    },
+                    "to": {
+                        "startLines": "4,5,6,7,8,9,10,87",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "536,732,937,1138,1339,1546,1751,17450",
+                        "endColumns": "195,204,200,200,206,204,211,203",
+                        "endOffsets": "727,932,1133,1334,1541,1746,1958,17649"
+                    }
+                },
+                {
+                    "source": "/Users/auroraa/.gradle/caches/transforms-3/f5589197b7c816f6893ed9b2c4a2bfa1/transformed/foundation-release/res/values-en-rXC/values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,243",
+                        "endColumns": "187,186",
+                        "endOffsets": "238,425"
+                    },
+                    "to": {
+                        "startLines": "91,92",
+                        "startColumns": "4,4",
+                        "startOffsets": "18238,18426",
+                        "endColumns": "187,186",
+                        "endOffsets": "18421,18608"
+                    }
+                },
                 {
                     "source": "/Users/auroraa/.gradle/caches/transforms-3/1586a1155d27ed6662e7b1c84e3a93f8/transformed/browser-1.4.0/res/values-en-rXC/values-en-rXC.xml",
                     "from": {
@@ -18,57 +69,6 @@
                         "startOffsets": "2339,3125,3324,3535",
                         "endColumns": "199,198,210,201",
                         "endOffsets": "2534,3319,3530,3732"
-                    }
-                },
-                {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/c2ea98f616a4f4daa85698a03f5145c2/transformed/ui-release/res/values-en-rXC/values-en-rXC.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,296,481,678,880,1067,1252,1445,1633,1820,1985,2152,2333,2518,2684,2863,3030",
-                        "endColumns": "190,184,196,201,186,184,192,187,186,164,166,180,184,165,178,166,237",
-                        "endOffsets": "291,476,673,875,1062,1247,1440,1628,1815,1980,2147,2328,2513,2679,2858,3025,3263"
-                    },
-                    "to": {
-                        "startLines": "11,12,14,15,16,20,21,78,79,80,81,82,83,84,86,87,88",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "1963,2154,2539,2736,2938,3737,3922,15833,16021,16208,16373,16540,16721,16906,17276,17455,17622",
-                        "endColumns": "190,184,196,201,186,184,192,187,186,164,166,180,184,165,178,166,237",
-                        "endOffsets": "2149,2334,2731,2933,3120,3917,4110,16016,16203,16368,16535,16716,16901,17067,17450,17617,17855"
-                    }
-                },
-                {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/e3bafe022e69c9a5c8d61f2d47396e69/transformed/core-1.12.0/res/values-en-rXC/values-en-rXC.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,251,456,657,858,1065,1270,1482",
-                        "endColumns": "195,204,200,200,206,204,211,203",
-                        "endOffsets": "246,451,652,853,1060,1265,1477,1681"
-                    },
-                    "to": {
-                        "startLines": "4,5,6,7,8,9,10,85",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "536,732,937,1138,1339,1546,1751,17072",
-                        "endColumns": "195,204,200,200,206,204,211,203",
-                        "endOffsets": "727,932,1133,1334,1541,1746,1958,17271"
-                    }
-                },
-                {
-                    "source": "/Users/auroraa/.gradle/caches/transforms-3/d7ff8db9546f722aa7ab9b0530936eea/transformed/foundation-release/res/values-en-rXC/values-en-rXC.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,243",
-                        "endColumns": "187,186",
-                        "endOffsets": "238,425"
-                    },
-                    "to": {
-                        "startLines": "89,90",
-                        "startColumns": "4,4",
-                        "startOffsets": "17860,18048",
-                        "endColumns": "187,186",
-                        "endOffsets": "18043,18230"
                     }
                 },
                 {

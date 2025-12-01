@@ -1,23 +1,27 @@
 package com.example.beautyapp.viewmodel
 
-import android.app.Application // <-- 1. IMPORT Application
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel // <-- 2. CHANGE from ViewModel to AndroidViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.beautyapp.data.AppDatabase // <-- 3. IMPORT Database
-import com.example.beautyapp.data.LikedProduct // <-- 4. IMPORT LikedProduct Entity
+import com.example.beautyapp.data.AppDatabase
+import com.example.beautyapp.data.LikedProduct
+import com.example.beautyapp.data.Note
 import com.example.beautyapp.data.Product
-import com.example.beautyapp.network.MakeupApiService // <-- Make sure this is your correct service
+import com.example.beautyapp.network.MakeupApiService
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient  //new - import for timeout configuration
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.util.*
+import java.util.concurrent.TimeUnit  //new - import for timeout units
 
-// This data class is the same
 data class AppState(
     val products: List<Product> = emptyList(),
     val filteredProducts: List<Product> = emptyList(),
-    val likedProducts: Set<Int> = emptySet(), // This will now come from the DB
+    val likedProducts: Set<Int> = emptySet(),
     val cartItems: Map<Int, Int> = emptyMap(),
     val loading: Boolean = false,
     val activeTab: String = "home",
@@ -27,21 +31,28 @@ data class AppState(
     val availableProductTypes: List<String> = emptyList()
 )
 
-// <-- 5. CHANGE signature to (application: Application) and extend AndroidViewModel(application)
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    // <-- 6. GET the DAO from the database
     private val likedProductDao = AppDatabase.getDatabase(application).likedProductDao()
+    private val noteDao = AppDatabase.getDatabase(application).noteDao()
 
     private val _state = MutableStateFlow(AppState())
     val state: StateFlow<AppState> = _state.asStateFlow()
 
-    // Assuming you have your MakeupApiService defined somewhere else
-    // If not, use the code you had before to create the 'api' service
+    val notes = noteDao.getAllNotes()
+
+    //new - Updated with timeout configuration
     private val api: MakeupApiService by lazy {
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)  //new - 30 second connection timeout
+            .readTimeout(30, TimeUnit.SECONDS)     //new - 30 second read timeout
+            .writeTimeout(30, TimeUnit.SECONDS)    //new - 30 second write timeout
+            .build()
+
         Retrofit.Builder()
-            .baseUrl("https://makeup-api.herokuapp.com/") // <-- FIXED
-            .addConverterFactory(GsonConverterFactory.create()) //added//           .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://makeup-api.herokuapp.com/")
+            .client(okHttpClient)  //new - attach the custom OkHttp client
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MakeupApiService::class.java)
     }
@@ -49,8 +60,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         fetchProducts()
 
-        // <-- 7. NEW: Launch a coroutine to listen to the database
-        // This Flow automatically updates the state whenever the database changes
         viewModelScope.launch {
             likedProductDao.getAllLikedProductIds().collect { likedIds ->
                 _state.update { it.copy(likedProducts = likedIds.toSet()) }
@@ -62,9 +71,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
             try {
-                val products = api.getProducts() // Use your Retrofit instance
+                val products = api.getProducts()
 
-                // Extract unique brands and product types
                 val brands = products.mapNotNull { it.brand }.distinct().sorted()
                 val productTypes = products.mapNotNull { it.productType }.distinct().sorted()
 
@@ -123,23 +131,41 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _state.value = _state.value.copy(filteredProducts = filtered)
     }
 
-    // <-- 8. UPDATED: This function now writes to the database
     fun toggleLike(productId: Int) {
         viewModelScope.launch {
             val currentLikes = _state.value.likedProducts
             if (currentLikes.contains(productId)) {
-                // Unlike: Delete from database
                 likedProductDao.unlikeProduct(LikedProduct(id = productId))
             } else {
-                // Like: Insert into database
                 likedProductDao.likeProduct(LikedProduct(id = productId))
             }
-            // The Flow in init{} will automatically update the state,
-            // so no need to update _state here.
         }
     }
 
-    // --- (The rest of your functions stay the same) ---
+    fun addNote(title: String, content: String, imagePath: String?) {
+        viewModelScope.launch {
+            val note = Note(
+                id = UUID.randomUUID().toString(),
+                title = title,
+                content = content,
+                imagePath = imagePath
+            )
+            noteDao.insertNote(note)
+        }
+    }
+
+    fun deleteNote(noteId: String, imagePath: String?) {
+        viewModelScope.launch {
+            imagePath?.let { path ->
+                try {
+                    File(path).delete()
+                } catch (e: Exception) {
+                    Log.e("MainViewModel", "Failed to delete image file", e)
+                }
+            }
+            noteDao.deleteNoteById(noteId)
+        }
+    }
 
     fun addToCart(productId: Int) {
         val currentCart = _state.value.cartItems.toMutableMap()

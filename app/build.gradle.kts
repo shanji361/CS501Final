@@ -3,17 +3,18 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
     id("com.google.devtools.ksp") // <-- ADD THIS LINE
+    id("org.jetbrains.kotlin.plugin.compose")
 
 }
 
 android {
     namespace = "com.example.beautyapp"
-    compileSdk = 34
+    compileSdk = 35 // <-- UPDATED
 
     defaultConfig {
         applicationId = "com.example.beautyapp"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35 // <-- UPDATED
         versionCode = 1
         versionName = "1.0"
 
@@ -42,9 +43,9 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
-    }
+    //composeOptions {
+        //kotlinCompilerExtensionVersion = "1.5.10"
+  //  }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -105,7 +106,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
     // YouTube Player
-    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:13.0.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

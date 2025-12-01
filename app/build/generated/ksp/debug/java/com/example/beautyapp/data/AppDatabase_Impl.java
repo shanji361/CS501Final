@@ -28,20 +28,24 @@ import javax.annotation.processing.Generated;
 public final class AppDatabase_Impl extends AppDatabase {
   private volatile LikedProductDao _likedProductDao;
 
+  private volatile NoteDao _noteDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `liked_products` (`id` INTEGER NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `imagePath` TEXT, `timestamp` INTEGER NOT NULL, PRIMARY KEY(`id`))");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '56c0a8fc3f5c816060106d94e79aff87')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd16f06692baa373751425e8338dfe3a3')");
       }
 
       @Override
       public void dropAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS `liked_products`");
+        db.execSQL("DROP TABLE IF EXISTS `notes`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -96,9 +100,24 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoLikedProducts + "\n"
                   + " Found:\n" + _existingLikedProducts);
         }
+        final HashMap<String, TableInfo.Column> _columnsNotes = new HashMap<String, TableInfo.Column>(5);
+        _columnsNotes.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsNotes.put("title", new TableInfo.Column("title", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsNotes.put("content", new TableInfo.Column("content", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsNotes.put("imagePath", new TableInfo.Column("imagePath", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsNotes.put("timestamp", new TableInfo.Column("timestamp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysNotes = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesNotes = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoNotes = new TableInfo("notes", _columnsNotes, _foreignKeysNotes, _indicesNotes);
+        final TableInfo _existingNotes = TableInfo.read(db, "notes");
+        if (!_infoNotes.equals(_existingNotes)) {
+          return new RoomOpenHelper.ValidationResult(false, "notes(com.example.beautyapp.data.Note).\n"
+                  + " Expected:\n" + _infoNotes + "\n"
+                  + " Found:\n" + _existingNotes);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "56c0a8fc3f5c816060106d94e79aff87", "d3e86921d8e648222850d83df0d2a43e");
+    }, "d16f06692baa373751425e8338dfe3a3", "d1435dcce5aba17aa73315991bac5854");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -109,7 +128,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "liked_products");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "liked_products","notes");
   }
 
   @Override
@@ -119,6 +138,7 @@ public final class AppDatabase_Impl extends AppDatabase {
     try {
       super.beginTransaction();
       _db.execSQL("DELETE FROM `liked_products`");
+      _db.execSQL("DELETE FROM `notes`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -134,6 +154,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected Map<Class<?>, List<Class<?>>> getRequiredTypeConverters() {
     final HashMap<Class<?>, List<Class<?>>> _typeConvertersMap = new HashMap<Class<?>, List<Class<?>>>();
     _typeConvertersMap.put(LikedProductDao.class, LikedProductDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(NoteDao.class, NoteDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -162,6 +183,20 @@ public final class AppDatabase_Impl extends AppDatabase {
           _likedProductDao = new LikedProductDao_Impl(this);
         }
         return _likedProductDao;
+      }
+    }
+  }
+
+  @Override
+  public NoteDao noteDao() {
+    if (_noteDao != null) {
+      return _noteDao;
+    } else {
+      synchronized(this) {
+        if(_noteDao == null) {
+          _noteDao = new NoteDao_Impl(this);
+        }
+        return _noteDao;
       }
     }
   }

@@ -5,10 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [LikedProduct::class], version = 1)
+@Database(
+    entities = [LikedProduct::class, Note::class],  //new - added Note::class to entities
+    version = 2,  //new - increment from 1 to 2 because we're adding a new table
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun likedProductDao(): LikedProductDao
+    abstract fun noteDao(): NoteDao  //new - provide access to NoteDao
 
     companion object {
         @Volatile
@@ -20,7 +25,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "beauty_app_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()  //new - handle database version upgrade (will delete old data but that's okay for development)
+                    .build()
                 INSTANCE = instance
                 instance
             }
