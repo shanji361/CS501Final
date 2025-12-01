@@ -26,17 +26,20 @@ fun ShadeSelectionSection(
             style = MaterialTheme.typography.titleLarge
         )
 
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(16.dp))
 
         LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
+            //showing shade circle in a row of 4
+            columns = GridCells.Fixed(4),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp),
             modifier = Modifier.height(300.dp)
         ) {
             items(shades) { shade ->
                 ShadeCircle(
                     hex = shade.hexCode,
+                    //passing shade name and description
+                    name=shade.description,
                     isSelected = (selectedShade?.shadeId == shade.shadeId),
                     onClick = { onShadeSelected(shade) }
                 )
