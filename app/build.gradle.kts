@@ -112,6 +112,15 @@ dependencies {
 // DataStore - Modern way to store key-value pairs (replaces SharedPreferences)
 // Used to save user settings like theme, font size, etc.
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    //GOOGLE MAPS
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    // GOOGLE PLACES API
+    implementation("com.google.android.libraries.places:places:3.3.0")
+
+
     // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

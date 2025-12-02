@@ -1,8 +1,18 @@
+/*
+ * CartScreen.kt
+ *
+ * Shopping cart screen that displays cart items
+ * Features:
+ * - Shows all products in cart with quantity controls
+ * - Displays selected shade for each product (color circle + name)
+ * - "Find at Nearby Stores" button for each item (NEW! - Store Finder integration)
+ * - Calculate and display cart total
+ * - Checkout button
+ */
+
 package com.example.beautyapp.ui.screens
 
-
 import com.example.beautyapp.utils.parseHexColor
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,6 +21,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,10 +42,11 @@ import com.example.beautyapp.data.ProductColor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(
-    cartItems: List<CartItem>,  // UPDATED - List<CartItem> not Map!
-    products: List<Product>,
-    onAddToCart: (Int, ProductColor?) -> Unit,  // UPDATED - added ProductColor parameter!
-    onRemoveFromCart: (Int, ProductColor?) -> Unit  // UPDATED - added ProductColor parameter!
+    cartItems: List<CartItem>,  // List of items in cart (productId, quantity, selectedShade)
+    products: List<Product>,  // All available products for lookups
+    onAddToCart: (Int, ProductColor?) -> Unit,  // Add 1 more of this product
+    onRemoveFromCart: (Int, ProductColor?) -> Unit,  // Remove 1 of this product
+    onFindStores: (Product) -> Unit = {} // NEW: Callback to open Store Finder map
 ) {
     Scaffold(
         topBar = {
@@ -75,6 +87,7 @@ fun CartScreen(
         }
     ) { paddingValues ->
         if (cartItems.isEmpty()) {
+            // Empty cart state
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -93,25 +106,28 @@ fun CartScreen(
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
+                // Scrollable list of cart items
                 LazyColumn(
                     modifier = Modifier.weight(1f),
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    items(cartItems) { cartItem ->  // UPDATED - now iterating over CartItems
+                    items(cartItems) { cartItem ->
+                        // Find product details from product ID
                         val product = products.find { it.id == cartItem.productId }
                         product?.let {
                             CartItemCard(
                                 product = it,
-                                cartItem = cartItem,  // UPDATED - pass entire CartItem
+                                cartItem = cartItem,
                                 onAddToCart = { onAddToCart(cartItem.productId, cartItem.selectedShade) },
-                                onRemoveFromCart = { onRemoveFromCart(cartItem.productId, cartItem.selectedShade) }
+                                onRemoveFromCart = { onRemoveFromCart(cartItem.productId, cartItem.selectedShade) },
+                                onFindStores = { onFindStores(it) } // NEW: Pass store finder callback
                             )
                         }
                     }
                 }
 
-                // Total and Checkout
+                // Total price and Checkout button (bottom section)
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.surface,
@@ -162,12 +178,15 @@ fun CartScreen(
     }
 }
 
+// Individual cart item card
+// Shows: product image, name, brand, shade, price, quantity controls, store finder button
 @Composable
 fun CartItemCard(
-    product: Product,
-    cartItem: CartItem,  // UPDATED - receive CartItem instead of just quantity
-    onAddToCart: () -> Unit,
-    onRemoveFromCart: () -> Unit
+    product: Product,  // Product details
+    cartItem: CartItem,  // Cart item (includes quantity and selected shade)
+    onAddToCart: () -> Unit,  // Add one more
+    onRemoveFromCart: () -> Unit,  // Remove one
+    onFindStores: () -> Unit = {} // NEW: Open store finder for this product
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -214,13 +233,14 @@ fun CartItemCard(
                     )
                 }
 
-                // SHOW SELECTED SHADE! 🎨
+                // Show selected shade with color circle (if product has shade variants)
                 cartItem.selectedShade?.let { shade ->
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         modifier = Modifier.padding(vertical = 4.dp)
                     ) {
+                        // Color circle showing the shade
                         Box(
                             modifier = Modifier
                                 .size(16.dp)
@@ -229,6 +249,7 @@ fun CartItemCard(
                                     shape = CircleShape
                                 )
                         )
+                        // Shade name
                         Text(
                             text = "Shade: ${shade.colourName ?: "Custom"}",
                             style = MaterialTheme.typography.bodySmall,
@@ -268,7 +289,7 @@ fun CartItemCard(
                     }
 
                     Text(
-                        text = cartItem.quantity.toString(),  // UPDATED - use cartItem.quantity
+                        text = cartItem.quantity.toString(),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -286,15 +307,35 @@ fun CartItemCard(
                         )
                     }
                 }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // NEW: Find Nearby Stores Button!
+                // Opens Google Maps with nearby beauty stores carrying this product
+                OutlinedButton(
+                    onClick = onFindStores,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = Color(0xFFF472B6)
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.LocationOn,
+                        contentDescription = "Location",
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = "Find at Nearby Stores")
+                }
             }
         }
     }
 }
 
-// Helper function from ProductDetailScreen
-//
-
-fun calculateTotal(cartItems: List<CartItem>, products: List<Product>): String {  // UPDATED - List<CartItem>
+// Calculate total price of all items in cart
+// Formula: sum(product price × quantity) for each cart item
+fun calculateTotal(cartItems: List<CartItem>, products: List<Product>): String {
     val total = cartItems.sumOf { cartItem ->
         val product = products.find { it.id == cartItem.productId }
         val price = product?.price?.toDoubleOrNull() ?: 0.0
