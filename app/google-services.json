@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "657735404993",
+    "project_id": "instaglow2",
+    "storage_bucket": "instaglow2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657735404993:android:804f5d52fc9da4f684f340",
+        "android_client_info": {
+          "package_name": "com.example.beautyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657735404993-n23bqf6cnpadftuumcnmgkkrh79p1kmo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.beautyapp",
+            "certificate_hash": "eb2bfb9b3afb14625bfc0daa325cdab01684fa4c"
+          }
+        },
+        {
+          "client_id": "657735404993-jbe21it8us5fhframgtb6a49bjvp029c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP66I6CTXnzDRIHr2Dlrpypwkc9TwmZrk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657735404993-jbe21it8us5fhframgtb6a49bjvp029c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
