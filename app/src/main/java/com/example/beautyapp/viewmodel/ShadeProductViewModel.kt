@@ -1,6 +1,7 @@
 package com.example.beautyapp.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,6 +26,10 @@ class ShadeProductViewModel(application: Application) : AndroidViewModel(applica
     private val _products = MutableLiveData<List<MakeupProduct>>()
     val products: LiveData<List<MakeupProduct>> = _products
 
+    companion object{
+        private const val TAG= "ShadeProductViewModel"
+    }
+
     init {
         loadShades()
     }
@@ -32,14 +37,17 @@ class ShadeProductViewModel(application: Application) : AndroidViewModel(applica
     private fun loadShades() {
         viewModelScope.launch(Dispatchers.IO) {
             val shadeList = shadeDao.getAllShades()
+            Log.d(TAG, "Loaded ${shadeList.size} shades from database")
             _shades.postValue(shadeList)
         }
     }
 
     fun onShadeSelected(shade: Shade) {
         _selectedShade.value = shade
+        Log.d(TAG, "Shade Selected: ${shade.description} (ID: ${shade.shadeId}")
         viewModelScope.launch(Dispatchers.IO) {
             val result = productDao.getProductsForShade(shade.shadeId)
+            Log.d(TAG, "Found ${result.size} products for shade ID ${shade.shadeId}.")
             _products.postValue(result)
         }
     }

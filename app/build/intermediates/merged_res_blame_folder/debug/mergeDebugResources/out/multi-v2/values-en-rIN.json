@@ -1,44 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.beautyapp-mergeDebugResources-69:/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "com.example.beautyapp-mergeDebugResources-3:/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
-                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/024e506e2a7c047021c330ab64c9f03d/transformed/credentials-1.2.0-rc01/res/values-en-rIN/values-en-rIN.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,167",
-                        "endColumns": "111,113",
-                        "endOffsets": "162,276"
-                    },
-                    "to": {
-                        "startLines": "29,30",
-                        "startColumns": "4,4",
-                        "startOffsets": "2762,2874",
-                        "endColumns": "111,113",
-                        "endOffsets": "2869,2983"
-                    }
-                },
-                {
-                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/f79c7e3ca9dc978524487365442c3620/transformed/core-1.15.0/res/values-en-rIN/values-en-rIN.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,151,253,352,451,555,658,774",
-                        "endColumns": "95,101,98,98,103,102,115,100",
-                        "endOffsets": "146,248,347,446,550,653,769,870"
-                    },
-                    "to": {
-                        "startLines": "32,33,34,35,36,37,38,116",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "3063,3159,3261,3360,3459,3563,3666,11610",
-                        "endColumns": "95,101,98,98,103,102,115,100",
-                        "endOffsets": "3154,3256,3355,3454,3558,3661,3777,11706"
-                    }
-                },
-                {
-                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/9bff2ea65dcde0a71599c51ed34e6b41/transformed/material3-release/res/values-en-rIN/values-en-rIN.xml",
+                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/9bff2ea65dcde0a71599c51ed34e6b41/transformed/material3-release/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,7 +21,58 @@
                     }
                 },
                 {
-                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/4a8dca4f0238c4bd41f91aa183fe52d1/transformed/foundation-release/res/values-en-rIN/values-en-rIN.xml",
+                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/024e506e2a7c047021c330ab64c9f03d/transformed/credentials-1.2.0-rc01/res/values-en-rIN/values-en-rIN.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,167",
+                        "endColumns": "111,113",
+                        "endOffsets": "162,276"
+                    },
+                    "to": {
+                        "startLines": "29,30",
+                        "startColumns": "4,4",
+                        "startOffsets": "2762,2874",
+                        "endColumns": "111,113",
+                        "endOffsets": "2869,2983"
+                    }
+                },
+                {
+                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/f79c7e3ca9dc978524487365442c3620/transformed/core-1.15.0/res/values-en-rIN/values-en-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,253,352,451,555,658,774",
+                        "endColumns": "95,101,98,98,103,102,115,100",
+                        "endOffsets": "146,248,347,446,550,653,769,870"
+                    },
+                    "to": {
+                        "startLines": "32,33,34,35,36,37,38,116",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "3063,3159,3261,3360,3459,3563,3666,11610",
+                        "endColumns": "95,101,98,98,103,102,115,100",
+                        "endOffsets": "3154,3256,3355,3454,3558,3661,3777,11706"
+                    }
+                },
+                {
+                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/6b553f2229f778fb14afcb8c26ee6a42/transformed/browser-1.4.0/res/values-en-rIN/values-en-rIN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,153,250,359",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "148,245,354,453"
+                    },
+                    "to": {
+                        "startLines": "41,45,46,47",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "3956,4334,4431,4540",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "4049,4426,4535,4634"
+                    }
+                },
+                {
+                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/4a8dca4f0238c4bd41f91aa183fe52d1/transformed/foundation-release/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
@@ -72,7 +89,7 @@
                     }
                 },
                 {
-                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/66b9cbf39625d5d38287c2d5fd554bb4/transformed/appcompat-1.6.1/res/values-en-rIN/values-en-rIN.xml",
+                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/66b9cbf39625d5d38287c2d5fd554bb4/transformed/appcompat-1.6.1/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -89,7 +106,7 @@
                     }
                 },
                 {
-                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/5b2265be213ff8e8c8082f0d62101f7c/transformed/ui-release/res/values-en-rIN/values-en-rIN.xml",
+                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/5b2265be213ff8e8c8082f0d62101f7c/transformed/ui-release/res/values-en-rIN/values-en-rIN.xml",
                     "from": {
                         "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -103,23 +120,6 @@
                         "startOffsets": "3782,3874,4054,4148,4247,4639,4721,10819,10908,10992,11070,11235,11308,11392,11468,11540,11711,11788,11854",
                         "endColumns": "91,81,93,98,86,81,88,88,83,77,81,72,83,75,71,69,76,65,120",
                         "endOffsets": "3869,3951,4143,4242,4329,4716,4805,10903,10987,11065,11147,11303,11387,11463,11535,11605,11783,11849,11970"
-                    }
-                },
-                {
-                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/6b553f2229f778fb14afcb8c26ee6a42/transformed/browser-1.4.0/res/values-en-rIN/values-en-rIN.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,153,250,359",
-                        "endColumns": "97,96,108,98",
-                        "endOffsets": "148,245,354,453"
-                    },
-                    "to": {
-                        "startLines": "41,45,46,47",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "3956,4334,4431,4540",
-                        "endColumns": "97,96,108,98",
-                        "endOffsets": "4049,4426,4535,4634"
                     }
                 }
             ]
