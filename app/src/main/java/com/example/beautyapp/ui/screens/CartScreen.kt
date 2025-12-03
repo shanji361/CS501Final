@@ -11,6 +11,9 @@
  */
 
 package com.example.beautyapp.ui.screens
+//NOTE FOR HAFSA: When you do horizontal reorientation, within
+// cartscreen, checkout button is in the way, so you can't see items
+//scroll
 
 import com.example.beautyapp.utils.parseHexColor
 import androidx.compose.foundation.background
