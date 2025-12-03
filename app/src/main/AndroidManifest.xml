@@ -22,11 +22,11 @@
         tools:targetApi="31">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC-EV2JYN0cHL6VxAeuSQ5mqdLlIQ5Mgis"/>
+            android:value="google_api_key_here"/>
 
         <meta-data
             android:name="com.google.android.geo.PLACES_API_KEY"
-            android:value="AIzaSyC-EV2JYN0cHL6VxAeuSQ5mqdLlIQ5Mgis"/>
+            android:value="google_api_key_here"/>
 
         <!-- Main Activity -->
         <activity
