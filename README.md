@@ -74,7 +74,7 @@ This project demonstrates several key Android development concepts:
 
 1.  **Clone/Open Project**: Open the project in Android Studio.
 2.  **Add `google-services.json`**: Download this file from your Firebase project settings and place it in the `app/` folder.
-3.  **Add API Keys**: Add your OpenWeatherMap API key where required (e.g., in `WeatherViewModel.kt` or `local.properties`). Add Google Maps API key under `AndroidManifest.kt`.
+3.  **Add API Keys**: Add your OpenWeatherMap API key where required (e.g., in `WeatherViewModel.kt` or `local.properties`). Add Google Maps API key under `AndroidManifest.xml`.
 4.  **Sync Gradle**: Click "Sync Project with Gradle Files".
 5.  **Run the app**: Connect an Android device or start an emulator and click "Run".
 
