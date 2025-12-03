@@ -68,7 +68,7 @@ fun BottomNavBar(
             onClick = { onTabChange("search") }
         )
 
-        // AR Scan Tab (center with special styling)
+        // Shade Selection
         NavigationBarItem(
             icon = {
                 Box(
@@ -80,8 +80,8 @@ fun BottomNavBar(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Default.CameraAlt,
-                        contentDescription = "AR Scan",
+                        imageVector = Icons.Default.Person,
+                        contentDescription = "Shade Selection",
                         tint = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier.size(24.dp)
                     )
@@ -89,7 +89,7 @@ fun BottomNavBar(
             },
             label = {
                 Text(
-                    "AR Scan",
+                    "Shade Select",
                     fontSize = 10.sp,
                     color = if (activeTab == "scan") MaterialTheme.colorScheme.primary
                     else MaterialTheme.colorScheme.onSurfaceVariant

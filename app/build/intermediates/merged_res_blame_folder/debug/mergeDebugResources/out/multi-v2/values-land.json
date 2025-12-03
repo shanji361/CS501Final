@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.beautyapp-mergeDebugResources-3:/values-land/values-land.xml",
+            "map": [
+                {
+                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/66b9cbf39625d5d38287c2d5fd554bb4/transformed/appcompat-1.6.1/res/values-land/values-land.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,125,196",
+                        "endColumns": "69,70,67",
+                        "endOffsets": "120,191,259"
+                    }
+                }
+            ]
+        }
+    ]
+}

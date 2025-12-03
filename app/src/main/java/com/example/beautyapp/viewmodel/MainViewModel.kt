@@ -1,19 +1,52 @@
+/*
+ * MainViewModel.kt
+ * PURPOSE: Central state management for BeautyApp - handles products, cart, favorites, notes, and filters
+ * MAIN COMPONENTS: MainViewModel, AppState data class
+ * KEY FEATURES:
+ *   - Product fetching from Makeup API with 30s timeout
+ *   - Cart management with shade selection support (CartItem with ProductColor)
+ *   - Favorites/likes management via Room database
+ *   - Notes management with image storage
+ *   - Brand and product type filtering
+ * DATA FLOW:
+ *   - StateFlow<AppState> exposes reactive state to UI
+ *   - Room DAOs for persistent storage (likes, notes)
+ *   - Retrofit API for product data
+ * STATE STRUCTURE:
+ *   - products: All products from API
+ *   - filteredProducts: Products after applying filters
+ *   - cartItems: List<CartItem> (productId + quantity + selectedShade)
+ *   - likedProducts: Set<Int> of product IDs
+ *   - selectedBrands/selectedProductTypes: Active filters
+ */
+
 package com.example.beautyapp.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.beautyapp.data.AppDatabase
+import com.example.beautyapp.data.CartItem
+import com.example.beautyapp.data.LikedProduct
+import com.example.beautyapp.data.Note
 import com.example.beautyapp.data.Product
-import com.example.beautyapp.network.MakeupApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.example.beautyapp.data.ProductColor
+import com.example.beautyapp.network.MakeupApiService
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 data class AppState(
     val products: List<Product> = emptyList(),
     val filteredProducts: List<Product> = emptyList(),
     val likedProducts: Set<Int> = emptySet(),
-    val cartItems: Map<Int, Int> = emptyMap(),
+    val cartItems: List<CartItem> = emptyList(),  // UPDATED - now List<CartItem> instead of Map!
     val loading: Boolean = false,
     val activeTab: String = "home",
     val selectedBrands: Set<String> = emptySet(),
@@ -22,21 +55,48 @@ data class AppState(
     val availableProductTypes: List<String> = emptyList()
 )
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val likedProductDao = AppDatabase.getDatabase(application).likedProductDao()
+    private val noteDao = AppDatabase.getDatabase(application).noteDao()
+
     private val _state = MutableStateFlow(AppState())
     val state: StateFlow<AppState> = _state.asStateFlow()
 
+    val notes = noteDao.getAllNotes()
+
+    // Updated with timeout configuration
+    private val api: MakeupApiService by lazy {
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)  // 30 second connection timeout
+            .readTimeout(30, TimeUnit.SECONDS)     // 30 second read timeout
+            .writeTimeout(30, TimeUnit.SECONDS)    // 30 second write timeout
+            .build()
+
+        Retrofit.Builder()
+            .baseUrl("https://makeup-api.herokuapp.com/")
+            .client(okHttpClient)  // Attach the custom OkHttp client
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(MakeupApiService::class.java)
+    }
+
     init {
         fetchProducts()
+
+        viewModelScope.launch {
+            likedProductDao.getAllLikedProductIds().collect { likedIds ->
+                _state.update { it.copy(likedProducts = likedIds.toSet()) }
+            }
+        }
     }
 
     fun fetchProducts() {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
             try {
-                val products = MakeupApi.service.getProducts()
+                val products = api.getProducts()
 
-                // Extract unique brands and product types
                 val brands = products.mapNotNull { it.brand }.distinct().sorted()
                 val productTypes = products.mapNotNull { it.productType }.distinct().sorted()
 
@@ -49,7 +109,7 @@ class MainViewModel : ViewModel() {
                 )
             } catch (e: Exception) {
                 _state.value = _state.value.copy(loading = false)
-                e.printStackTrace()
+                Log.e("MainViewModel", "Failed to fetch products", e)
             }
         }
     }
@@ -96,39 +156,92 @@ class MainViewModel : ViewModel() {
     }
 
     fun toggleLike(productId: Int) {
-        val currentLiked = _state.value.likedProducts.toMutableSet()
-        if (currentLiked.contains(productId)) {
-            currentLiked.remove(productId)
-        } else {
-            currentLiked.add(productId)
+        viewModelScope.launch {
+            val currentLikes = _state.value.likedProducts
+            if (currentLikes.contains(productId)) {
+                likedProductDao.unlikeProduct(LikedProduct(id = productId))
+            } else {
+                likedProductDao.likeProduct(LikedProduct(id = productId))
+            }
         }
-        _state.value = _state.value.copy(likedProducts = currentLiked)
     }
 
-    fun addToCart(productId: Int) {
-        val currentCart = _state.value.cartItems.toMutableMap()
-        val currentQty = currentCart[productId] ?: 0
-        currentCart[productId] = currentQty + 1
-        _state.value = _state.value.copy(cartItems = currentCart)
+    fun addNote(title: String, content: String, imagePath: String?) {
+        viewModelScope.launch {
+            val note = Note(
+                id = UUID.randomUUID().toString(),
+                title = title,
+                content = content,
+                imagePath = imagePath
+            )
+            noteDao.insertNote(note)
+        }
     }
 
-    fun removeFromCart(productId: Int) {
-        val currentCart = _state.value.cartItems.toMutableMap()
-        val currentQty = currentCart[productId] ?: 0
-        if (currentQty <= 1) {
-            currentCart.remove(productId)
-        } else {
-            currentCart[productId] = currentQty - 1
+    fun deleteNote(noteId: String, imagePath: String?) {
+        viewModelScope.launch {
+            imagePath?.let { path ->
+                try {
+                    File(path).delete()
+                } catch (e: Exception) {
+                    Log.e("MainViewModel", "Failed to delete image file", e)
+                }
+            }
+            noteDao.deleteNoteById(noteId)
         }
-        _state.value = _state.value.copy(cartItems = currentCart)
+    }
+
+    // UPDATED - Add to cart with shade support
+    fun addToCart(productId: Int, selectedShade: ProductColor? = null) {
+        val currentItems = _state.value.cartItems.toMutableList()
+
+        // Find if this exact product + shade combo already exists
+        val existingIndex = currentItems.indexOfFirst {
+            it.productId == productId && it.selectedShade == selectedShade
+        }
+
+        if (existingIndex >= 0) {
+            // Same product + same shade = increase quantity
+            currentItems[existingIndex] = currentItems[existingIndex].copy(
+                quantity = currentItems[existingIndex].quantity + 1
+            )
+        } else {
+            // New product or different shade = add new item
+            currentItems.add(CartItem(productId, 1, selectedShade))
+        }
+
+        _state.value = _state.value.copy(cartItems = currentItems)
+    }
+
+    // UPDATED - Remove from cart with shade support
+    fun removeFromCart(productId: Int, selectedShade: ProductColor? = null) {
+        val currentItems = _state.value.cartItems.toMutableList()
+
+        // Find the exact product + shade combo
+        val existingIndex = currentItems.indexOfFirst {
+            it.productId == productId && it.selectedShade == selectedShade
+        }
+
+        if (existingIndex >= 0) {
+            val item = currentItems[existingIndex]
+            if (item.quantity > 1) {
+                // Decrease quantity
+                currentItems[existingIndex] = item.copy(quantity = item.quantity - 1)
+            } else {
+                // Remove item completely
+                currentItems.removeAt(existingIndex)
+            }
+            _state.value = _state.value.copy(cartItems = currentItems)
+        }
     }
 
     fun setActiveTab(tab: String) {
         _state.value = _state.value.copy(activeTab = tab)
     }
 
+    // UPDATED - Calculate total items in cart
     fun getCartCount(): Int {
-        return _state.value.cartItems.values.sum()
+        return _state.value.cartItems.sumOf { it.quantity }
     }
 
     fun getFeaturedProducts(): List<Product> {

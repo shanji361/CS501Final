@@ -1,13 +1,15 @@
 package com.example.beautyapp.ui.components
 
-
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,7 +31,7 @@ fun FilterBottomSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        containerColor = Color.White
+        containerColor = MaterialTheme.colorScheme.surface  // FIXED - theme-aware!
     ) {
         Column(
             modifier = Modifier
@@ -45,97 +47,127 @@ fun FilterBottomSheet(
                 Text(
                     text = "Filters",
                     fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface  // FIXED - theme-aware!
                 )
                 IconButton(onClick = onDismiss) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "Close"
+                        contentDescription = "Close",
+                        tint = MaterialTheme.colorScheme.onSurface  // FIXED - theme-aware!
                     )
                 }
             }
 
+            var selectedTabIndex by remember { mutableStateOf(0) }
+            val tabs = listOf("Brand", "Product Type")
+
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Scrollable content
-            LazyColumn(
+            TabRow(
+                selectedTabIndex = selectedTabIndex,
+                containerColor = MaterialTheme.colorScheme.surface,  // FIXED - theme-aware!
+                contentColor = Color(0xFFF472B6)
+            ) {
+                tabs.forEachIndexed { index, title ->
+                    Tab(
+                        selected = selectedTabIndex == index,
+                        onClick = { selectedTabIndex = index },
+                        text = {
+                            Text(
+                                text = title,
+                                color = if (selectedTabIndex == index)
+                                    Color(0xFFF472B6)
+                                else
+                                    MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)  // FIXED!
+                            )
+                        }
+                    )
+                }
+            }
+
+            Box(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
             ) {
-                // Brands Section
-                item {
-                    Text(
-                        text = "BRAND",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Gray,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-                }
-
-                items(brands) { brand ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                when (selectedTabIndex) {
+                    0 -> LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(top = 8.dp)
                     ) {
-                        Checkbox(
-                            checked = selectedBrands.contains(brand),
-                            onCheckedChange = { onBrandToggle(brand) },
-                            colors = CheckboxDefaults.colors(
-                                checkedColor = Color(0xFFF472B6)
-                            )
-                        )
-                        Text(
-                            text = brand,
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(start = 8.dp)
-                        )
+                        items(brands) { brand ->
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable(
+                                        onClick = { onBrandToggle(brand) },
+                                        indication = rememberRipple(),
+                                        interactionSource = remember { MutableInteractionSource() }
+                                    )
+                                    .padding(vertical = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Checkbox(
+                                    checked = selectedBrands.contains(brand),
+                                    onCheckedChange = { onBrandToggle(brand) },
+                                    colors = CheckboxDefaults.colors(
+                                        checkedColor = Color(0xFFF472B6),
+                                        uncheckedColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)  // FIXED!
+                                    )
+                                )
+                                Text(
+                                    text = brand,
+                                    fontSize = 16.sp,
+                                    color = MaterialTheme.colorScheme.onSurface,  // FIXED!
+                                    modifier = Modifier.padding(start = 8.dp)
+                                )
+                            }
+                        }
+                        item {
+                            Spacer(modifier = Modifier.height(100.dp))
+                        }
                     }
-                }
 
-                // Product Types Section
-                item {
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Text(
-                        text = "PRODUCT TYPE",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Gray,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-                }
-
-                items(productTypes) { type ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                    1 -> LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(top = 8.dp)
                     ) {
-                        Checkbox(
-                            checked = selectedProductTypes.contains(type),
-                            onCheckedChange = { onProductTypeToggle(type) },
-                            colors = CheckboxDefaults.colors(
-                                checkedColor = Color(0xFFF472B6)
-                            )
-                        )
-                        Text(
-                            text = type.replaceFirstChar { it.uppercase() },
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(start = 8.dp)
-                        )
+                        items(productTypes) { type ->
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable(
+                                        onClick = { onProductTypeToggle(type) },
+                                        indication = rememberRipple(),
+                                        interactionSource = remember { MutableInteractionSource() }
+                                    )
+                                    .padding(vertical = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Checkbox(
+                                    checked = selectedProductTypes.contains(type),
+                                    onCheckedChange = { onProductTypeToggle(type) },
+                                    colors = CheckboxDefaults.colors(
+                                        checkedColor = Color(0xFFF472B6),
+                                        uncheckedColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)  // FIXED!
+                                    )
+                                )
+                                Text(
+                                    text = type.replaceFirstChar { it.uppercase() },
+                                    fontSize = 16.sp,
+                                    color = MaterialTheme.colorScheme.onSurface,  // FIXED!
+                                    modifier = Modifier.padding(start = 8.dp)
+                                )
+                            }
+                        }
+                        item {
+                            Spacer(modifier = Modifier.height(100.dp))
+                        }
                     }
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(100.dp))
                 }
             }
 
-            // Action Buttons
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -146,7 +178,10 @@ fun FilterBottomSheet(
                     onClick = onClearFilters,
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(text = "Clear All")
+                    Text(
+                        text = "Clear All",
+                        color = MaterialTheme.colorScheme.onSurface  // FIXED!
+                    )
                 }
 
                 Button(

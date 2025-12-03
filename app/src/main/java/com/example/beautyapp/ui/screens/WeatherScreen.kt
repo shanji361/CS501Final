@@ -32,6 +32,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.ripple.rememberRipple
 // Added imports:
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.graphics.Brush
@@ -75,6 +77,8 @@ fun WeatherScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 20.dp, vertical = 16.dp)
+            .verticalScroll(rememberScrollState())
+
     ) {
         // Header Section
         HeaderSection(userName=userName)
@@ -82,6 +86,7 @@ fun WeatherScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         // Show either Search Bar OR Weather Display Card
+        // - ugh edit to find the error regarding the YT SHORTS
         if (showSearchBar) {
             // Search Bar Card
             Card(
@@ -542,6 +547,7 @@ fun VideoCardPlaceHolder(
     onVideoClick: (String) -> Unit
 ) {
     // UPDATED: Now uses the VideoInfo data class
+    // look into this also -HA
     val beautyVideos = listOf(
         VideoInfo("Foundation Tips", "2 min", "hkQhA6lmDME", R.drawable.foundation),
         VideoInfo("Blush Tutorial", "3 min", "5wx1U64ez14", R.drawable.blush),
