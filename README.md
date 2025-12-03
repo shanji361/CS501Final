@@ -3,8 +3,7 @@
 This is a Kotlin/Android beauty app built with Jetpack Compose. It integrates **Firebase Authentication**, a **live weather forecast** (from the OpenWeatherMap API), product browsing (from the Makeup API), and a local shopping cart.
 
 ## Demo One 11/4/2025
-Watch our full app demo, including video walkthroughs, by clicking the link below: [**Click here to view our Interactive Google Slides Demo**]
-https://docs.google.com/presentation/d/1nwfEWkiNuIehxy6FuLXlfblTZpB4IcLc32x3zp_sFdA/edit?usp=sharing
+Watch our full app demo, including video walkthroughs, by clicking the link below: [**Click here to view our Interactive Google Slides Demo**](https://docs.google.com/presentation/d/1nwfEWkiNuIehxy6FuLXlfblTZpB4IcLc32x3zp_sFdA/edit?usp=sharing)
 ## Features
 
 * **Firebase Authentication**: Full login and sign-up screen flow.
@@ -17,6 +16,9 @@ https://docs.google.com/presentation/d/1nwfEWkiNuIehxy6FuLXlfblTZpB4IcLc32x3zp_s
 * **Shopping Cart**: A functional cart (`CartScreen.kt`) with quantity controls and total calculation.
 * **Profile Screen**: A dedicated screen (`ProfileScreen.kt`) for user information and liked items.
 * **Bottom Navigation**: A custom `BottomNavBar.kt` with an elevated, central "AI Scan" button.
+
+## Demo Two 12/2/2025
+Click the [link here](https://docs.google.com/presentation/d/1w7bB2ansTAv_P7HBIOqV54Jg_sPSMdFu4DX21h6yV-E/edit?usp=sharing) for our Demo Two Google Slides
 
 ## Core Technical Features
 
