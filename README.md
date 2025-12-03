@@ -74,7 +74,7 @@ This project demonstrates several key Android development concepts:
 
 1.  **Clone/Open Project**: Open the project in Android Studio.
 2.  **Add `google-services.json`**: Download this file from your Firebase project settings and place it in the `app/` folder.
-3.  **Add API Keys**: Add your OpenWeatherMap API key where required (e.g., in `WeatherViewModel.kt` or `local.properties`).
+3.  **Add API Keys**: Add your OpenWeatherMap API key where required (e.g., in `WeatherViewModel.kt` or `local.properties`). Add Google Maps API key under `AndroidManifest.kt`.
 4.  **Sync Gradle**: Click "Sync Project with Gradle Files".
 5.  **Run the app**: Connect an Android device or start an emulator and click "Run".
 
@@ -84,6 +84,7 @@ This project demonstrates several key Android development concepts:
 * **Material3**: Material Design 3 components
 * **Firebase Authentication**: For user login and registration
 * **Retrofit & Gson**: HTTP client for API calls and JSON parsing
+* **OkHttp**: Used for direct HTTP requests when accessing the Places Web API, allowing selective parsing of JSON without creating full data classes. Currently evaluating switching back to Retrofit with the Google Places SDK for Android for a more structured integration.
 * **Coil**: Image loading library
 * **Coroutines & ViewModel**: For asynchronous operations and state management
 * **Android YouTube Player**: For embedding YouTube videos
@@ -92,3 +93,4 @@ This project demonstrates several key Android development concepts:
 
 * **Makeup API**: `https://makeup-api.herokuapp.com/api/v1/products.json`
 * **OpenWeatherMap API**: For fetching live weather data.
+* **Google Maps API & Places Web API**: For find nearby stores feature.
