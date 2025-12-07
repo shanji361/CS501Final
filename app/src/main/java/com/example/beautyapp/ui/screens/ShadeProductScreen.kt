@@ -29,10 +29,17 @@ import androidx.compose.ui.unit.dp
 import com.example.beautyapp.ui.components.ProductRecommendationSection
 import com.example.beautyapp.ui.components.ShadeSelectionSection
 import com.example.beautyapp.viewmodel.ShadeProductViewModel
+import com.example.beautyapp.data.MakeupProduct
+import com.example.beautyapp.ui.components.ShadeProductCard
+import com.example.beautyapp.ui.components.ShadeSelectionSection
+
 
 @Composable
 fun ShadeProductScreen(
-    viewModel: ShadeProductViewModel
+    viewModel: ShadeProductViewModel,
+    likedProducts: Set<Int>,
+    onToggleLike: (Int) -> Unit,
+    onAddToCart: (Int) -> Unit
 ) {
     val shades by viewModel.shades.observeAsState(emptyList())
     val selectedShade by viewModel.selectedShade.observeAsState()
@@ -85,6 +92,11 @@ fun ShadeProductScreen(
         Spacer(Modifier.height(32.dp))
 
         // Product recommendations
-        ProductRecommendationSection(products = products)
+        ProductRecommendationSection(
+            products = products,
+            likedProducts = likedProducts,
+            onToggleLike = onToggleLike,
+            onAddToCart = onAddToCart
+            )
     }
 }

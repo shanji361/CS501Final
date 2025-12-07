@@ -265,7 +265,12 @@ fun BeautyApp(
                     )
 
                     // Tab 2: Shade Match - Find your perfect shade from 8 skin tones
-                    2 -> ShadeProductScreen(viewModel = shadeProductViewModel)
+                    2 -> ShadeProductScreen(
+                        viewModel = shadeProductViewModel,
+                        likedProducts = productState.likedProducts,  // <- ADD THIS
+                        onToggleLike = { productId -> productViewModel.toggleLike(productId) }, // <- ADD THIS
+                        onAddToCart = { productId -> productViewModel.addToCart(productId, null) } // <- ADD THIS
+                    )
 
                     // Tab 3: Cart - View cart items with Store Finder feature
                     3 -> CartScreen(

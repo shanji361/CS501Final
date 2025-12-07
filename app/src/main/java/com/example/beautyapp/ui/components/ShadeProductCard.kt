@@ -9,11 +9,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddShoppingCart
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -25,8 +32,12 @@ import com.example.beautyapp.data.MakeupProduct
 
 @Composable
 fun ShadeProductCard(
-    product: MakeupProduct
-) {
+    product: MakeupProduct,
+    isLiked: Boolean,
+    onToggleLike: (Int) -> Unit,
+    onAddToCart: (Int) -> Unit
+)
+{
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -37,7 +48,10 @@ fun ShadeProductCard(
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        Row(modifier = Modifier.padding(16.dp)) {
+        Row(modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+
+        ) {
             AsyncImage(
                 model = product.imageUrl,
                 contentDescription = product.name,
@@ -72,6 +86,24 @@ fun ShadeProductCard(
                     fontWeight = FontWeight.Bold
                 )
             }
+            // Action Icons
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                IconButton(onClick = { onToggleLike(product.productId) }) {
+                    Icon(
+                        imageVector = if (isLiked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                        contentDescription = "Like",
+                        tint = if (isLiked) Color(0xFFEF4444) else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
+                }
+                IconButton(onClick = { onAddToCart(product.productId) }) {
+                    Icon(
+                        imageVector = Icons.Default.AddShoppingCart,
+                        contentDescription = "Add to Cart",
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
+                }
+            }
+        }
+
         }
     }
-}

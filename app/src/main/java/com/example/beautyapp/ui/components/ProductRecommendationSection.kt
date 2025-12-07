@@ -11,7 +11,13 @@ import androidx.compose.ui.unit.dp
 import com.example.beautyapp.data.MakeupProduct
 
 @Composable
-fun ProductRecommendationSection(products: List<MakeupProduct>) {
+fun ProductRecommendationSection(
+    products: List<MakeupProduct>,
+    likedProducts: Set<Int>,
+    onToggleLike: (Int) -> Unit,
+    onAddToCart: (Int) -> Unit
+
+) {
     if (products.isNotEmpty()) {
         Text(
             text = "Recommended Products",
@@ -22,7 +28,12 @@ fun ProductRecommendationSection(products: List<MakeupProduct>) {
 
         Column {
             products.forEach { product ->
-                ShadeProductCard(product = product)
+                ShadeProductCard(
+                    product = product,
+                    isLiked = likedProducts.contains(product.productId),
+                    onToggleLike = onToggleLike,
+                    onAddToCart = onAddToCart
+                )
             }
         }
     }
