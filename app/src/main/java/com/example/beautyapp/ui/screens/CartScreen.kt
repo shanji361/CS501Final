@@ -12,6 +12,7 @@
 
 package com.example.beautyapp.ui.screens
 
+import android.util.Log
 import com.example.beautyapp.utils.parseHexColor
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -39,6 +40,9 @@ import com.example.beautyapp.data.CartItem
 import com.example.beautyapp.data.Product
 import com.example.beautyapp.data.ProductColor
 
+// TAG for logging - identifies logs from CartScreen
+private const val TAG = "CartScreen"
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(
@@ -48,6 +52,12 @@ fun CartScreen(
     onRemoveFromCart: (Int, ProductColor?) -> Unit,  // Remove 1 of this product
     onFindStores: (Product) -> Unit = {} // NEW: Callback to open Store Finder map
 ) {
+    // Log cart state when screen is displayed
+    Log.d(TAG, "CartScreen displayed with ${cartItems.size} items")
+    cartItems.forEachIndexed { index, item ->
+        Log.d(TAG, "Cart item $index: productId=${item.productId}, quantity=${item.quantity}, shade=${item.selectedShade?.colourName}")
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -61,7 +71,10 @@ fun CartScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { /* Handle back */ }) {
+                    IconButton(onClick = {
+                        Log.d(TAG, "User clicked back button")
+                        /* Handle back */
+                    }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
@@ -87,6 +100,8 @@ fun CartScreen(
         }
     ) { paddingValues ->
         if (cartItems.isEmpty()) {
+            Log.d(TAG, "Cart is empty")
+
             // Empty cart state
             Box(
                 modifier = Modifier
@@ -101,6 +116,8 @@ fun CartScreen(
                 )
             }
         } else {
+            Log.d(TAG, "Cart has ${cartItems.size} items, total value: $${calculateTotal(cartItems, products)}")
+
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -115,14 +132,28 @@ fun CartScreen(
                     items(cartItems) { cartItem ->
                         // Find product details from product ID
                         val product = products.find { it.id == cartItem.productId }
-                        product?.let {
+
+                        if (product != null) {
+                            Log.d(TAG, "Rendering cart item: ${product.name}, quantity=${cartItem.quantity}")
                             CartItemCard(
-                                product = it,
+                                product = product,
                                 cartItem = cartItem,
-                                onAddToCart = { onAddToCart(cartItem.productId, cartItem.selectedShade) },
-                                onRemoveFromCart = { onRemoveFromCart(cartItem.productId, cartItem.selectedShade) },
-                                onFindStores = { onFindStores(it) } // NEW: Pass store finder callback
+                                onAddToCart = {
+                                    Log.d(TAG, "User adding to cart: productId=${cartItem.productId}, current quantity=${cartItem.quantity}, new quantity=${cartItem.quantity + 1}")
+                                    onAddToCart(cartItem.productId, cartItem.selectedShade)
+                                },
+                                onRemoveFromCart = {
+                                    Log.d(TAG, "User removing from cart: productId=${cartItem.productId}, current quantity=${cartItem.quantity}, new quantity=${cartItem.quantity - 1}")
+                                    onRemoveFromCart(cartItem.productId, cartItem.selectedShade)
+                                },
+                                onFindStores = {
+                                    Log.d(TAG, "User clicked 'Find at Nearby Stores' for product: ${product.name}")
+                                    Log.d(TAG, "Triggering Store Finder with product: ${product.name}")
+                                    onFindStores(product)
+                                } // NEW: Pass store finder callback
                             )
+                        } else {
+                            Log.e(TAG, "Product not found for cartItem: productId=${cartItem.productId}")
                         }
                     }
                 }
@@ -160,7 +191,10 @@ fun CartScreen(
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Button(
-                            onClick = { /* Handle checkout */ },
+                            onClick = {
+                                Log.d(TAG, "User clicked Checkout button, cart total: $${calculateTotal(cartItems, products)}")
+                                /* Handle checkout */
+                            },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color(0xFFF472B6)
                             ),
@@ -235,6 +269,8 @@ fun CartItemCard(
 
                 // Show selected shade with color circle (if product has shade variants)
                 cartItem.selectedShade?.let { shade ->
+                    Log.d("CartItemCard", "Displaying shade for ${product.name}: ${shade.colourName} (${shade.hexValue})")
+
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -276,7 +312,10 @@ fun CartItemCard(
                     modifier = Modifier.padding(top = 8.dp)
                 ) {
                     IconButton(
-                        onClick = onRemoveFromCart,
+                        onClick = {
+                            Log.d("CartItemCard", "Remove button clicked for ${product.name}")
+                            onRemoveFromCart()
+                        },
                         modifier = Modifier
                             .size(28.dp)
                             .clip(CircleShape)
@@ -295,7 +334,10 @@ fun CartItemCard(
                     )
 
                     IconButton(
-                        onClick = onAddToCart,
+                        onClick = {
+                            Log.d("CartItemCard", "Add button clicked for ${product.name}")
+                            onAddToCart()
+                        },
                         modifier = Modifier
                             .size(28.dp)
                             .clip(CircleShape)
@@ -313,7 +355,10 @@ fun CartItemCard(
                 // NEW: Find Nearby Stores Button!
                 // Opens Google Maps with nearby beauty stores carrying this product
                 OutlinedButton(
-                    onClick = onFindStores,
+                    onClick = {
+                        Log.d("CartItemCard", "'Find at Nearby Stores' button clicked for product: ${product.name}")
+                        onFindStores()
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.outlinedButtonColors(
                         contentColor = Color(0xFFF472B6)
@@ -339,7 +384,13 @@ fun calculateTotal(cartItems: List<CartItem>, products: List<Product>): String {
     val total = cartItems.sumOf { cartItem ->
         val product = products.find { it.id == cartItem.productId }
         val price = product?.price?.toDoubleOrNull() ?: 0.0
-        price * cartItem.quantity
+        val itemTotal = price * cartItem.quantity
+
+        Log.d(TAG, "Item calculation: productId=${cartItem.productId}, price=${product?.price}, quantity=${cartItem.quantity}, itemTotal=$itemTotal")
+
+        itemTotal
     }
+
+    Log.d(TAG, "Total cart value: $${"%.2f".format(total)}")
     return String.format("%.2f", total)
 }

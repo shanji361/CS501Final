@@ -106,6 +106,7 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
+
     // YouTube Player
     implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:13.0.0")
 
@@ -119,7 +120,6 @@ dependencies {
 
     // GOOGLE PLACES API
     implementation("com.google.android.libraries.places:places:3.3.0")
-
 
     // Testing
     testImplementation("junit:junit:4.13.2")
