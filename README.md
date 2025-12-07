@@ -39,17 +39,15 @@ This project demonstrates several key Android development concepts:
         * `Product.kt`: Product data model
         * `CartItem.kt`: Cart item model with productId, quantity, and selectedShade
         * `UserPreferences.kt`: User settings data model
-        * **`weather/`**: Weather data models
+        * **`weather/Weather.kt`**: Weather data models
         * **`database/`**
             * `AppDatabase.kt`: Room database instance
             * `CartDao.kt`: DAO for cart operations
             * `CartEntity.kt`: Room entity for cart items
     * **`network/`**
         * `MakeupApiService.kt`: Retrofit service for Makeup API
-        * `WeatherApi.kt`: Retrofit service for Weather API
-        * `WeatherApiService.kt`: Weather API implementation
+        * `WeatherApiService.kt`: Retrofit service for Weather API
         * `GooglePlacesApiService.kt`: Retrofit service for Google Places API
-        * `YouTubeApiService.kt`: Service for YouTube video integration
     * **`repository/`**
         * `CartRepository.kt`: Repository for cart data management
         * `ProductRepository.kt`: Repository for product data
