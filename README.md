@@ -30,79 +30,63 @@ This project demonstrates several key Android development concepts:
     1.  The **Makeup API** to fetch product data in `MainViewModel`.
     2.  The **OpenWeatherMap API** to fetch live weather data in `WeatherViewModel`.
 
+
 ## Project Structure
 
 * **`app/src/main/java/com/example/beautyapp/`**
     * `MainActivity.kt`: Main entry point, handles navigation
     * **`data/`**
         * `Product.kt`: Product data model
-        * `weather/`: Data models for weather
- * **`database/'**
-
-AppDatabase.kt: Room database instance
-CartDao.kt: DAO for cart operations
-CartEntity.kt: Room entity for cart items
-
- * **`network/'** 
-
-MakeupApiService.kt: Retrofit service for Makeup API
-WeatherApi.kt: Retrofit service for Weather API
-WeatherApiService.kt: Weather API implementation
-GooglePlacesApiService.kt: Retrofit service for Google Places API
-YouTubeApiService.kt: Service for YouTube video integration
-
-
- * **`repository/'**
-
-CartRepository.kt: Repository for cart data management
-ProductRepository.kt: Repository for product data
-WeatherRepository.kt: Repository for weather data
-
- * **`viewmodel/'** 
-
-MainViewModel.kt: ViewModel for products, cart, likes
-WeatherViewModel.kt: ViewModel for fetching weather
-CartViewModel.kt: ViewModel for cart operations
-SettingsViewModel.kt: ViewModel for user settings
-
-
- * **`ui/'**
-
- * **`components/'**
-
-BottomNavBar.kt: Custom bottom navigation bar
-FilterBottomSheet.kt: Composable for filtering products
-ProductCard.kt: Card for displaying a single product
-CartItemCard.kt: Card for cart items with shade selection
-ShadeSelector.kt: Component for selecting product shades
-
- * **`screens/'**
-
-CartScreen.kt: Shopping cart screen with shade-based item separation
-LoginScreen.kt: Firebase authentication login screen
-ProductDetailScreen.kt: Product detail view with shade selection
-ProductsScreen.kt: Product grid screen
-ProfileScreen.kt: User profile and favorites
-SignUpScreen.kt: Firebase user registration screen
-WeatherScreen.kt: Main "Home" screen with weather integration
-SettingsScreen.kt: User settings and preferences
-AccessibilityScreen.kt: Accessibility settings
-StoreFinder.kt: Google Maps store finder with Places API
-VideoScreen.kt: YouTube video integration screen
-
-
- * **`theme/'**
-
-Theme.kt: Material theme with dark mode support
-Color.kt: Color definitions with brand colors
-Typography.kt: Typography definitions
-
- * **`utils/'**
-
-ColorUtils.kt: Utilities for color matching and conversion
-SettingsManager.kt: Settings persistence manager
-PreferencesDataStore.kt: DataStore for settings persistence
-FirebaseAuthHelper.kt: Firebase authentication helper functions
+        * `CartItem.kt`: Cart item model with productId, quantity, and selectedShade
+        * `UserPreferences.kt`: User settings data model
+        * **`weather/`**: Weather data models
+        * **`database/`**
+            * `AppDatabase.kt`: Room database instance
+            * `CartDao.kt`: DAO for cart operations
+            * `CartEntity.kt`: Room entity for cart items
+    * **`network/`**
+        * `MakeupApiService.kt`: Retrofit service for Makeup API
+        * `WeatherApi.kt`: Retrofit service for Weather API
+        * `WeatherApiService.kt`: Weather API implementation
+        * `GooglePlacesApiService.kt`: Retrofit service for Google Places API
+        * `YouTubeApiService.kt`: Service for YouTube video integration
+    * **`repository/`**
+        * `CartRepository.kt`: Repository for cart data management
+        * `ProductRepository.kt`: Repository for product data
+        * `WeatherRepository.kt`: Repository for weather data
+    * **`viewmodel/`**
+        * `MainViewModel.kt`: ViewModel for products, cart, likes
+        * `WeatherViewModel.kt`: ViewModel for fetching weather
+        * `CartViewModel.kt`: ViewModel for cart operations
+        * `SettingsViewModel.kt`: ViewModel for user settings
+    * **`ui/`**
+        * **`components/`**
+            * `BottomNavBar.kt`: Custom bottom navigation bar
+            * `FilterBottomSheet.kt`: Composable for filtering products
+            * `ProductCard.kt`: Card for displaying a single product
+            * `CartItemCard.kt`: Card for cart items with shade selection
+            * `ShadeSelector.kt`: Component for selecting product shades
+        * **`screens/`**
+            * `CartScreen.kt`: Shopping cart screen with shade-based item separation
+            * `LoginScreen.kt`: Firebase authentication login screen
+            * `ProductDetailScreen.kt`: Product detail view with shade selection
+            * `ProductsScreen.kt`: Product grid screen
+            * `ProfileScreen.kt`: User profile and favorites
+            * `SignUpScreen.kt`: Firebase user registration screen
+            * `WeatherScreen.kt`: Main "Home" screen with weather integration
+            * `SettingsScreen.kt`: User settings and preferences
+            * `AccessibilityScreen.kt`: Accessibility settings
+            * `StoreFinder.kt`: Google Maps store finder with Places API
+            * `VideoScreen.kt`: YouTube video integration screen
+        * **`theme/`**
+            * `Theme.kt`: Material theme with dark mode support
+            * `Color.kt`: Color definitions with brand colors
+            * `Typography.kt`: Typography definitions
+    * **`utils/`**
+        * `ColorUtils.kt`: Utilities for color matching and conversion
+        * `SettingsManager.kt`: Settings persistence manager
+        * `PreferencesDataStore.kt`: DataStore for settings persistence
+        * `FirebaseAuthHelper.kt`: Firebase authentication helper functions
 
 ### Prerequisites
 
