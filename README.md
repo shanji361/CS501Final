@@ -83,8 +83,7 @@ This project demonstrates several key Android development concepts:
 * **Jetpack Compose**: Modern UI toolkit
 * **Material3**: Material Design 3 components
 * **Firebase Authentication**: For user login and registration
-* **Retrofit & Gson**: HTTP client for API calls and JSON parsing
-* **OkHttp**: Used for direct HTTP requests when accessing the Places Web API, allowing selective parsing of JSON without creating full data classes. Currently evaluating switching back to Retrofit with the Google Places SDK for Android for a more structured integration.
+* **Retrofit/Moshi & Gson**: HTTP client for API calls and JSON parsing
 * **Coil**: Image loading library
 * **Coroutines & ViewModel**: For asynchronous operations and state management
 * **Android YouTube Player**: For embedding YouTube videos
