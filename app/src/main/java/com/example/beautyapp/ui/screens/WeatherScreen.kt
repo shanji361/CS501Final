@@ -538,29 +538,26 @@ fun EmbeddedYouTubePlayer(
     }
 }
 
-//  ************************************************
-//  THIS IS THE UPDATED FUNCTION
-//  ************************************************
+
 @Composable
 fun VideoCardPlaceHolder(
     context: ComponentActivity,
     onVideoClick: (String) -> Unit
 ) {
-    // UPDATED: Now uses the VideoInfo data class
-    // look into this also -HA
+    // uses VideoInfo data class
     val beautyVideos = listOf(
-        VideoInfo("Foundation Tips", "2 min", "hkQhA6lmDME", R.drawable.foundation),
-        VideoInfo("Blush Tutorial", "3 min", "5wx1U64ez14", R.drawable.blush),
-        VideoInfo("Contour Guide", "4 min", "QKz_2ScpV9s", R.drawable.foundation), // Placeholder
-        VideoInfo("Eye Makeup", "5 min", "tTV6vZCKEWM", R.drawable.foundation), // Placeholder
-        VideoInfo("Lipstick", "2 min", "ay1EH7uQjG0", R.drawable.lipstick)
+        VideoInfo("Foundation Tips", "1 min", "VWQWI333vqI", R.drawable.foundation),
+        VideoInfo("Blush Tutorial", "1 min", "9ycY8jLrL4s", R.drawable.blush),
+        VideoInfo("Contour Guide", "1 min", "nNcEqP1nHiw", R.drawable.foundation), 
+        VideoInfo("Eye Makeup", "1 min", "uUAvAV6VplA", R.drawable.foundation),
+        VideoInfo("Lipstick", "1 min", "mIzYqIKwTJE", R.drawable.lipstick)
     )
 
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(beautyVideos.size) { index ->
-            // Destructure the data class - this is now correct
+          
             val (topic, duration, videoId, thumbnailResId) = beautyVideos[index]
 
             Card(
@@ -579,7 +576,7 @@ fun VideoCardPlaceHolder(
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    // 1. The Thumbnail Image
+                    // The Thumbnail Image
                     Image(
                         painter = painterResource(id = thumbnailResId),
                         contentDescription = topic,
@@ -587,7 +584,7 @@ fun VideoCardPlaceHolder(
                         contentScale = ContentScale.Crop
                     )
 
-                    // 2. Dark gradient
+                    // Dark gradient
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
@@ -603,7 +600,6 @@ fun VideoCardPlaceHolder(
                             )
                     )
 
-                    // 3. Your existing content
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
