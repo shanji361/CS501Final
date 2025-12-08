@@ -74,8 +74,7 @@ fun StoreFinderScreen(
     val locationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
-        val granted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
-                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        val granted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
 
         hasLocationPermission = granted
 
