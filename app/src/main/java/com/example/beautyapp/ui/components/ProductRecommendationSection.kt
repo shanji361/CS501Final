@@ -1,5 +1,6 @@
 package com.example.beautyapp.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -13,10 +14,7 @@ import com.example.beautyapp.data.MakeupProduct
 @Composable
 fun ProductRecommendationSection(
     products: List<MakeupProduct>,
-    likedProducts: Set<Int>,
-    onToggleLike: (Int) -> Unit,
-    onAddToCart: (Int) -> Unit
-
+    onAddToCart: (MakeupProduct) -> Unit // this is so that users can added recommended products to cart directly
 ) {
     if (products.isNotEmpty()) {
         Text(
@@ -26,12 +24,13 @@ fun ProductRecommendationSection(
 
         Spacer(Modifier.height(12.dp))
 
-        Column {
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             products.forEach { product ->
                 ShadeProductCard(
                     product = product,
-                    isLiked = likedProducts.contains(product.productId),
-                    onToggleLike = onToggleLike,
+                    isLiked = false, // for rn, always false for recommended products
+                    isLikingEnabled = false, //for rn, local products like button is always disabled
+                    onToggleLike = {}, // does nothing
                     onAddToCart = onAddToCart
                 )
             }
