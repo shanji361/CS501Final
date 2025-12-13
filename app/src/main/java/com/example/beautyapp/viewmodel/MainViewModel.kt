@@ -25,6 +25,7 @@ data class AppState(
     val products: List<Product> = emptyList(),
     val filteredProducts: List<Product> = emptyList(),
     val likedProducts: Set<Int> = emptySet(),
+    val likedLocalProducts: Set<Int> = emptySet(),
     val cartItems: List<CartItem> = emptyList(),
     val localCartItems: List<MakeupProduct> = emptyList(),
     val loading: Boolean = false,
@@ -133,6 +134,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
+    //  ---added this function to handle liking local products ---
+    fun toggleLocalLike(localProductId: Int) {
+        val currentLocalLikes = _state.value.likedLocalProducts.toMutableSet()
+        if (currentLocalLikes.contains(localProductId)) {
+            currentLocalLikes.remove(localProductId)
+        } else {
+            currentLocalLikes.add(localProductId)
+        }
+        _state.update { it.copy(likedLocalProducts = currentLocalLikes) }
+        Log.d("MainViewModel", "Toggled local like for ID: $localProductId. New likes: $currentLocalLikes")
+    }
+
 
     fun addNote(title: String, content: String, imagePath: String?) {
         viewModelScope.launch {

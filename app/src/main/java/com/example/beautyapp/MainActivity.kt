@@ -268,11 +268,15 @@ fun BeautyApp(
                     // Tab 2: Shade Match - Find your perfect shade from 8 skin tones
                     2 -> ShadeProductScreen(
                         viewModel = shadeProductViewModel,
+                        allApiProducts = productState.products,
+                        likedProductIds = productState.likedProducts,
+                        likedLocalProductIds = productState.likedLocalProducts,
+                        onToggleLike = { productId -> productViewModel.toggleLike(productId) },
+                        onToggleLocalLike = { localId -> productViewModel.toggleLocalLike(localId) },
                         onAddToCart = { localProduct ->
                             productViewModel.addLocalProductToCart(localProduct)
                         }
                     )
-
                     // Tab 3: Cart - View cart items with Store Finder feature
                     3 -> CartScreen(
                         cartItems = productState.cartItems,
@@ -295,7 +299,9 @@ fun BeautyApp(
                         userName = userName,
                         likedProducts = productState.products.filter { productState.likedProducts.contains(it.id) },
                         likedProductIds = productState.likedProducts,
+                        likedLocalProductIds = productState.likedLocalProducts,
                         onToggleLike = { productId -> productViewModel.toggleLike(productId) },
+                        onToggleLocalLike = { localId -> productViewModel.toggleLocalLike(localId) },
                         onAddToCart = { productId -> productViewModel.addToCart(productId, null) },
                         onProductClick = { product -> selectedProduct = product },
                         onLogout = { showLogoutDialog = true },

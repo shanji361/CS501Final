@@ -15,6 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.beautyapp.data.Shade
 
+/*
+This file ShadeSelectionSection.kt is responsible for the UI features of the shade circles
+that are are show in our Shade Select page
+*/
+
 @Composable
 fun ShadeSelectionSection(
     shades: List<Shade>,

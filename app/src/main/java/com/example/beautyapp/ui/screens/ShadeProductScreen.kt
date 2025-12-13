@@ -21,11 +21,23 @@ import com.example.beautyapp.data.MakeupProduct
 import com.example.beautyapp.ui.components.ProductRecommendationSection
 import com.example.beautyapp.ui.components.ShadeSelectionSection
 import com.example.beautyapp.viewmodel.ShadeProductViewModel
+import com.example.beautyapp.data.Product
+
+/*
+--This file ShadeProductScreen, responsible for the Shade Section of our navbar, primarily fetching products from the
+local makeup.db, so a user select their skin shade and get three respective product recommendations
+foundation, blush, and lip liner
+*/
 
 @Composable
 fun ShadeProductScreen(
     viewModel: ShadeProductViewModel,
-    onAddToCart: (MakeupProduct) -> Unit // addtocart feature for shadeproductscreen needs to be passed here
+    allApiProducts: List<Product>,
+    likedProductIds: Set<Int>,
+    likedLocalProductIds: Set<Int>,
+    onToggleLike: (Int) -> Unit,
+    onToggleLocalLike: (Int) -> Unit,
+    onAddToCart: (MakeupProduct) -> Unit
 ) {
     val shades by viewModel.shades.observeAsState(emptyList())
     val selectedShade by viewModel.selectedShade.observeAsState()
@@ -80,7 +92,11 @@ fun ShadeProductScreen(
         // products recommendations : need to pass these parameters allowing for user action
         ProductRecommendationSection(
             products = products,
-            onAddToCart = onAddToCart
+            onAddToCart = onAddToCart,
+            allApiProducts = allApiProducts,
+            likedProductIds = likedProductIds,
+            likedLocalProductIds = likedLocalProductIds,
+            onToggleLocalLike = onToggleLocalLike
         )
     }
 }

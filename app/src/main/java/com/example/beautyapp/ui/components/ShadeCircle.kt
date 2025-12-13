@@ -23,6 +23,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+/*
+This file ShadeCircle.kt is responsible for the UI features of the shade circles
+that are are show in our Shade Select page
+*/
+
 @Composable
 fun ShadeCircle(
     hex: String,

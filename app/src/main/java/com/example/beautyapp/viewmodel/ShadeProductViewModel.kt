@@ -12,6 +12,11 @@ import com.example.beautyapp.data.Shade  // ← CORRECTED!
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/*
+This file ShadeProductViewModel.kt responsible for managing data for Shade Select
+screen. It loads all the available skin shades from the database and provides them
+to the UI.
+*/
 class ShadeProductViewModel(application: Application) : AndroidViewModel(application) {
     private val db = MakeupDatabase.getDatabase(application)
     private val shadeDao = db.shadeDao()

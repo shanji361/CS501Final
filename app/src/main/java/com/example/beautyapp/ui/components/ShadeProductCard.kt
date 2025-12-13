@@ -18,13 +18,18 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.beautyapp.data.MakeupProduct
 
+/* This file ShadeProductCard.kt contains reusable UI component that displays
+* a single recommended product from the local makeup.db in a compact horizontal
+* card. Showing the product's image, name, price, and action buttons.
+ */
+
 @Composable
 fun ShadeProductCard(
     product: MakeupProduct,
     isLiked: Boolean,
     onToggleLike: () -> Unit,
     onAddToCart: (MakeupProduct) -> Unit,
-    isLikingEnabled: Boolean // this will be false for recommended products
+    isLikingEnabled: Boolean
 ) {
     Card(
         modifier = Modifier
@@ -62,7 +67,7 @@ fun ShadeProductCard(
                 )
                 Spacer(Modifier.height(6.dp))
                 Text(
-                    text = "$${product.price}",
+                    text = "$${String.format("%.2f", product.price)}",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
@@ -75,7 +80,8 @@ fun ShadeProductCard(
                     Icon(
                         imageVector = if (isLiked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
                         contentDescription = "Like",
-                        tint = if (isLikingEnabled && isLiked) Color.Red else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+                        //this is what gives heart the red color when liked
+                        tint = if (isLiked) Color.Red else MaterialTheme.colorScheme.onSurface.copy(alpha = if (isLikingEnabled) 0.7f else 0.3f)
                     )
                 }
                 // Add to cart button

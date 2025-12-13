@@ -11,10 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.beautyapp.data.MakeupProduct
 
+/*
+--- This file ProductRecommendationSection.kt is responsible for the Product Section of our navbar, primarily fetching products from the
+makeup service api, local products refers to makeup products recommended by shade select screen in navbar
+*/
+
 @Composable
 fun ProductRecommendationSection(
     products: List<MakeupProduct>,
-    onAddToCart: (MakeupProduct) -> Unit // this is so that users can added recommended products to cart directly
+    allApiProducts: List<com.example.beautyapp.data.Product>,
+    likedProductIds: Set<Int>,
+    likedLocalProductIds: Set<Int>,
+    onToggleLocalLike: (Int) -> Unit,
+    onAddToCart: (MakeupProduct) -> Unit
 ) {
     if (products.isNotEmpty()) {
         Text(
@@ -25,13 +34,19 @@ fun ProductRecommendationSection(
         Spacer(Modifier.height(12.dp))
 
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            products.forEach { product ->
+            products.forEach { recommendedProduct ->
                 ShadeProductCard(
-                    product = product,
-                    isLiked = false, // for rn, always false for recommended products
-                    isLikingEnabled = false, //for rn, local products like button is always disabled
-                    onToggleLike = {}, // does nothing
+                    product = recommendedProduct,
+                    //  check the local liked set ---
+                    isLiked = recommendedProduct.productId in likedLocalProductIds,
+                    // Liking is always enabled for local products now
+                    isLikingEnabled = true,
+                    // --- FIX 3: Call the NEW local like function ---
+                    onToggleLike = {
+                        onToggleLocalLike(recommendedProduct.productId)
+                    },
                     onAddToCart = onAddToCart
+
                 )
             }
         }

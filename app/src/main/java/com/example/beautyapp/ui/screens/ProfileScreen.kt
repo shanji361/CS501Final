@@ -63,6 +63,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -81,6 +82,7 @@ import com.example.beautyapp.ui.components.ProductCard
 import com.example.beautyapp.ui.components.SettingsDialog
 import com.example.beautyapp.viewmodel.MainViewModel
 import com.example.beautyapp.viewmodel.SettingsViewModel
+import com.example.beautyapp.viewmodel.ShadeProductViewModel
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -94,11 +96,14 @@ fun ProfileScreen(
     userName: String,
     likedProducts: List<Product>,
     likedProductIds: Set<Int>,
+    likedLocalProductIds: Set<Int>,
     onToggleLike: (Int) -> Unit,
+    onToggleLocalLike: (Int) -> Unit,
     onAddToCart: (Int) -> Unit,
     onProductClick: (Product) -> Unit,
     onLogout: () -> Unit,
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
+    shadeProductViewModel: ShadeProductViewModel = viewModel()
 ) {
     // Get SettingsViewModel instance
     val settingsViewModel: SettingsViewModel = viewModel()
@@ -115,6 +120,13 @@ fun ProfileScreen(
 
     val notes by viewModel.notes.collectAsState(initial = emptyList())
     var showAddNoteDialog by remember { mutableStateOf(false) }
+
+
+    //This gets the local products from the makeup db, and filters them by the liked IDs
+    val allLocalProducts by shadeProductViewModel.products.observeAsState(initial = emptyList())
+    val likedLocalProducts = remember(allLocalProducts, likedLocalProductIds) {
+        allLocalProducts.filter { it.productId in likedLocalProductIds }
+    }
 
     Scaffold(
         topBar = {
@@ -193,7 +205,8 @@ fun ProfileScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         ProfileStat(
-                            count = likedProducts.size.toString(),
+                            // this now includes both API and local makeup.db products into favorites
+                            count = (likedProducts.size + likedLocalProducts.size).toString(),
                             label = "Favorites"
                         )
                         ProfileStat(
@@ -248,11 +261,12 @@ fun ProfileScreen(
                     .padding(16.dp)
             ) {
                 when (selectedTabIndex) {
-                    0 -> FavoritesSection(
-                        likedProducts = likedProducts,
-                        likedProductIds = likedProductIds,
-                        onToggleLike = onToggleLike,
-                        onAddToCart = onAddToCart,
+                    0 -> FavoritesTabContent(
+                        likedApiProducts = likedProducts,
+                        likedLocalProducts = likedLocalProducts,
+                        onToggleApiLike = onToggleLike,
+                        onToggleLocalLike = onToggleLocalLike,
+                        onAddToCartApi = onAddToCart,
                         onProductClick = onProductClick
                     )
                     1 -> NotesSection(
@@ -351,6 +365,103 @@ fun FavoritesSection(
         }
     }
 }
+
+// this composable function is for the local recommended products coming from makeup.db
+@Composable
+fun FavoritesTabContent(
+    likedApiProducts: List<Product>,
+    likedLocalProducts: List<com.example.beautyapp.data.MakeupProduct>,
+    onToggleApiLike: (Int) -> Unit,
+    onToggleLocalLike: (Int) -> Unit,
+    onAddToCartApi: (Int) -> Unit,
+    onProductClick: (Product) -> Unit
+) {
+    if (likedApiProducts.isEmpty() && likedLocalProducts.isEmpty()) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(text = "💝", fontSize = 64.sp)
+                Text(
+                    text = "No favorites yet",
+                    fontSize = 18.sp,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                )
+                Text(
+                    text = "Start exploring and save your favorite products!",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
+                )
+            }
+        }
+        return
+    }
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // section for local makeup products coming from makeup.db(in shade select screen), which is then added to profile section under favorite section
+        if (likedLocalProducts.isNotEmpty()) {
+            item {
+                Text(
+                    "My Shade Recommendations",
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+            }
+            items(likedLocalProducts, key = { "local-${it.productId}" }) { localProduct ->
+                com.example.beautyapp.ui.components.ShadeProductCard(
+                    product = localProduct,
+                    isLiked = true,
+                    onToggleLike = { onToggleLocalLike(localProduct.productId) },
+                    onAddToCart = { /* TODO: Add local product to cart from here */ },
+                    isLikingEnabled = true
+                )
+            }
+        }
+
+        // Section for API/Catalog Favorites
+        if (likedApiProducts.isNotEmpty()) {
+            item {
+                Text(
+                    "Liked Products from Catalog",
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(
+                        top = 16.dp,
+                        bottom = 8.dp
+                    )
+                )
+            }
+            item {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.height(((likedApiProducts.size + 1) / 2 * 250).dp) // Estimate height
+                ) {
+                    items(
+                        likedApiProducts.withIndex().toList(),
+                        key = { "api-${it.value.id}" }) { (index, apiProduct) ->
+                        ProductCard(
+                            product = apiProduct,
+                            isLiked = true,
+                            onToggleLike = { onToggleApiLike(apiProduct.id) },
+                            onAddToCart = { onAddToCartApi(apiProduct.id) },
+                            onClick = { onProductClick(apiProduct) },
+                            colorIndex = index
+                        )
+                    }
+                }
+            }
+        }
+        }
+}
+
 
 @Composable
 fun NotesSection(
