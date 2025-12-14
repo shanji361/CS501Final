@@ -20,11 +20,11 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="google_map_api_here"/>
+            android:value="AIzaSyCVtplpLDUSR_tC56oO410iB2c3LjRfGW4"/>
 
         <meta-data
             android:name="com.google.android.geo.PLACES_API_KEY"
-            android:value="google_map_api_here"/>
+            android:value="AIzaSyCVtplpLDUSR_tC56oO410iB2c3LjRfGW4"/>
 
         <!-- Main Activity -->
         <activity

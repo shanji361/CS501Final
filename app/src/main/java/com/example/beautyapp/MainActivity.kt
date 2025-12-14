@@ -153,6 +153,7 @@ fun BeautyApp(
     productViewModel: MainViewModel = viewModel(),
     weatherViewModel: WeatherViewModel = viewModel(),
     shadeProductViewModel: ShadeProductViewModel = viewModel()
+
 ) {
     // State management
     val productState by productViewModel.state.collectAsState()
@@ -162,8 +163,7 @@ fun BeautyApp(
 
     // NEW: Store Finder State - manages map screen visibility
     var showStoreFinder by remember { mutableStateOf(false) }  // Show/hide store finder screen
-    var storeFinderProduct by remember { mutableStateOf<Product?>(null) }  // Product to find stores for
-
+    var storeFinderProductInfo by remember { mutableStateOf<Pair<String, String?>>(Pair("", null)) }
     // Logout confirmation dialog
     if (showLogoutDialog) {
         AlertDialog(
@@ -188,13 +188,13 @@ fun BeautyApp(
 
     // NEW: Show Store Finder Screen (full screen overlay)
     // When user taps "Find at Nearby Stores" from cart
-    if (showStoreFinder && storeFinderProduct != null) {
+    if (showStoreFinder) {
         StoreFinderScreen(
-            product = storeFinderProduct!!,
+            productName = storeFinderProductInfo.first,
+            productBrand = storeFinderProductInfo.second,
             onBack = {
-                // Close store finder and return to cart
                 showStoreFinder = false
-                storeFinderProduct = null
+                storeFinderProductInfo = Pair("", null)
             }
         )
         return  // Don't show main app while store finder is open
@@ -286,7 +286,7 @@ fun BeautyApp(
                         onAddToCart = { productId, shade -> productViewModel.addToCart(productId, shade) },
                         onRemoveFromCart = { productId, shade -> productViewModel.removeFromCart(productId, shade) },
                         onFindStores = { product ->
-                            storeFinderProduct = product
+                            storeFinderProductInfo = Pair(product.name, product.brand ?: "")
                             showStoreFinder = true
                         },
                         // to add/remove items from cart need to pass in CartScreen

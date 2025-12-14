@@ -39,7 +39,8 @@ fun CartScreen(
     total: Double,
     onAddToCart: (Int, ProductColor?) -> Unit,
     onRemoveFromCart: (Int, ProductColor?) -> Unit,
-    onFindStores: (Product) -> Unit,
+//    onFindStores: (Product) -> Unit,
+    onFindStores: (DisplayableCartProduct) -> Unit,
     // ADDED functions for local products
     onAddLocalToCart: (MakeupProduct) -> Unit,
     onRemoveLocalFromCart: (MakeupProduct) -> Unit
@@ -125,11 +126,11 @@ fun CartScreen(
                                 }
                             },
                             onFindStores = {
-                                if (originalApiProduct != null) onFindStores(originalApiProduct)
+                                onFindStores(item)
                             },
-                            // The card now enables/disables based on the item type
                             isLocalProduct = item.isLocal,
-                            isStoreFinderEnabled = !item.isLocal // Find Stores is only for API products not local products from makeup.db
+                            // BUG FIX 2: Enable the button for ALL products.
+                            isStoreFinderEnabled = true
                         )
                     }
                 }
