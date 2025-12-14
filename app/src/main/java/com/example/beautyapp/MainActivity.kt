@@ -11,20 +11,21 @@
 
 package com.example.beautyapp
 
-import androidx.compose.ui.platform.LocalContext
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,13 +33,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.beautyapp.data.Product
 import com.example.beautyapp.data.ProductColor
 import com.example.beautyapp.data.Settings
-import com.example.beautyapp.ui.screens.*
 import com.example.beautyapp.ui.components.BottomNavBar
+import com.example.beautyapp.ui.screens.* // This import is crucial
 import com.example.beautyapp.ui.theme.BeautyAppTheme
 import com.example.beautyapp.viewmodel.MainViewModel
-import com.example.beautyapp.viewmodel.WeatherViewModel
 import com.example.beautyapp.viewmodel.SettingsViewModel
 import com.example.beautyapp.viewmodel.ShadeProductViewModel
+import com.example.beautyapp.viewmodel.WeatherViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -152,17 +153,17 @@ fun BeautyApp(
     productViewModel: MainViewModel = viewModel(),
     weatherViewModel: WeatherViewModel = viewModel(),
     shadeProductViewModel: ShadeProductViewModel = viewModel()
+
 ) {
     // State management
     val productState by productViewModel.state.collectAsState()
     var selectedProduct by remember { mutableStateOf<Product?>(null) }  // Currently viewed product
-    var selectedTab by remember { mutableStateOf(0) }  // Active bottom nav tab
+    var selectedTab by remember { mutableIntStateOf(0) }  // Active bottom nav tab
     var showLogoutDialog by remember { mutableStateOf(false) }  // Logout confirmation
 
     // NEW: Store Finder State - manages map screen visibility
     var showStoreFinder by remember { mutableStateOf(false) }  // Show/hide store finder screen
-    var storeFinderProduct by remember { mutableStateOf<Product?>(null) }  // Product to find stores for
-
+    var storeFinderProductInfo by remember { mutableStateOf<Pair<String, String?>>(Pair("", null)) }
     // Logout confirmation dialog
     if (showLogoutDialog) {
         AlertDialog(
@@ -187,13 +188,13 @@ fun BeautyApp(
 
     // NEW: Show Store Finder Screen (full screen overlay)
     // When user taps "Find at Nearby Stores" from cart
-    if (showStoreFinder && storeFinderProduct != null) {
+    if (showStoreFinder) {
         StoreFinderScreen(
-            product = storeFinderProduct!!,
+            productName = storeFinderProductInfo.first,
+            productBrand = storeFinderProductInfo.second,
             onBack = {
-                // Close store finder and return to cart
                 showStoreFinder = false
-                storeFinderProduct = null
+                storeFinderProductInfo = Pair("", null)
             }
         )
         return  // Don't show main app while store finder is open
@@ -204,7 +205,7 @@ fun BeautyApp(
         ProductDetailScreen(
             product = selectedProduct!!,
             isLiked = productState.likedProducts.contains(selectedProduct!!.id),
-            onToggleLike = { productViewModel.toggleLike(it) },
+            onToggleLike = { productId -> productViewModel.toggleLike(productId) },
             onAddToCart = { productId: Int, shade: ProductColor? ->
                 productViewModel.addToCart(productId, shade)
             },
@@ -250,45 +251,58 @@ fun BeautyApp(
                     1 -> ProductsScreen(
                         products = productViewModel.getDisplayProducts(),
                         likedProducts = productState.likedProducts,
-                        onToggleLike = { productViewModel.toggleLike(it) },
-                        onAddToCart = { productViewModel.addToCart(it) },
+                        onToggleLike = { productId -> productViewModel.toggleLike(productId) },
+                        onAddToCart = { productId -> productViewModel.addToCart(productId, null) },
                         loading = productState.loading,
                         brands = productState.availableBrands,
                         productTypes = productState.availableProductTypes,
                         selectedBrands = productState.selectedBrands,
                         selectedProductTypes = productState.selectedProductTypes,
-                        onBrandToggle = { productViewModel.toggleBrandFilter(it) },
-                        onProductTypeToggle = { productViewModel.toggleProductTypeFilter(it) },
+                        onBrandToggle = { brand -> productViewModel.toggleBrandFilter(brand) },
+                        onProductTypeToggle = { type -> productViewModel.toggleProductTypeFilter(type) },
                         onClearFilters = { productViewModel.clearFilters() },
                         hasActiveFilters = productViewModel.hasActiveFilters(),
                         onProductClick = { product -> selectedProduct = product }
                     )
 
                     // Tab 2: Shade Match - Find your perfect shade from 8 skin tones
-                    2 -> ShadeProductScreen(viewModel = shadeProductViewModel)
-
+                    2 -> ShadeProductScreen(
+                        viewModel = shadeProductViewModel,
+                        allApiProducts = productState.products,
+                        likedProductIds = productState.likedProducts,
+                        likedLocalProductIds = productState.likedLocalProducts,
+                        onToggleLike = { productId -> productViewModel.toggleLike(productId) },
+                        onToggleLocalLike = { localId -> productViewModel.toggleLocalLike(localId) },
+                        onAddToCart = { localProduct ->
+                            productViewModel.addLocalProductToCart(localProduct)
+                        }
+                    )
                     // Tab 3: Cart - View cart items with Store Finder feature
                     3 -> CartScreen(
                         cartItems = productState.cartItems,
+                        localCartItems = productState.localCartItems,
                         products = productState.products,
+                        total = productViewModel.getCartTotal(),
                         onAddToCart = { productId, shade -> productViewModel.addToCart(productId, shade) },
                         onRemoveFromCart = { productId, shade -> productViewModel.removeFromCart(productId, shade) },
-                        onFindStores = { product ->  // NEW: Store finder callback!
-                            // When user taps "Find at Nearby Stores" button
-                            storeFinderProduct = product
+                        onFindStores = { product ->
+                            storeFinderProductInfo = Pair(product.name, product.brand ?: "")
                             showStoreFinder = true
-                        }
+                        },
+                        // to add/remove items from cart need to pass in CartScreen
+                        onAddLocalToCart = { localProduct -> productViewModel.addLocalProductToCart(localProduct) },
+                        onRemoveLocalFromCart = { localProduct -> productViewModel.removeLocalProductFromCart(localProduct) }
                     )
 
                     // Tab 4: Profile - Favorites, settings, logout
                     4 -> ProfileScreen(
                         userName = userName,
-                        likedProducts = productState.products.filter {
-                            productState.likedProducts.contains(it.id)
-                        },
+                        likedProducts = productState.products.filter { productState.likedProducts.contains(it.id) },
                         likedProductIds = productState.likedProducts,
-                        onToggleLike = { productViewModel.toggleLike(it) },
-                        onAddToCart = { productViewModel.addToCart(it) },
+                        likedLocalProductIds = productState.likedLocalProducts,
+                        onToggleLike = { productId -> productViewModel.toggleLike(productId) },
+                        onToggleLocalLike = { localId -> productViewModel.toggleLocalLike(localId) },
+                        onAddToCart = { productId -> productViewModel.addToCart(productId, null) },
                         onProductClick = { product -> selectedProduct = product },
                         onLogout = { showLogoutDialog = true },
                         viewModel = productViewModel

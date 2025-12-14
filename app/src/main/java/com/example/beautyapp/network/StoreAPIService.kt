@@ -83,7 +83,8 @@ object StoreAPIService {
     suspend fun searchNearbyStores(
         context: Context,
         userLocation: LatLng,
-        product: Product
+        productName: String,
+        productBrand: String?
     ): List<StoreLocation> = withContext(Dispatchers.IO) {
         try {
             val apiKey = context.packageManager
@@ -92,10 +93,12 @@ object StoreAPIService {
 
             val keyword = buildString {
                 append("beauty store")
-                product.brand?.let {
+                productBrand?.let {
                     append(" ")
                     append(it)
                 }
+                append(" ")
+                append(productName)
             }
 
             val radiusMeters = 5000

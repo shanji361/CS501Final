@@ -1,19 +1,14 @@
 package com.example.beautyapp.ui.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddShoppingCart
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,9 +18,18 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.beautyapp.data.MakeupProduct
 
+/* This file ShadeProductCard.kt contains reusable UI component that displays
+* a single recommended product from the local makeup.db in a compact horizontal
+* card. Showing the product's image, name, price, and action buttons.
+ */
+
 @Composable
 fun ShadeProductCard(
-    product: MakeupProduct
+    product: MakeupProduct,
+    isLiked: Boolean,
+    onToggleLike: () -> Unit,
+    onAddToCart: (MakeupProduct) -> Unit,
+    isLikingEnabled: Boolean
 ) {
     Card(
         modifier = Modifier
@@ -33,11 +37,13 @@ fun ShadeProductCard(
             .padding(vertical = 6.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFFF4F8)
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+        )
     ) {
-        Row(modifier = Modifier.padding(16.dp)) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             AsyncImage(
                 model = product.imageUrl,
                 contentDescription = product.name,
@@ -49,28 +55,42 @@ fun ShadeProductCard(
 
             Spacer(Modifier.width(16.dp))
 
-            Column {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = product.type.replaceFirstChar { it.uppercase() },
-                    style = MaterialTheme.typography.labelMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFFD81B60)
+                    style = MaterialTheme.typography.labelMedium
                 )
-
                 Text(
                     text = "${product.brand} — ${product.name}",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.SemiBold
                 )
-
                 Spacer(Modifier.height(6.dp))
-
                 Text(
-                    text = "$${product.price}",
+                    text = "$${String.format("%.2f", product.price)}",
                     style = MaterialTheme.typography.titleMedium,
-                    color = Color(0xFF8E24AA),
                     fontWeight = FontWeight.Bold
                 )
+            }
+
+            // Action Icons
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                // Like button is controlled by isLikingEnabled
+                IconButton(onClick = onToggleLike, enabled = isLikingEnabled) {
+                    Icon(
+                        imageVector = if (isLiked) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                        contentDescription = "Like",
+                        //this is what gives heart the red color when liked
+                        tint = if (isLiked) Color.Red else MaterialTheme.colorScheme.onSurface.copy(alpha = if (isLikingEnabled) 0.7f else 0.3f)
+                    )
+                }
+                // Add to cart button
+                IconButton(onClick = { onAddToCart(product) }) {
+                    Icon(
+                        imageVector = Icons.Default.AddShoppingCart,
+                        contentDescription = "Add to Cart"
+                    )
+                }
             }
         }
     }

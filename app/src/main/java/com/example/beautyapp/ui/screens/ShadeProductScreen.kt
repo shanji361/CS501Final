@@ -2,16 +2,7 @@ package com.example.beautyapp.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -26,13 +17,27 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.beautyapp.data.MakeupProduct
 import com.example.beautyapp.ui.components.ProductRecommendationSection
 import com.example.beautyapp.ui.components.ShadeSelectionSection
 import com.example.beautyapp.viewmodel.ShadeProductViewModel
+import com.example.beautyapp.data.Product
+
+/*
+--This file ShadeProductScreen, responsible for the Shade Section of our navbar, primarily fetching products from the
+local makeup.db, so a user select their skin shade and get three respective product recommendations
+foundation, blush, and lip liner
+*/
 
 @Composable
 fun ShadeProductScreen(
-    viewModel: ShadeProductViewModel
+    viewModel: ShadeProductViewModel,
+    allApiProducts: List<Product>,
+    likedProductIds: Set<Int>,
+    likedLocalProductIds: Set<Int>,
+    onToggleLike: (Int) -> Unit,
+    onToggleLocalLike: (Int) -> Unit,
+    onAddToCart: (MakeupProduct) -> Unit
 ) {
     val shades by viewModel.shades.observeAsState(emptyList())
     val selectedShade by viewModel.selectedShade.observeAsState()
@@ -44,7 +49,7 @@ fun ShadeProductScreen(
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        // Shade selection grid
+        // shade selection grid
         ShadeSelectionSection(
             shades = shades,
             selectedShade = selectedShade,
@@ -53,7 +58,7 @@ fun ShadeProductScreen(
 
         Spacer(Modifier.height(32.dp))
 
-        // Display selected shade with color circle
+        // displays selected shade with color circle
         selectedShade?.let {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -84,7 +89,14 @@ fun ShadeProductScreen(
 
         Spacer(Modifier.height(32.dp))
 
-        // Product recommendations
-        ProductRecommendationSection(products = products)
+        // products recommendations : need to pass these parameters allowing for user action
+        ProductRecommendationSection(
+            products = products,
+            onAddToCart = onAddToCart,
+            allApiProducts = allApiProducts,
+            likedProductIds = likedProductIds,
+            likedLocalProductIds = likedLocalProductIds,
+            onToggleLocalLike = onToggleLocalLike
+        )
     }
 }

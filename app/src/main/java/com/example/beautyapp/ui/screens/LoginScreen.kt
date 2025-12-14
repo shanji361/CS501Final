@@ -19,7 +19,9 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -55,6 +57,10 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
+    // --- added: state to hold error msg for password validation for email and password fields
+    var passwordError by remember { mutableStateOf<String?>(null) }
+    var emailError by remember { mutableStateOf<String?>(null) }
+
 
     // Google Sign In Setup
     val gso = remember {
@@ -150,10 +156,21 @@ fun LoginScreen(
             // Email Field
             OutlinedTextField(
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = { newEmail ->
+                    if (newEmail.length <= 50) {
+                        email = newEmail
+                        emailError = null
+                    } else {
+                        //gives user feedback that email cannot be longer than 50 characters
+                        // if user tries to type the 51st character, show error but don't update email
+                        emailError = "Email cannot be more than 50 characters."
+                    }
+                },
                 label = { Text("Email") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
+                //  addedthe isError property
+                isError = emailError != null,
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.White,
@@ -163,12 +180,36 @@ fun LoginScreen(
                 shape = RoundedCornerShape(16.dp)
             )
 
+            // added this toast msg to display email error message
+            emailError?.let {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
+                )
+            }
+
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
             Spacer(modifier = Modifier.height(16.dp))
 
             // Password Field
             OutlinedTextField(
                 value = password,
-                onValueChange = { password = it },
+                // --- onValueChange handles length check when password is longer than 13 chars we get error, so nothing breaks
+                onValueChange = { newPassword ->
+                    // allows typing up to 13 characters
+                    if (newPassword.length <= 13) {
+                        password = newPassword
+                        passwordError = null
+                    } else {
+                        // if user tries to type the 14th character, show error but don't update password
+                        passwordError = "Password cannot be more than 13 characters."
+                    }
+                },
                 label = { Text("Password") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
@@ -190,7 +231,8 @@ fun LoginScreen(
                         )
                     }
                 },
-                colors = OutlinedTextFieldDefaults.colors(
+                // isError property to show visual feedback for error
+                isError = passwordError != null,colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.White,
                     focusedBorderColor = Color(0xFFF472B6),
@@ -198,6 +240,18 @@ fun LoginScreen(
                 ),
                 shape = RoundedCornerShape(16.dp)
             )
+
+            // toast msg to display  error message
+            passwordError?.let {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 4.dp)
+                )
+            }
 
             Spacer(modifier = Modifier.height(24.dp))
 

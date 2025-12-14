@@ -1,23 +1,7 @@
 /*
  * MainViewModel.kt
  * PURPOSE: Central state management for BeautyApp - handles products, cart, favorites, notes, and filters
- * MAIN COMPONENTS: MainViewModel, AppState data class
- * KEY FEATURES:
- *   - Product fetching from Makeup API with 30s timeout
- *   - Cart management with shade selection support (CartItem with ProductColor)
- *   - Favorites/likes management via Room database
- *   - Notes management with image storage
- *   - Brand and product type filtering
- * DATA FLOW:
- *   - StateFlow<AppState> exposes reactive state to UI
- *   - Room DAOs for persistent storage (likes, notes)
- *   - Retrofit API for product data
- * STATE STRUCTURE:
- *   - products: All products from API
- *   - filteredProducts: Products after applying filters
- *   - cartItems: List<CartItem> (productId + quantity + selectedShade)
- *   - likedProducts: Set<Int> of product IDs
- *   - selectedBrands/selectedProductTypes: Active filters
+ * ...
  */
 
 package com.example.beautyapp.viewmodel
@@ -26,12 +10,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.beautyapp.data.AppDatabase
-import com.example.beautyapp.data.CartItem
-import com.example.beautyapp.data.LikedProduct
-import com.example.beautyapp.data.Note
-import com.example.beautyapp.data.Product
-import com.example.beautyapp.data.ProductColor
+import com.example.beautyapp.data.*
 import com.example.beautyapp.network.MakeupApiService
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -46,7 +25,9 @@ data class AppState(
     val products: List<Product> = emptyList(),
     val filteredProducts: List<Product> = emptyList(),
     val likedProducts: Set<Int> = emptySet(),
-    val cartItems: List<CartItem> = emptyList(),  // UPDATED - now List<CartItem> instead of Map!
+    val likedLocalProducts: Set<Int> = emptySet(),
+    val cartItems: List<CartItem> = emptyList(),
+    val localCartItems: List<MakeupProduct> = emptyList(),
     val loading: Boolean = false,
     val activeTab: String = "home",
     val selectedBrands: Set<String> = emptySet(),
@@ -65,17 +46,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val notes = noteDao.getAllNotes()
 
-    // Updated with timeout configuration
     private val api: MakeupApiService by lazy {
         val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)  // 30 second connection timeout
-            .readTimeout(30, TimeUnit.SECONDS)     // 30 second read timeout
-            .writeTimeout(30, TimeUnit.SECONDS)    // 30 second write timeout
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build()
 
         Retrofit.Builder()
             .baseUrl("https://makeup-api.herokuapp.com/")
-            .client(okHttpClient)  // Attach the custom OkHttp client
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MakeupApiService::class.java)
@@ -83,7 +63,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         fetchProducts()
-
         viewModelScope.launch {
             likedProductDao.getAllLikedProductIds().collect { likedIds ->
                 _state.update { it.copy(likedProducts = likedIds.toSet()) }
@@ -96,10 +75,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _state.value = _state.value.copy(loading = true)
             try {
                 val products = api.getProducts()
-
                 val brands = products.mapNotNull { it.brand }.distinct().sorted()
                 val productTypes = products.mapNotNull { it.productType }.distinct().sorted()
-
                 _state.value = _state.value.copy(
                     products = products,
                     filteredProducts = products,
@@ -114,24 +91,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    // --- Filter Logic ---
     fun toggleBrandFilter(brand: String) {
         val currentBrands = _state.value.selectedBrands.toMutableSet()
-        if (currentBrands.contains(brand)) {
-            currentBrands.remove(brand)
-        } else {
-            currentBrands.add(brand)
-        }
+        if (currentBrands.contains(brand)) currentBrands.remove(brand) else currentBrands.add(brand)
         _state.value = _state.value.copy(selectedBrands = currentBrands)
         applyFilters()
     }
 
     fun toggleProductTypeFilter(productType: String) {
         val currentTypes = _state.value.selectedProductTypes.toMutableSet()
-        if (currentTypes.contains(productType)) {
-            currentTypes.remove(productType)
-        } else {
-            currentTypes.add(productType)
-        }
+        if (currentTypes.contains(productType)) currentTypes.remove(productType) else currentTypes.add(productType)
         _state.value = _state.value.copy(selectedProductTypes = currentTypes)
         applyFilters()
     }
@@ -146,15 +116,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun applyFilters() {
         val filtered = _state.value.products.filter { product ->
-            val brandMatch = _state.value.selectedBrands.isEmpty() ||
-                    _state.value.selectedBrands.contains(product.brand)
-            val typeMatch = _state.value.selectedProductTypes.isEmpty() ||
-                    _state.value.selectedProductTypes.contains(product.productType)
+            val brandMatch = _state.value.selectedBrands.isEmpty() || _state.value.selectedBrands.contains(product.brand)
+            val typeMatch = _state.value.selectedProductTypes.isEmpty() || _state.value.selectedProductTypes.contains(product.productType)
             brandMatch && typeMatch
         }
         _state.value = _state.value.copy(filteredProducts = filtered)
     }
 
+    // --- Likes and Notes Logic ---
     fun toggleLike(productId: Int) {
         viewModelScope.launch {
             val currentLikes = _state.value.likedProducts
@@ -166,98 +135,98 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    //  ---added this function to handle liking local products ---
+    fun toggleLocalLike(localProductId: Int) {
+        val currentLocalLikes = _state.value.likedLocalProducts.toMutableSet()
+        if (currentLocalLikes.contains(localProductId)) {
+            currentLocalLikes.remove(localProductId)
+        } else {
+            currentLocalLikes.add(localProductId)
+        }
+        _state.update { it.copy(likedLocalProducts = currentLocalLikes) }
+        Log.d("MainViewModel", "Toggled local like for ID: $localProductId. New likes: $currentLocalLikes")
+    }
+
+
     fun addNote(title: String, content: String, imagePath: String?) {
         viewModelScope.launch {
-            val note = Note(
-                id = UUID.randomUUID().toString(),
-                title = title,
-                content = content,
-                imagePath = imagePath
-            )
-            noteDao.insertNote(note)
+            noteDao.insertNote(Note(id = UUID.randomUUID().toString(), title = title, content = content, imagePath = imagePath))
         }
     }
 
     fun deleteNote(noteId: String, imagePath: String?) {
         viewModelScope.launch {
             imagePath?.let { path ->
-                try {
-                    File(path).delete()
-                } catch (e: Exception) {
-                    Log.e("MainViewModel", "Failed to delete image file", e)
-                }
+                try { File(path).delete() } catch (e: Exception) { Log.e("MainViewModel", "Failed to delete image", e) }
             }
             noteDao.deleteNoteById(noteId)
         }
     }
 
-    // UPDATED - Add to cart with shade support
+    // --- Cart Logic for API Products ---
     fun addToCart(productId: Int, selectedShade: ProductColor? = null) {
         val currentItems = _state.value.cartItems.toMutableList()
-
-        // Find if this exact product + shade combo already exists
-        val existingIndex = currentItems.indexOfFirst {
-            it.productId == productId && it.selectedShade == selectedShade
-        }
-
-        if (existingIndex >= 0) {
-            // Same product + same shade = increase quantity
-            currentItems[existingIndex] = currentItems[existingIndex].copy(
-                quantity = currentItems[existingIndex].quantity + 1
-            )
+        val existingIndex = currentItems.indexOfFirst { it.productId == productId && it.selectedShade == selectedShade }
+        if (existingIndex != -1) {
+            val updatedItem = currentItems[existingIndex].copy(quantity = currentItems[existingIndex].quantity + 1)
+            currentItems[existingIndex] = updatedItem
         } else {
-            // New product or different shade = add new item
-            currentItems.add(CartItem(productId, 1, selectedShade))
+            currentItems.add(CartItem(productId = productId, quantity = 1, selectedShade = selectedShade))
         }
-
-        _state.value = _state.value.copy(cartItems = currentItems)
+        _state.update { it.copy(cartItems = currentItems) }
     }
 
-    // UPDATED - Remove from cart with shade support
     fun removeFromCart(productId: Int, selectedShade: ProductColor? = null) {
         val currentItems = _state.value.cartItems.toMutableList()
-
-        // Find the exact product + shade combo
-        val existingIndex = currentItems.indexOfFirst {
-            it.productId == productId && it.selectedShade == selectedShade
-        }
-
-        if (existingIndex >= 0) {
+        val existingIndex = currentItems.indexOfFirst { it.productId == productId && it.selectedShade == selectedShade }
+        if (existingIndex != -1) {
             val item = currentItems[existingIndex]
             if (item.quantity > 1) {
-                // Decrease quantity
-                currentItems[existingIndex] = item.copy(quantity = item.quantity - 1)
+                val updatedItem = item.copy(quantity = item.quantity - 1)
+                currentItems[existingIndex] = updatedItem
             } else {
-                // Remove item completely
                 currentItems.removeAt(existingIndex)
             }
-            _state.value = _state.value.copy(cartItems = currentItems)
+            _state.update { it.copy(cartItems = currentItems) }
         }
     }
 
-    fun setActiveTab(tab: String) {
-        _state.value = _state.value.copy(activeTab = tab)
+    // --- Cart Logic for Local Products To Add---
+    fun addLocalProductToCart(localProduct: MakeupProduct) {
+        val currentLocalCart = _state.value.localCartItems.toMutableList()
+        currentLocalCart.add(localProduct) // Simply add another instance
+        _state.update { it.copy(localCartItems = currentLocalCart) }
+        Log.d("MainViewModel", "Added local product to cart: ${localProduct.name}")
     }
 
-    // UPDATED - Calculate total items in cart
+    // --- Cart Logic for Local Products To Remove ---
+    fun removeLocalProductFromCart(localProduct: MakeupProduct) {
+        val currentLocalCart = _state.value.localCartItems.toMutableList()
+        // Find the first instance of this product and remove it
+        val itemToRemove = currentLocalCart.firstOrNull { it.productId == localProduct.productId }
+        if (itemToRemove != null) {
+            currentLocalCart.remove(itemToRemove)
+            _state.update { it.copy(localCartItems = currentLocalCart) }
+            Log.d("MainViewModel", "Removed one instance of local product: ${localProduct.name}")
+        }
+    }
+
+    // --- Getter Functions for UI ---
+    fun getCartTotal(): Double {
+        val apiProductsTotal = state.value.cartItems.sumOf { cartItem ->
+            val product = state.value.products.find { it.id == cartItem.productId }
+            (product?.price?.toDoubleOrNull() ?: 0.0) * cartItem.quantity
+        }
+        val localProductsTotal = state.value.localCartItems.sumOf { it.price }
+        return apiProductsTotal + localProductsTotal
+    }
+
     fun getCartCount(): Int {
-        return _state.value.cartItems.sumOf { it.quantity }
+        val apiItemCount = _state.value.cartItems.sumOf { it.quantity }
+        val localItemCount = _state.value.localCartItems.size
+        return apiItemCount + localItemCount
     }
 
-    fun getFeaturedProducts(): List<Product> {
-        val products = _state.value.products
-        val foundation = products.firstOrNull { it.productType == "foundation" }
-        val blush = products.firstOrNull { it.productType == "blush" }
-        val lipstick = products.firstOrNull { it.productType == "lipstick" }
-        return listOfNotNull(foundation, blush, lipstick)
-    }
-
-    fun getDisplayProducts(): List<Product> {
-        return _state.value.filteredProducts
-    }
-
-    fun hasActiveFilters(): Boolean {
-        return _state.value.selectedBrands.isNotEmpty() ||
-                _state.value.selectedProductTypes.isNotEmpty()
-    }
+    fun getDisplayProducts(): List<Product> = _state.value.filteredProducts
+    fun hasActiveFilters(): Boolean = _state.value.selectedBrands.isNotEmpty() || _state.value.selectedProductTypes.isNotEmpty()
 }
