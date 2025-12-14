@@ -254,15 +254,15 @@ MERGED from [com.google.android.play:core-common:2.0.3] /opt/homebrew/Cellar/ope
 	android:usesCleartextTraffic
 		ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:18:9-44
 meta-data#com.google.android.geo.API_KEY
-ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:21:9-23:70
+ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:21:9-23:54
 	android:value
-		ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:23:13-68
+		ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:23:13-52
 	android:name
 		ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:22:13-58
 meta-data#com.google.android.geo.PLACES_API_KEY
-ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:25:9-27:70
+ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:25:9-27:54
 	android:value
-		ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:27:13-68
+		ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:27:13-52
 	android:name
 		ADDED from /Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:26:13-65
 activity#com.example.beautyapp.MainActivity

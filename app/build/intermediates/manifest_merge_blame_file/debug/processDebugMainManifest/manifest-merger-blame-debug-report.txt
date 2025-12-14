@@ -82,17 +82,17 @@
 49        android:usesCleartextTraffic="true" >
 49-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:18:9-44
 50        <meta-data
-50-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:21:9-23:70
+50-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:21:9-23:54
 51            android:name="com.google.android.geo.API_KEY"
 51-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:22:13-58
-52            android:value="AIzaSyCVtplpLDUSR_tC56oO410iB2c3LjRfGW4" />
-52-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:23:13-68
+52            android:value="place_your_api_key_here" />
+52-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:23:13-52
 53        <meta-data
-53-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:25:9-27:70
+53-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:25:9-27:54
 54            android:name="com.google.android.geo.PLACES_API_KEY"
 54-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:26:13-65
-55            android:value="AIzaSyCVtplpLDUSR_tC56oO410iB2c3LjRfGW4" />
-55-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:27:13-68
+55            android:value="place_your_api_key_here" />
+55-->/Users/javeria2/AndroidStudioProjects/CS501Final/app/src/main/AndroidManifest.xml:27:13-52
 56
 57        <!-- Main Activity -->
 58        <activity
