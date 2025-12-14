@@ -57,8 +57,9 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
-    // --- added: state to hold error msg for password validation ---
+    // --- added: state to hold error msg for password validation for email and password fields
     var passwordError by remember { mutableStateOf<String?>(null) }
+    var emailError by remember { mutableStateOf<String?>(null) }
 
 
     // Google Sign In Setup
@@ -155,10 +156,21 @@ fun LoginScreen(
             // Email Field
             OutlinedTextField(
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = { newEmail ->
+                    if (newEmail.length <= 50) {
+                        email = newEmail
+                        emailError = null
+                    } else {
+                        //gives user feedback that email cannot be longer than 50 characters
+                        // if user tries to type the 51st character, show error but don't update email
+                        emailError = "Email cannot be more than 50 characters."
+                    }
+                },
                 label = { Text("Email") },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
+                //  addedthe isError property
+                isError = emailError != null,
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.White,
@@ -167,6 +179,20 @@ fun LoginScreen(
                 ),
                 shape = RoundedCornerShape(16.dp)
             )
+
+            // added this toast msg to display email error message
+            emailError?.let {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.fillMaxWidth().padding(top = 4.dp)
+                )
+            }
+
+
+            Spacer(modifier = Modifier.height(16.dp))
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
