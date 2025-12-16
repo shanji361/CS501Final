@@ -1,14 +1,6 @@
 /*
  * StoreFinderScreen.kt
- *
- * Store Finder screen with Google Maps integration
- * Features:
- * - Request location permission
- * - Show user's location on map
- * - Display nearby beauty stores with markers
- * - Open Google Maps for directions (with error handling)
  */
-
 package com.example.beautyapp.ui.screens
 
 import android.Manifest
@@ -33,24 +25,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.beautyapp.data.StoreFinderUiState
 import com.example.beautyapp.data.StoreLocation
 import com.example.beautyapp.viewmodel.StoreFinderViewModel
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.compose.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -108,7 +94,6 @@ fun StoreFinderScreen(
                 productName = productName,
                 productBrand = productBrand,
                 uiState = uiState,
-                onMapReady = viewModel::onMapReady,
                 context = context
             )
         } else {
@@ -143,7 +128,6 @@ private fun MapScreen(
     productName: String,
     productBrand: String?,
     uiState: StoreFinderUiState,
-    onMapReady: (GoogleMap) -> Unit,
     context: Context
 ) {
     Column(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
@@ -173,8 +157,7 @@ private fun MapScreen(
         GoogleMapViewWithStores(
             modifier = Modifier.fillMaxWidth().weight(1f),
             userLocation = uiState.userLocation!!,
-            stores = uiState.nearbyStores,
-            onMapReady = onMapReady
+            stores = uiState.nearbyStores
         )
 
         Button(
@@ -194,7 +177,7 @@ private fun InitialScreen(
     productName: String,
     productBrand: String?,
     uiState: StoreFinderUiState,
-    hasLocationPermission: Boolean, // Added this parameter
+    hasLocationPermission: Boolean,
     onSearchClick: () -> Unit,
     onOpenMapsWithoutLocation: () -> Unit
 ) {
@@ -256,47 +239,55 @@ private fun InitialScreen(
 fun GoogleMapViewWithStores(
     modifier: Modifier = Modifier,
     userLocation: LatLng,
-    stores: List<StoreLocation>,
-    onMapReady: (GoogleMap) -> Unit
+    stores: List<StoreLocation>
 ) {
-    val context = LocalContext.current
-    val mapView = remember { MapView(context) }
-    val lifecycleOwner = LocalLifecycleOwner.current
-
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_CREATE -> mapView.onCreate(null)
-                Lifecycle.Event.ON_START -> mapView.onStart()
-                Lifecycle.Event.ON_RESUME -> mapView.onResume()
-                Lifecycle.Event.ON_PAUSE -> mapView.onPause()
-                Lifecycle.Event.ON_STOP -> mapView.onStop()
-                Lifecycle.Event.ON_DESTROY -> mapView.onDestroy()
-                else -> {}
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    // Camera position state - centers on user location with zoom level 13
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(userLocation, 13f)
     }
 
-    AndroidView(factory = { mapView }, modifier = modifier) { map ->
-        map.getMapAsync { googleMap ->
-            googleMap.apply {
-                moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 13f))
-                addMarker(MarkerOptions().position(userLocation).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
-                stores.forEach { store ->
-                    addMarker(MarkerOptions().position(store.location).title(store.name).snippet(store.address).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
-                }
-                try {
-                    isMyLocationEnabled = true
-                    uiSettings.isMyLocationButtonEnabled = true
-                } catch (e: SecurityException) {
-                    Log.e("GoogleMap", "Location permission error: ${e.message}")
-                }
-                uiSettings.isZoomControlsEnabled = true
-                uiSettings.isCompassEnabled = true
-            }
-            onMapReady(googleMap)
+    // UI Settings for the map
+    val uiSettings by remember {
+        mutableStateOf(
+            MapUiSettings(
+                zoomControlsEnabled = true,
+                myLocationButtonEnabled = true,
+                compassEnabled = true
+            )
+        )
+    }
+
+    // Map properties including location display
+    val mapProperties by remember {
+        mutableStateOf(
+            MapProperties(
+                isMyLocationEnabled = true
+            )
+        )
+    }
+
+    // The GoogleMap Composable - lifecycle is handled automatically!
+    GoogleMap(
+        modifier = modifier,
+        cameraPositionState = cameraPositionState,
+        uiSettings = uiSettings,
+        properties = mapProperties
+    ) {
+        // User location marker (blue)
+        Marker(
+            state = MarkerState(position = userLocation),
+            title = "You are here",
+            icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+        )
+
+        // Store markers (red)
+        stores.forEach { store ->
+            Marker(
+                state = MarkerState(position = store.location),
+                title = store.name,
+                snippet = store.address,
+                icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+            )
         }
     }
 }
