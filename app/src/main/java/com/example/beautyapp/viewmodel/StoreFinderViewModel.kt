@@ -1,3 +1,4 @@
+// storefinderviewmodel.kt
 package com.example.beautyapp.viewmodel
 
 import android.annotation.SuppressLint
@@ -22,21 +23,21 @@ import kotlinx.coroutines.launch
 class StoreFinderViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(StoreFinderUiState())
     val uiState: StateFlow<StoreFinderUiState> = _uiState.asStateFlow()
-    private var googleMap: GoogleMap? = null
 
-    /**
-     * Called when location permission is granted by the user.
-     * It immediately tries to search for stores.
-     */
+
+
+     // Called when location permission is granted by the user.
+     // It immediately tries to search for stores.
+
     fun onLocationPermissionGranted(context: Context, productName: String, productBrand: String?) {
         Log.d("StoreFinder", "Permission granted. Starting store search.")
         searchForStores(context, productName, productBrand)
     }
 
-    /**
-     * Called when location permission is denied by the user.
-     * Updates the UI to show an error message.
-     */
+
+     //Called when location permission is denied by the user.
+     //Updates the UI to show an error message.
+
     fun onLocationPermissionDenied() {
         Log.d("StoreFinder", "Permission denied.")
         _uiState.update {
@@ -44,10 +45,10 @@ class StoreFinderViewModel : ViewModel() {
         }
     }
 
-    /**
-     * The main function to find stores. It gets the user's current location first,
-     * then uses that location to search for nearby stores via the API.
-     */
+
+     //The main function to find stores. It gets the user's current location first,
+     // then uses that location to search for nearby stores via the API.
+
     @SuppressLint("MissingPermission") // Suppressed because this is only called after a permission check.
     fun searchForStores(context: Context, productName: String, productBrand: String?) {
         if (_uiState.value.isSearching) return
@@ -62,10 +63,10 @@ class StoreFinderViewModel : ViewModel() {
                     val userLatLng = LatLng(location.latitude, location.longitude)
                     Log.d("StoreFinder", "Got user location: $userLatLng")
 
-                    // Now that we have the location, search for stores
+                    // Now with the location,  search for stores
                     viewModelScope.launch {
                         val stores = StoreAPIService.searchNearbyStores(
-                            context = context,
+                            context = context.applicationContext,
                             userLocation = userLatLng,
                             productName = productName,
                             productBrand = productBrand
@@ -81,18 +82,8 @@ class StoreFinderViewModel : ViewModel() {
                             )
                         }
 
-                        // Update the map with the new markers
-                        googleMap?.let { map ->
-                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 13f))
-                            stores.forEach { store ->
-                                map.addMarker(
-                                    MarkerOptions()
-                                        .position(store.location)
-                                        .title(store.name)
-                                        .snippet(store.address)
-                                )
-                            }
-                        }
+
+
                     }
                 } else {
                     Log.e("StoreFinder", "Failed to get location, it was null.")
@@ -101,6 +92,7 @@ class StoreFinderViewModel : ViewModel() {
                     }
                 }
             }
+            //listens for failure and updates the UI accordingly
             .addOnFailureListener { exception ->
                 Log.e("StoreFinder", "Location fetch failed", exception)
                 _uiState.update {
@@ -109,10 +101,5 @@ class StoreFinderViewModel : ViewModel() {
             }
     }
 
-    /**
-     * Caches the GoogleMap object when the map is ready.
-     */
-    fun onMapReady(map: GoogleMap) {
-        this.googleMap = map
-    }
+
 }
