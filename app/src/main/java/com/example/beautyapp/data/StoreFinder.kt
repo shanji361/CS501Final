@@ -1,3 +1,4 @@
+// storefinder.kt
 package com.example.beautyapp.data
 
 
@@ -15,5 +16,5 @@ data class StoreFinderUiState(
     val showMap: Boolean = false,
     val userLocation: LatLng? = null,
     val nearbyStores: List<StoreLocation> = emptyList(),
-    val googleMap: com.google.android.gms.maps.GoogleMap? = null
+
 )
