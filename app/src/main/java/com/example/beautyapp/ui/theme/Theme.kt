@@ -3,6 +3,7 @@ package com.example.beautyapp.ui.theme
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -10,7 +11,10 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import com.example.beautyapp.data.FontSize
 
 // Light theme colors - used when dark mode is OFF
 private val LightColorScheme = lightColorScheme(
@@ -44,9 +48,43 @@ private val DarkColorScheme = darkColorScheme(
     onError = Color.White                // White text on errors
 )
 
+// Function to get font scale multiplier based on user preference
+private fun getFontScaleMultiplier(fontSize: FontSize): Float {
+    return when (fontSize) {
+        FontSize.SMALL -> 0.85f   // 85% of default
+        FontSize.MEDIUM -> 1.0f   // 100% default
+        FontSize.LARGE -> 1.15f   // 115% of default
+    }
+}
+
+// Function to create scaled typography based on font size preference
+@Composable
+private fun getScaledTypography(fontSize: FontSize): Typography {
+    val scale = getFontScaleMultiplier(fontSize)
+
+    return Typography(
+        displayLarge = TextStyle(fontSize = (57 * scale).sp),
+        displayMedium = TextStyle(fontSize = (45 * scale).sp),
+        displaySmall = TextStyle(fontSize = (36 * scale).sp),
+        headlineLarge = TextStyle(fontSize = (32 * scale).sp),
+        headlineMedium = TextStyle(fontSize = (28 * scale).sp),
+        headlineSmall = TextStyle(fontSize = (24 * scale).sp),
+        titleLarge = TextStyle(fontSize = (22 * scale).sp),
+        titleMedium = TextStyle(fontSize = (16 * scale).sp),
+        titleSmall = TextStyle(fontSize = (14 * scale).sp),
+        bodyLarge = TextStyle(fontSize = (16 * scale).sp),
+        bodyMedium = TextStyle(fontSize = (14 * scale).sp),
+        bodySmall = TextStyle(fontSize = (12 * scale).sp),
+        labelLarge = TextStyle(fontSize = (14 * scale).sp),
+        labelMedium = TextStyle(fontSize = (12 * scale).sp),
+        labelSmall = TextStyle(fontSize = (11 * scale).sp)
+    )
+}
+
 @Composable
 fun BeautyAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),  // Use system setting by default
+    fontSize: FontSize = FontSize.MEDIUM,  // NEW: Font size parameter
     content: @Composable () -> Unit
 ) {
     // Choose color scheme based on dark mode setting
@@ -71,7 +109,7 @@ fun BeautyAppTheme(
     // Apply the theme to all child composables
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,  // Defined in Type.kt
+        typography = getScaledTypography(fontSize),  // NEW: Use scaled typography
         content = content  // Your app content
     )
 }

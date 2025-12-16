@@ -56,8 +56,11 @@ class MainActivity : ComponentActivity() {
             // Observe settings to enable live theme switching
             val settings: Settings by settingsViewModel.settings.collectAsState()
 
-            // Apply theme - automatically switches between light/dark mode
-            BeautyAppTheme(darkTheme = settings.isDarkMode) {
+            // Apply theme - automatically switches between light/dark mode AND font size
+            BeautyAppTheme(
+                darkTheme = settings.isDarkMode,
+                fontSize = settings.fontSize  // NEW: Apply font size setting
+            ) {
                 // Check if user is logged in
                 val auth = FirebaseAuth.getInstance()
                 val currentUser = auth.currentUser
@@ -127,17 +130,23 @@ fun AppNavigation() {
             val settingsViewModel: SettingsViewModel = viewModel()
             val settings by settingsViewModel.settings.collectAsState()
 
-            BeautyApp(
-                context = context,
-                userName = userName,
-                onLogout = {
-                    FirebaseAuth.getInstance().signOut()
-                    navController.navigate("login") {
-                        popUpTo(0) { inclusive = true }
-                    }
-                },
-                settings = settings
-            )
+            // NEW: Wrap BeautyApp in BeautyAppTheme to apply settings here too
+            BeautyAppTheme(
+                darkTheme = settings.isDarkMode,
+                fontSize = settings.fontSize  // NEW: Apply font size setting
+            ) {
+                BeautyApp(
+                    context = context,
+                    userName = userName,
+                    onLogout = {
+                        FirebaseAuth.getInstance().signOut()
+                        navController.navigate("login") {
+                            popUpTo(0) { inclusive = true }
+                        }
+                    },
+                    settings = settings
+                )
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.beautyapp.ui.screens
-//NOTE TO HAFSA vertical scroll state is not working, profile screen crashes
-//out left that line commmented on line 149.
+
 
 /*
  * ProfileScreen.kt
@@ -24,6 +23,7 @@ package com.example.beautyapp.ui.screens
  * - Room database integration for persistent notes storage
  * - Full dark mode support using MaterialTheme colors
  * - Logout functionality with confirmation dialog
+ * - Edit profile display name functionality
  *
  * DATA FLOW:
  * - Uses MainViewModel for product/notes data (Room database)
@@ -80,15 +80,16 @@ import com.example.beautyapp.data.Product
 import com.example.beautyapp.data.Note
 import com.example.beautyapp.ui.components.ProductCard
 import com.example.beautyapp.ui.components.SettingsDialog
+import com.example.beautyapp.ui.components.EditProfileDialog
 import com.example.beautyapp.viewmodel.MainViewModel
 import com.example.beautyapp.viewmodel.SettingsViewModel
 import com.example.beautyapp.viewmodel.ShadeProductViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-
-// [Rest of the code stays exactly the same - I'll include it all below]
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -113,6 +114,9 @@ fun ProfileScreen(
 
     // State to control showing/hiding the settings dialog
     var showSettingsDialog by remember { mutableStateOf(false) }
+
+    // State to control showing/hiding the edit profile dialog
+    var showEditProfileDialog by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
     var selectedTabIndex by remember { mutableStateOf(0) }
@@ -191,12 +195,30 @@ fun ProfileScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Text(
-                        text = userName,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
+                    // Username with Edit button
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = userName,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+
+                        IconButton(
+                            onClick = { showEditProfileDialog = true },
+                            modifier = Modifier.size(32.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = "Edit profile",
+                                tint = Color(0xFFF472B6),
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
+                    }
 
                     Spacer(modifier = Modifier.height(8.dp))
 
@@ -294,6 +316,7 @@ fun ProfileScreen(
         )
     }
 
+    // Add Note Dialog
     if (showAddNoteDialog) {
         AddNoteDialog(
             context = context,
@@ -301,6 +324,29 @@ fun ProfileScreen(
             onSave = { title, content, imagePath ->
                 viewModel.addNote(title, content, imagePath)
                 showAddNoteDialog = false
+            }
+        )
+    }
+
+    // Edit Profile Dialog
+    if (showEditProfileDialog) {
+        EditProfileDialog(
+            currentName = userName,
+            onDismiss = { showEditProfileDialog = false },
+            onSave = { newName ->
+                // Update Firebase Auth display name
+                val user = FirebaseAuth.getInstance().currentUser
+                val profileUpdates = UserProfileChangeRequest.Builder()
+                    .setDisplayName(newName)
+                    .build()
+
+                user?.updateProfile(profileUpdates)?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        showEditProfileDialog = false
+                        // Recreate activity to show new name
+                        (context as? android.app.Activity)?.recreate()
+                    }
+                }
             }
         )
     }
@@ -459,7 +505,7 @@ fun FavoritesTabContent(
                 }
             }
         }
-        }
+    }
 }
 
 
