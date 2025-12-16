@@ -21,7 +21,7 @@ Demo one video walkthrough [link here](https://docs.google.com/presentation/d/1n
 * **Bottom Navigation**: A custom `BottomNavBar.kt` with an elevated, central "AI Scan" button.
 
 ## Demo Two 12/2/2025
-Click the [link here](https://docs.google.com/presentation/d/1w7bB2ansTAv_P7HBIOqV54Jg_sPSMdFu4DX21h6yV-E/edit?usp=sharing) for our Demo Two Google Slides
+Demo two presentation slides [link here](https://docs.google.com/presentation/d/1w7bB2ansTAv_P7HBIOqV54Jg_sPSMdFu4DX21h6yV-E/edit?usp=sharing) 
 
 ## Core Technical Features
 
