@@ -8,10 +8,10 @@ InstaGlow is a comprehensive beauty application built with **Kotlin** and **Jetp
 
 ## 📱 Demo & Documentation
 
-- **[Final Report](https://docs.google.com/document/d/1Y5LPNKT9Fe1EuAae6JxFHHaAXolV5gTWHw3fuWV7v9s/edit?usp=sharing)** - Comprehensive technical documentation
+- **[Final Report](https://docs.google.com/document/d/1Y5LPNKT9Fe1EuAae6JxFHHaAXolV5gTWHw3fuWV7v9s/edit?tab=t.0)** - Comprehensive technical documentation
 - **[Demo One (11/4/2025)](https://docs.google.com/presentation/d/1nwfEWkiNuIehxy6FuLXlfblTZpB4IcLc32x3zp_sFdA/edit?usp=sharing)** - Initial prototype walkthrough
 - **[Demo Two (12/2/2025)](https://docs.google.com/presentation/d/1w7bB2ansTAv_P7HBIOqV54Jg_sPSMdFu4DX21h6yV-E/edit?usp=sharing)** - Feature-complete demo
-- **[Demo
+- **[Final Demo (12/16/2025)](https://docs.google.com/presentation/d/11C-6y2OrCrn59C9Pwl1e7M0qATfS7NWYo-P6IAILGZ4/edit?slide=id.g391726e1d48_0_0#slide=id.g391726e1d48_0_0)** - Final presentation with all features
 
 ## ✨ Key Features
 
