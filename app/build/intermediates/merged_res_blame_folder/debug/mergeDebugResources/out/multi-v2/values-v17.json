@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.beautyapp-mergeDebugResources-3:/values-v17/values-v17.xml",
+            "outputFile": "com.example.beautyapp-mergeDebugResources-69:/values-v17/values-v17.xml",
             "map": [
                 {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/66b9cbf39625d5d38287c2d5fd554bb4/transformed/appcompat-1.6.1/res/values-v17/values-v17.xml",
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/66b9cbf39625d5d38287c2d5fd554bb4/transformed/appcompat-1.6.1/res/values-v17/values-v17.xml",
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,25,29,33,37,40,43,46,50,53,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

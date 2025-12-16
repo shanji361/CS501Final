@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.beautyapp-mergeDebugResources-3:/values-v23/values-v23.xml",
+            "outputFile": "com.example.beautyapp-mergeDebugResources-69:/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/66b9cbf39625d5d38287c2d5fd554bb4/transformed/appcompat-1.6.1/res/values-v23/values-v23.xml",
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/66b9cbf39625d5d38287c2d5fd554bb4/transformed/appcompat-1.6.1/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/55a53b76c3b89a2734b1be2d16b2039f/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/55a53b76c3b89a2734b1be2d16b2039f/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

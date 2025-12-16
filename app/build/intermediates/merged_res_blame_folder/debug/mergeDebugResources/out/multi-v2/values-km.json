@@ -1,44 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.beautyapp-mergeDebugResources-3:/values-km/values-km.xml",
+            "outputFile": "com.example.beautyapp-mergeDebugResources-69:/values-km/values-km.xml",
             "map": [
                 {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/bf7ff7beef189cb8c9031d64d2443804/transformed/places-3.3.0/res/values-km/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11",
-                        "startColumns": "0,0,0,0,0,0,0,0",
-                        "startOffsets": "184,260,328,417,487,532,600,678",
-                        "endColumns": "75,67,88,69,44,67,77,56",
-                        "endOffsets": "259,327,416,486,531,599,677,734"
-                    },
-                    "to": {
-                        "startLines": "126,127,128,129,130,131,132,133",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "13446,13526,13598,13691,13765,13814,13886,13968",
-                        "endColumns": "79,71,92,73,48,71,81,60",
-                        "endOffsets": "13521,13593,13686,13760,13809,13881,13963,14024"
-                    }
-                },
-                {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/024e506e2a7c047021c330ab64c9f03d/transformed/credentials-1.2.0-rc01/res/values-km/values-km.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,171",
-                        "endColumns": "115,116",
-                        "endOffsets": "166,283"
-                    },
-                    "to": {
-                        "startLines": "29,30",
-                        "startColumns": "4,4",
-                        "startOffsets": "2793,2909",
-                        "endColumns": "115,116",
-                        "endOffsets": "2904,3021"
-                    }
-                },
-                {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/f79c7e3ca9dc978524487365442c3620/transformed/core-1.15.0/res/values-km/values-km.xml",
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/f79c7e3ca9dc978524487365442c3620/transformed/core-1.15.0/res/values-km/values-km.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -55,58 +21,7 @@
                     }
                 },
                 {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/a6006b2494a892ab914ab529b50cbbde/transformed/play-services-base-18.1.0/res/values-km/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,291,442,559,660,818,938,1055,1160,1314,1427,1594,1715,1856,2010,2070,2124",
-                        "endColumns": "97,150,116,100,157,119,116,104,153,112,166,120,140,153,59,53,72",
-                        "endOffsets": "290,441,558,659,817,937,1054,1159,1313,1426,1593,1714,1855,2009,2069,2123,2196"
-                    },
-                    "to": {
-                        "startLines": "41,42,43,44,45,46,47,48,50,51,52,53,54,55,56,57,58",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3999,4101,4256,4377,4482,4644,4768,4889,5147,5305,5422,5593,5718,5863,6021,6085,6143",
-                        "endColumns": "101,154,120,104,161,123,120,108,157,116,170,124,144,157,63,57,76",
-                        "endOffsets": "4096,4251,4372,4477,4639,4763,4884,4993,5300,5417,5588,5713,5858,6016,6080,6138,6215"
-                    }
-                },
-                {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/84ee192a80a8c43b1ac00a0f267f0571/transformed/play-services-basement-18.4.0/res/values-km/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "144",
-                        "endOffsets": "339"
-                    },
-                    "to": {
-                        "startLines": "49",
-                        "startColumns": "4",
-                        "startOffsets": "4998",
-                        "endColumns": "148",
-                        "endOffsets": "5142"
-                    }
-                },
-                {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/5b2265be213ff8e8c8082f0d62101f7c/transformed/ui-release/res/values-km/values-km.xml",
-                    "from": {
-                        "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "193,278,358,462,560,648,732,815,900,987,1067,1152,1228,1316,1390,1462,1533,1617,1683",
-                        "endColumns": "84,79,103,97,87,83,82,84,86,79,84,75,87,73,71,70,83,65,117",
-                        "endOffsets": "273,353,457,555,643,727,810,895,982,1062,1147,1223,1311,1385,1457,1528,1612,1678,1796"
-                    },
-                    "to": {
-                        "startLines": "39,40,60,61,62,66,67,124,125,134,135,137,138,139,140,141,143,144,145",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3834,3919,6317,6421,6519,6937,7021,13274,13359,14029,14109,14278,14354,14442,14516,14588,14760,14844,14910",
-                        "endColumns": "84,79,103,97,87,83,82,84,86,79,84,75,87,73,71,70,83,65,117",
-                        "endOffsets": "3914,3994,6416,6514,6602,7016,7099,13354,13441,14104,14189,14349,14437,14511,14583,14654,14839,14905,15023"
-                    }
-                },
-                {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/6b553f2229f778fb14afcb8c26ee6a42/transformed/browser-1.4.0/res/values-km/values-km.xml",
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/6b553f2229f778fb14afcb8c26ee6a42/transformed/browser-1.4.0/res/values-km/values-km.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -123,7 +38,24 @@
                     }
                 },
                 {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/66b9cbf39625d5d38287c2d5fd554bb4/transformed/appcompat-1.6.1/res/values-km/values-km.xml",
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/4a8dca4f0238c4bd41f91aa183fe52d1/transformed/foundation-release/res/values-km/values-km.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,142,233",
+                        "endColumns": "86,90,91",
+                        "endOffsets": "137,228,320"
+                    },
+                    "to": {
+                        "startLines": "31,146,147",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "3026,15028,15119",
+                        "endColumns": "86,90,91",
+                        "endOffsets": "3108,15114,15206"
+                    }
+                },
+                {
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/66b9cbf39625d5d38287c2d5fd554bb4/transformed/appcompat-1.6.1/res/values-km/values-km.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -140,7 +72,24 @@
                     }
                 },
                 {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/9bff2ea65dcde0a71599c51ed34e6b41/transformed/material3-release/res/values-km/values-km.xml",
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/bf7ff7beef189cb8c9031d64d2443804/transformed/places-3.3.0/res/values-km/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11",
+                        "startColumns": "0,0,0,0,0,0,0,0",
+                        "startOffsets": "184,260,328,417,487,532,600,678",
+                        "endColumns": "75,67,88,69,44,67,77,56",
+                        "endOffsets": "259,327,416,486,531,599,677,734"
+                    },
+                    "to": {
+                        "startLines": "126,127,128,129,130,131,132,133",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "13446,13526,13598,13691,13765,13814,13886,13968",
+                        "endColumns": "79,71,92,73,48,71,81,60",
+                        "endOffsets": "13521,13593,13686,13760,13809,13881,13963,14024"
+                    }
+                },
+                {
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/9bff2ea65dcde0a71599c51ed34e6b41/transformed/material3-release/res/values-km/values-km.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -157,20 +106,71 @@
                     }
                 },
                 {
-                    "source": "/opt/homebrew/Cellar/openjdk@17/17.0.16/libexec/openjdk.jdk/caches/8.10.2/transforms/4a8dca4f0238c4bd41f91aa183fe52d1/transformed/foundation-release/res/values-km/values-km.xml",
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/5b2265be213ff8e8c8082f0d62101f7c/transformed/ui-release/res/values-km/values-km.xml",
                     "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,142,233",
-                        "endColumns": "86,90,91",
-                        "endOffsets": "137,228,320"
+                        "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "193,278,358,462,560,648,732,815,900,987,1067,1152,1228,1316,1390,1462,1533,1617,1683",
+                        "endColumns": "84,79,103,97,87,83,82,84,86,79,84,75,87,73,71,70,83,65,117",
+                        "endOffsets": "273,353,457,555,643,727,810,895,982,1062,1147,1223,1311,1385,1457,1528,1612,1678,1796"
                     },
                     "to": {
-                        "startLines": "31,146,147",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "3026,15028,15119",
-                        "endColumns": "86,90,91",
-                        "endOffsets": "3108,15114,15206"
+                        "startLines": "39,40,60,61,62,66,67,124,125,134,135,137,138,139,140,141,143,144,145",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3834,3919,6317,6421,6519,6937,7021,13274,13359,14029,14109,14278,14354,14442,14516,14588,14760,14844,14910",
+                        "endColumns": "84,79,103,97,87,83,82,84,86,79,84,75,87,73,71,70,83,65,117",
+                        "endOffsets": "3914,3994,6416,6514,6602,7016,7099,13354,13441,14104,14189,14349,14437,14511,14583,14654,14839,14905,15023"
+                    }
+                },
+                {
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/a6006b2494a892ab914ab529b50cbbde/transformed/play-services-base-18.1.0/res/values-km/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,291,442,559,660,818,938,1055,1160,1314,1427,1594,1715,1856,2010,2070,2124",
+                        "endColumns": "97,150,116,100,157,119,116,104,153,112,166,120,140,153,59,53,72",
+                        "endOffsets": "290,441,558,659,817,937,1054,1159,1313,1426,1593,1714,1855,2009,2069,2123,2196"
+                    },
+                    "to": {
+                        "startLines": "41,42,43,44,45,46,47,48,50,51,52,53,54,55,56,57,58",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3999,4101,4256,4377,4482,4644,4768,4889,5147,5305,5422,5593,5718,5863,6021,6085,6143",
+                        "endColumns": "101,154,120,104,161,123,120,108,157,116,170,124,144,157,63,57,76",
+                        "endOffsets": "4096,4251,4372,4477,4639,4763,4884,4993,5300,5417,5588,5713,5858,6016,6080,6138,6215"
+                    }
+                },
+                {
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/024e506e2a7c047021c330ab64c9f03d/transformed/credentials-1.2.0-rc01/res/values-km/values-km.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,171",
+                        "endColumns": "115,116",
+                        "endOffsets": "166,283"
+                    },
+                    "to": {
+                        "startLines": "29,30",
+                        "startColumns": "4,4",
+                        "startOffsets": "2793,2909",
+                        "endColumns": "115,116",
+                        "endOffsets": "2904,3021"
+                    }
+                },
+                {
+                    "source": "/Users/auroraa/.gradle/caches/8.10.2/transforms/84ee192a80a8c43b1ac00a0f267f0571/transformed/play-services-basement-18.4.0/res/values-km/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "144",
+                        "endOffsets": "339"
+                    },
+                    "to": {
+                        "startLines": "49",
+                        "startColumns": "4",
+                        "startOffsets": "4998",
+                        "endColumns": "148",
+                        "endOffsets": "5142"
                     }
                 }
             ]
