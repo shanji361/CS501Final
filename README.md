@@ -37,32 +37,7 @@ InstaGlow is a comprehensive beauty application built with **Kotlin** and **Jetp
 
 ## 🏗️ Architecture
 
-### MVVM Pattern
-```
-┌─────────────────┐
-│   UI Layer      │  Jetpack Compose Screens & Components
-│  (Composables)  │
-└────────┬────────┘
-         │
-┌────────▼────────┐
-│  ViewModel      │  MainViewModel, WeatherViewModel, SettingsViewModel
-│   Layer         │  StateFlow for reactive state management
-└────────┬────────┘
-         │
-┌────────▼────────┐
-│ Repository      │  Data access abstraction
-│   Layer         │
-└────────┬────────┘
-         │
-┌────────▼────────────────────────┐
-│  Data Sources                   │
-├─────────────────────────────────┤
-│ • Room Database (local)         │
-│ • Retrofit APIs (remote)        │
-│ • DataStore (preferences)       │
-│ • Firebase Auth                 │
-└─────────────────────────────────┘
-```
+
 
 ## 📂 Project Structure
 ```
