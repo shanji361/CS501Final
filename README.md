@@ -1,7 +1,7 @@
 # InstaGlow | Beauty App | Android (Kotlin + Jetpack Compose)
 
 <p align="center">
-  <img src="app/src/main/ic_launcher-playstore.png" alt="InstaGlow Logo" width="200"/>
+  <img src="app/src/main/ic_launcher-playstore.png" alt="InstaGlow Logo" width="100"/>
 </p>
 
 
