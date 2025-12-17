@@ -233,6 +233,9 @@ implementation("com.google.maps.android:maps-compose:4.3.0")
 
 This project was created as part of CS501 Mobile Application Development course.
 
+## 👩🏻‍💻 Authors 
+Hafsa (Aurora) Ahmed (**hafsaah1**), Javeria Jalil (**javeriajalil889**) ,Shan Ji (**shanji361**)
+
 ## 🙏 Acknowledgments
 
 - [Makeup API](https://makeup-api.herokuapp.com/) for product data
