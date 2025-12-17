@@ -1,8 +1,9 @@
 # InstaGlow | Beauty App | Android (Kotlin + Jetpack Compose)
 
 <p align="center">
-  <img src="assets/instaglow-logo.png" alt="InstaGlow Logo" width="200"/>
+  <img src="app/src/main/ic_launcher-playstore.png" alt="InstaGlow Logo" width="200"/>
 </p>
+
 
 InstaGlow is a comprehensive beauty application built with **Kotlin** and **Jetpack Compose** that solves three major problems in makeup shopping: overwhelming product choices, lack of inclusivity in shade matching, and fragmented user experience. The app integrates Firebase Authentication, live weather forecasts, shade-based product recommendations, and a complete shopping experience—all in one unified platform.
 
